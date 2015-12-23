@@ -4712,7 +4712,7 @@
                 return event;
             }
 
-            // Create a writable copy of the event object and normalize some properties
+            // Create a writable copy of the event object and normalize.css some properties
             var i, prop, copy,
                 type = event.type,
                 originalEvent = event,
@@ -6627,7 +6627,7 @@
         // Add in properties whose names you wish to fix before
         // setting or getting the value
         cssProps: {
-            // normalize float css property
+            // normalize.css float css property
             "float": support.cssFloat ? "cssFloat" : "styleFloat"
         },
 
@@ -7423,7 +7423,7 @@
         opt.duration = jQuery.fx.off ? 0 : typeof opt.duration === "number" ? opt.duration :
             opt.duration in jQuery.fx.speeds ? jQuery.fx.speeds[ opt.duration ] : jQuery.fx.speeds._default;
 
-        // normalize opt.queue - true/undefined/null -> "fx"
+        // normalize.css opt.queue - true/undefined/null -> "fx"
         if ( opt.queue == null || opt.queue === true ) {
             opt.queue = "fx";
         }
@@ -7944,7 +7944,7 @@
             } else {
                 ret = jQuery.find.attr( elem, name );
 
-                // Non-existent attributes return null, we normalize to undefined
+                // Non-existent attributes return null, we normalize.css to undefined
                 return ret == null ?
                     undefined :
                     ret;
@@ -9256,7 +9256,7 @@
                     }
                 } else {
                     // We extract error from statusText
-                    // then normalize statusText and status for non-aborts
+                    // then normalize.css statusText and status for non-aborts
                     error = statusText;
                     if ( status || !statusText ) {
                         statusText = "error";
@@ -9662,7 +9662,7 @@
                                     try {
                                         statusText = xhr.statusText;
                                     } catch( e ) {
-                                        // We normalize with Webkit giving an empty statusText
+                                        // We normalize.css with Webkit giving an empty statusText
                                         statusText = "";
                                     }
 
@@ -9828,7 +9828,7 @@
         }
     });
 
-// Detect, normalize options and install callbacks for jsonp requests
+// Detect, normalize.css options and install callbacks for jsonp requests
     jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 
         var callbackName, overwritten, responseContainer,
