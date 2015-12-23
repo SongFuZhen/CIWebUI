@@ -1,9 +1,10 @@
 .Welcome {
     position: absolute;
     height: 300px;
+    min-width: 900px;
     width: 900px;
-    left: 20%;
-    top: 20%;
+    /*   left: 25%;
+       top: 20%;*/
 }
 
 .SignIn {
