@@ -49,6 +49,7 @@ function Loading(top, right, bottom, left, avaliable) {
     LoadingDiv.appendChild(Circle);
 }
 
+//显示警告框。遮罩层+对话框信息
 function SimpleDialog(title, content, btnmsg, avaliable) {
     var Masked = document.createElement('div');
     Masked.style.display = avaliable;
@@ -114,6 +115,7 @@ function SimpleDialog(title, content, btnmsg, avaliable) {
 
 }
 
+//显示正确错误的信息 只有背景+文字
 function ShowMsgDialog(top, right, bottom, left, avaliable, Msg, background) {
     var ShowMsgDialog = document.createElement('div');
     ShowMsgDialog.style.display = avaliable;
@@ -131,13 +133,17 @@ function ShowMsgDialog(top, right, bottom, left, avaliable, Msg, background) {
     ShowMsgDialog.style.textAlign = 'center';
     ShowMsgDialog.style.borderRadius = '3px';
     ShowMsgDialog.style.paddingTop = '20px';
+    ShowMsgDialog.style.zIndex = '1000';
     ShowMsgDialog.setAttribute('class', 'ShowMsgDialog');
     document.body.appendChild(ShowMsgDialog);
 }
 
+//设置上下滑动
 function SlideToggle(name, slidedowntime, gaptime, slideuptime) {
     $(name).slideDown(slidedowntime);
     setTimeout(function () {
         $(name).slideUp(slideuptime);
     }, gaptime);
 }
+
+

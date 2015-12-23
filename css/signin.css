@@ -3,15 +3,11 @@
     height: 300px;
     min-width: 900px;
     width: 900px;
-    /*   left: 25%;
-       top: 20%;*/
 }
 
 .SignIn {
     position: absolute;
-    /*left: 20%;*/
     top: 35%;
-    /*width: 600px;*/
     min-width: 600px;
     border: 2px solid #23527c;
     border-radius: 5px;
@@ -37,3 +33,24 @@
 .input-group .form-control {
     width: 250px;
 }
+
+/*Register And Forget Password CSS*/
+
+.RgAndFGTPass {
+    position: absolute;
+    min-width: 400px;
+    left: 60%;
+    top: 62%;
+    font-size: 1.3em;
+}
+
+.SignUpBtn:hover {
+    color: white;
+    background: lightseagreen;
+}
+
+.SignUpBtn:active {
+    padding-top: 2px;
+}
+
+

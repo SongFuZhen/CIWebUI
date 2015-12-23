@@ -43,13 +43,3 @@
     background: lightseagreen;
     color: white;
 }
-
-/*Register And Forget Password CSS*/
-
-.RgAndFGTPass {
-    position: absolute;
-    min-width: 400px;
-    left: 60%;
-    top: 62%;
-    font-size: 1.3em;
-}
