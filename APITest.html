@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>APITest</title>
+    <!-- link start -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/basic/jquery-latest.js"></script>
+    <script src="js/basic/jquery.jsonp.js"></script>
+    <script src="js/basic/d3.v3.min.js"></script>
+    <!-- link end -->
+</head>
+<body>
+<button onclick="CallAPI('http://fanyi.youdao.com/openapi.do','good')">Click</button>
+</body>
+</html>
+
+<script>
+    //    跨域访问ajax两种方式
+    /*
+     //使用jsonp插件。注意：必须要有callback
+     function CallAPI(url, word) {
+     $(document).ready(function () {
+     $.jsonp({
+     url: url,
+     data: {
+     keyfrom: 'songyoudao',
+     key: '958769048',
+     type: 'data',
+     doctype: 'jsonp',
+     version: '1.1',
+     q: word
+     },
+     callbackParameter: 'callback',
+     success: function (data) {
+     console.log('show data--->' + data.translation + ',' + data.basic['us-phonetic'] + ',' + data.basic.explains);
+     },
+     error: function () {
+     console.log('Call API Error');
+     }
+     })
+     });
+     }
+     */
+    //使用ajax，注意：dataType必须是jsonp
+    function CallAPI(url, word) {
+        $(document).ready(function () {
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    keyfrom: 'songyoudao',
+                    key: '958769048',
+                    type: 'data',
+                    doctype: 'jsonp',
+                    version: '1.1',
+                    q: word
+                },
+                dataType: 'jsonp',
+                success: function (data) {
+                    console.log('show data--->' + data.translation + ',' + data.basic['us-phonetic'] + ',' + data.basic.explains);
+                },
+                error: function () {
+                    console.log('Call API Error');
+                }
+            })
+        });
+    }
+</script>

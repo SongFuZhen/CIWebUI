@@ -1,0 +1,55 @@
+/*Login In CSS*/
+.input-addonleft {
+    background: #EEEEEE;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    height: 34px;
+    width: 40px;
+}
+
+.input-addonleft > i {
+    line-height: 34px;
+    text-align: center;
+    margin-left: 15px;
+}
+
+.BtnSubmit {
+    cursor: pointer;
+    width: 90px;
+    height: 34px;
+    padding-top: 4px;
+    padding-left: 20px;
+    font-weight: bold;
+    border-radius: 3px;
+    border: 2px solid green;
+    background: transparent;
+    margin: 20px 15px 0 0;
+}
+
+.BtnSubmit:hover {
+    border: none;
+    padding-top: 6px;
+    color: white;
+    background: lightseagreen;
+}
+
+.BtnSubmit:active {
+    padding-top: 4px;
+    font-size: 1.2em;
+}
+
+.DialogBtn:hover {
+    cursor: pointer;
+    background: lightseagreen;
+    color: white;
+}
+
+/*Register And Forget Password CSS*/
+
+.RgAndFGTPass {
+    position: absolute;
+    min-width: 400px;
+    left: 60%;
+    top: 62%;
+    font-size: 1.3em;
+}

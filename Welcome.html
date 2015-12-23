@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClearInSight</title>
+    <!-- link start -->
+    <link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/signin.css">
+    <link rel="stylesheet" href="css/basic/basic.css">
+
+    <script src="js/basic/jquery-latest.js"></script>
+    <script src="js/basic/jquery.jsonp.js"></script>
+    <script src="js/basic/d3.v3.min.js"></script>
+    <script src="js/basic/basic.js"></script>
+    <script src="js/basic/ajax.js"></script>
+    <script src="js/signin.js"></script>
+    <!-- link end -->
+
+</head>
+<body>
+<div class="Welcome">
+    <div class="SignIn" style="display: flex">
+        <div class="input-group">
+            <span class="input-addonleft"><i class="glyphicon glyphicon-envelope"></i></span>
+            <input autofocus="autofocus" type="email" class="form-control" placeholder="Email Address">
+            <span class="input-group-addon" style="visibility:hidden;"><i></i></span>
+        </div>
+
+        <div class="input-group">
+            <span class="input-addonleft"><i class="glyphicon glyphicon-lock"></i></span>
+            <input type="password" class="form-control" placeholder="Password">
+            <span class="input-group-addon" style="visibility: hidden"><i></i></span>
+        </div>
+
+        <div class="BtnSubmit" onclick="SignIn()">Sign In</div>
+    </div>
+
+    <div class="RgAndFGTPass">
+        <a href="#" onclick="RgAndFGTPass()"><strong>New Here</strong></a>
+        <em>&nbsp;Or&nbsp;</em>
+        <a href="#" onclick="RgAndFGTPass()"><strong>Forget Password?</strong></a>
+    </div>
+</div>
+<div class="footer">© 2011-2016
+    <a href="#">上海伊弗信息科技有限公司</a>
+    . All Rights Reserved.
+</div>
+</body>
+</html>
