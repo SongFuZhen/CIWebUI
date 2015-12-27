@@ -1,4 +1,4 @@
-//µã»÷¿Õ°×´¦ ÊÕÆðµ¯´°
+//ç‚¹å‡»ç©ºç™½å¤„ï¼Œæ”¶èµ·å¼¹çª—
 <script type="text/javascript">
 $(function(){
  $(document).bind("click",function(e){
