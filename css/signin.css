@@ -13,6 +13,10 @@
     border-radius: 5px;
 }
 
+/*.BtnSubmit {
+    padding:4px 0 0 20px;
+}*/
+
 .footer {
     position: absolute;
     min-width: 500px;
@@ -43,14 +47,3 @@
     top: 62%;
     font-size: 1.3em;
 }
-
-.SignUpBtn:hover {
-    color: white;
-    background: lightseagreen;
-}
-
-.SignUpBtn:active {
-    padding-top: 2px;
-}
-
-

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KPIManagement</title>
+    <!-- link start -->
+    <link rel="stylesheet" href="../../bootstrap-3.3.5-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/basic/basic.css">
+    <link rel="stylesheet" href="../../css/nav.css">
+    <link rel="stylesheet" href="../../css/KPIManagement.css">
+    <script src="../../js/basic/jquery-latest.js"></script>
+    <script src="../../js/basic/ajax.js"></script>
+    <script src="../../js/nav.js"></script>
+    <!-- link end -->
+
+</head>
+<body>
+
+<!--top Nav-->
+<div class="topNav">
+    <div class="topleftNav">
+        <img src="../../images/logo.png" alt="ClearInSight">
+        <ul>
+            <li><a href="../MyKPI/MyKPI.html"><!--<i class="glyphicon glyphicon-bullhorn"></i>-->My KPI</a></li>
+            <li><a href="KPIManagement.html"><!--<i class="glyphicon glyphicon-stats"></i>-->
+                Management</a></li>
+            <li><a href="../MyTasks/MyTasks.html"><!--<i class="glyphicon glyphicon-tasks"></i>-->My Tasks</a></li>
+        </ul>
+    </div>
+
+    <div class="fulltextsearch">
+        <input type="text">
+        <i class="glyphicon glyphicon-search"></i>
+    </div>
+
+    <div class="toprightNav">
+        <div class="icons">
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-tasks">
+                            <span class="badge">2</span>
+                        </i>
+                    </a>
+                    <div class="NavTaskShow">
+                        <i class="glyphicon glyphicon-triangle-top"></i>
+                        <h5>Here is the task alert.</h5>
+                        <hr>
+
+                        <div class="TaskItem">
+                            <div>
+                                <h5>RPI is due in 1 min.</h5>
+                                <hr>
+                                <h5>Today 3:00 pm</h5>
+                            </div>
+                            <button class="BtnSubmit">Fill Now</button>
+                        </div>
+                        <hr>
+
+                        <div class="TaskItem">
+                            <div>
+                                <h5>RPI is due in 1 min.</h5>
+                                <hr>
+                                <h5>Today 2:00 pm</h5>
+                            </div>
+                            <button class="BtnSubmit">Fill Now</button>
+                        </div>
+                        <hr>
+
+                        <a href="#">
+                            <span>See All Tasks Notification.</span>
+                            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-bell">
+                            <span class="badge">5</span>
+                        </i>
+                    </a>
+                    <div class="NavSystemShow">
+                        <i class="glyphicon glyphicon-triangle-top"></i>
+                        <h5>Here is the System Message.</h5>
+                        <hr>
+
+                        <div class="SystemItem">
+                            <h5>You are invited to access discussion group <a href="#">[why tpf exeeds 3 for 5 days]</a>
+                            </h5>
+                            <hr>
+                            <h5>Today 3:00 pm</h5>
+                        </div>
+                        <hr>
+
+                        <div class="SystemItem">
+                            <h5><a href="#">[huangbq.01@gmail.com]</a> has created a new team <a href="#">[team
+                                name]</a></h5>
+                            <hr>
+                            <h5>Today 3:00 pm</h5>
+                        </div>
+                        <hr>
+
+                        <a href="#">
+                            <span>See All System Message Notification.</span>
+                            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-exclamation-sign">
+                            <span class="badge">1</span>
+                        </i></a>
+                    <div class="NavAbnormalShow">
+                        <i class="glyphicon glyphicon-triangle-top"></i>
+                        <h5>Here is the Abnormal Message.</h5>
+                        <hr>
+
+                        <div class="AbnormalItem">
+                            <h5><a href="#"> [RPI]</a> from <a href="#">[department 123]</a> exeeds the max limit,
+                                current value is 100
+                            </h5>
+                            <hr>
+                            <h5>Today 3:00 pm</h5>
+                        </div>
+                        <hr>
+
+                        <div class="AbnormalItem">
+                            <h5><a href="#">[RPI]</a> from <a href="#">[department 123]</a> exeeds the max limit.
+                                Current value is 20%
+                            </h5>
+                            <hr>
+                            <h5>Today 3:00 pm</h5>
+                        </div>
+                        <hr>
+
+                        <a href="#">
+                            <span>See All Abnormal Message Notification.</span>
+                            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="nickname">
+            <img src="../../images/user.jpg" alt="Users">
+            <h4>Nickname</h4>
+            <!--<i class="glyphicon glyphicon-triangle-bottom"></i>-->
+        </div>
+    </div>
+
+    <div class="shownickname">
+        <i class="glyphicon glyphicon-triangle-top"></i>
+
+        <div class="nicknamecontent">
+            <ul>
+                <li><a href="#">
+                    <i class="glyphicon glyphicon-cog"></i>
+                    Setting</a>
+                </li>
+                <hr>
+                <li><a href="#">
+                    <i class="glyphicon glyphicon-user"></i>
+                    Profile</a></li>
+                <hr>
+                <li><a href="../NickName/LockScreen.html">
+                    <i class="glyphicon glyphicon-lock"></i>
+                    LockScreen</a></li>
+                <hr>
+                <li><a href="../../Welcome.html">
+                    <i class="glyphicon glyphicon-log-out"></i>
+                    Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--<h3>Here is The KPI Management</h3>-->
+<div class="LeftNav">
+    <h3>KPI Assistant</h3>
+    <hr>
+    <ul>
+        <li><a href="#">All</a></li>
+        <hr/>
+        <li><a href="#">Followed</a></li>
+        <hr/>
+        <li><a href="#">Created</a></li>
+        <hr/>
+        <li>
+            <button class="BtnSubmit">Create</button>
+        </li>
+    </ul>
+</div>
+
+<div class="RightContent">
+    <h3>Here is the Content.</h3>
+</div>
+</body>
+</html>

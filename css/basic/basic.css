@@ -17,8 +17,6 @@
     cursor: pointer;
     width: 90px;
     height: 34px;
-    padding-top: 4px;
-    padding-left: 20px;
     font-weight: bold;
     border-radius: 3px;
     border: 2px solid green;
@@ -28,13 +26,12 @@
 
 .BtnSubmit:hover {
     border: none;
-    padding-top: 6px;
     color: white;
     background: lightseagreen;
 }
 
 .BtnSubmit:active {
-    padding-top: 4px;
+    padding-top: 2px;
     font-size: 1.2em;
 }
 

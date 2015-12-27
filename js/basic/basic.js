@@ -49,8 +49,9 @@ function Loading(top, right, bottom, left, avaliable) {
     LoadingDiv.appendChild(Circle);
 }
 
-//显示警告框。遮罩层+对话框信息
+//显示警告框。遮罩层+对话框信息  没有关闭按钮
 function SimpleDialog(title, content, btnmsg, avaliable) {
+
     var Masked = document.createElement('div');
     Masked.style.display = avaliable;
     Masked.style.position = 'absolute';
@@ -146,4 +147,7 @@ function SlideToggle(name, slidedowntime, gaptime, slideuptime) {
     }, gaptime);
 }
 
-
+//此处name没有必要加.
+function RemoveDialog(name) {
+    document.getElementsByClassName(name)[0].parentNode.removeChild(document.getElementsByClassName(name)[0]);
+}

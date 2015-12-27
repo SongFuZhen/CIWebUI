@@ -6,8 +6,8 @@
     <!-- link start -->
     <link rel="stylesheet" href="css/basic/normalize.css">
     <link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/signin.css">
     <link rel="stylesheet" href="css/basic/basic.css">
+    <link rel="stylesheet" href="css/signin.css">
 
     <script src="js/basic/jquery-latest.js"></script>
     <script src="js/basic/jquery.jsonp.js"></script>
@@ -23,25 +23,26 @@
     <div class="SignIn" style="display: flex">
         <div class="input-group">
             <span class="input-addonleft"><i class="glyphicon glyphicon-envelope"></i></span>
-            <input autofocus="autofocus" type="email" class="form-control" placeholder="Email Address">
+            <input autofocus="autofocus" type="email" class="form-control" placeholder="example@cz-tek.com">
             <span class="input-group-addon" style="visibility:hidden;"><i></i></span>
         </div>
 
         <div class="input-group">
             <span class="input-addonleft"><i class="glyphicon glyphicon-lock"></i></span>
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" class="form-control" placeholder="Private Password">
             <span class="input-group-addon" style="visibility: hidden"><i></i></span>
         </div>
 
-        <div class="BtnSubmit" onclick="SignIn()">Sign In</div>
+        <button class="BtnSubmit" onclick="SignIn()">Sign In</button>
     </div>
 
     <div class="RgAndFGTPass">
-        <a href="#" onclick="RgAndFGTPass()"><strong>New Here</strong></a>
+        <a onclick="RegisterShow('block')" href="#"><strong>New Here</strong></a>
         <em>&nbsp;Or&nbsp;</em>
-        <a href="#" onclick="RgAndFGTPass()"><strong>Forget Password?</strong></a>
+        <a onclick="ForgetPasswordShow('block')" href="#"><strong>Forget Password?</strong></a>
     </div>
 </div>
+
 <div class="footer">© 2011-2016
     <a href="#">上海伊弗信息科技有限公司</a>
     . All Rights Reserved.
