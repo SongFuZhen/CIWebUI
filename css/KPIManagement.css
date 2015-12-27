@@ -1,0 +1,55 @@
+.LeftNav {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    text-align: center;
+    width: 180px;
+    background: #F2F2F2;
+}
+
+.LeftNav > h3 {
+    font-family: Arial, "Microsoft YaHei UI", 宋体, 黑体, sans-serif;
+}
+
+.LeftNav > hr {
+    border-color: white;
+    margin-bottom: 0;
+}
+
+.LeftNav > ul {
+    display: block;
+}
+
+.LeftNav > ul > li {
+    text-align: center;
+    /*background: #000;*/
+    margin: 0;
+}
+
+.LeftNav > ul > hr {
+    border-color: #cccccc;
+    margin: 0;
+}
+
+.LeftNav > ul > li > a {
+    text-decoration: none;
+    padding: 15px 0 0 0;
+    height: 50px;
+    margin: 0;
+}
+
+.LeftNav > ul > li > a:hover {
+    background: #ccc;
+}
+
+.LeftNav > ul > li > button {
+    margin: 50px 0 0 0;
+}
+
+/*Here is the Content CSS*/
+.RightContent {
+    position: absolute;
+    top: 60px;
+    left: 180px;
+    background: #ccc;
+}

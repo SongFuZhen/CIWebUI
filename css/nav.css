@@ -1,0 +1,300 @@
+.topNav {
+    position: absolute;
+    min-width: 1200px;
+    background: #e0e0e0;
+    display: flex;
+    height: 60px;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.topleftNav {
+    position: absolute;
+    display: flex;
+    background: transparent;
+    left: 0;
+    top: 0;
+    width: 500px;
+    height: 60px;
+}
+
+.topNav > .topleftNav > img {
+    width: 60px;
+    height: 60px;
+    border-right: 1px solid #F2F2F2;
+}
+
+ul {
+    display: flex;
+    margin: 4px 0 0 -40px;
+}
+
+ul > li {
+    margin-left: 20px;
+    list-style: none;
+    text-align: left;
+}
+
+ul > li > a > i {
+    margin-right: 3px;
+}
+
+ul > li > a {
+    text-decoration: none;
+    display: block;
+    color: #23527c;
+    height: 32px;
+    margin-top: 12px;
+    border-radius: 3px;
+    padding: 4px 6px 0 0;
+    font-size: 1.1em;
+}
+
+.topleftNav > ul > li > a:hover, .topleftNav > ul > li > a:active, .topleftNav > ul > li > a:focus {
+    outline: none;
+    /*color: white;*/
+    background: #ccc;
+    text-decoration: none;
+}
+
+.fulltextsearch {
+    position: absolute;
+    display: flex;
+    top: 10px;
+    left: 450px;
+    width: 250px;
+    height: 36px;
+    line-height: 36px;
+    border: 1px solid #23527c;
+    margin: 2px 0 0 0;
+    border-radius: 3px;
+    z-index: 1000;
+    background: white;
+}
+
+.fulltextsearch > input {
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    border: none;
+    margin: 2px 0 0 2px;
+    padding-left: 10px;
+}
+
+.fulltextsearch > i {
+    cursor: pointer;
+    height: 34px;
+    line-height: 34px;
+    width: 36px;
+    margin: -1px 0 0 12px;
+    padding: 0 0 0 10px;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    background: #ccc;
+}
+
+.fulltextsearch > i:hover {
+    font-size: 1.2em;
+    color: #23527c;
+}
+
+.toprightNav {
+    position: absolute;
+    display: flex;
+    right: 0;
+    top: 0;
+    width: 400px;
+    height: 60px;
+}
+
+.icons {
+    margin-right: 40px;
+}
+
+.icons > ul > li > a {
+    cursor: pointer;
+    outline: none;
+    margin: 15px 0 20px 0;
+    color: #23527c;
+    font-size: 1.5em;
+    border-radius: 3px;
+}
+
+.icons > ul > li > a > i > span {
+    margin: -70px 0 0 15px;
+    background: red;
+}
+
+.icons > ul > li > a:hover {
+    /*color: darkorange;*/
+    background: #ccc;
+}
+
+.nickname {
+    display: flex;
+}
+
+.nickname > img {
+    margin-top: 10px;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.nickname > h4 {
+    cursor: pointer;
+    line-height: 40px;
+    margin-right: 4px;
+}
+
+.nickname > i {
+    line-height: 60px;
+    color: #23527c;
+}
+
+.nickname > h4:hover {
+    background: #ccc;
+    border-radius: 3px;
+    color: #23527c;
+}
+
+.shownickname {
+    position: absolute;
+    /*here is none*/
+    display: none;
+    top: 65px;
+    right: 1px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    width: 150px;
+    height: 150px;
+}
+
+.shownickname > i {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    color: #e0e0e0;
+}
+
+.nicknamecontent > ul {
+    display: block;
+}
+
+.nicknamecontent > ul > li {
+    margin: 4px 0 0 10px;
+}
+
+.nicknamecontent > ul > li:hover {
+    font-size: 1.1em;
+}
+
+.nicknamecontent > ul > li > a {
+    text-decoration: none;
+    outline: none;
+    margin: 0;
+}
+
+.nicknamecontent > ul > hr {
+    border-color: white;
+    margin: 0;
+}
+
+.NavTaskShow, .NavSystemShow, .NavAbnormalShow {
+    position: absolute;
+    left: -120px;
+    background: #e0e0e0;
+    height: 210px;
+    top: 65px;
+    border-radius: 3px;
+    width: 200px;
+    display: none;
+}
+
+.NavSystemShow, .NavAbnormalShow {
+    width: 300px;
+    height: 240px;
+    left: -43px;
+}
+
+.NavAbnormalShow {
+    left: 30px;
+}
+
+.NavTaskShow > i, .NavSystemShow > i, .NavAbnormalShow > i {
+    top: -10px;
+    left: 150px;
+    color: #e0e0e0;
+}
+
+.NavTaskShow > h5, .NavSystemShow > h5, .NavAbnormalShow > h5 {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.NavTaskShow > hr, .NavSystemShow > hr, .NavAbnormalShow > hr {
+    border-color: white;
+    margin: 0;
+}
+
+.NavTaskShow > a, .NavSystemShow > a, .NavAbnormalShow > a {
+    position: absolute;
+    outline: none;
+    bottom: 0;
+    width: 200px;
+    height: 36px;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 8px;
+}
+
+.NavSystemShow > a, .NavAbnormalShow > a {
+    width: 300px;
+}
+
+.NavTaskShow > a:hover, .NavSystemShow > a:hover {
+    text-decoration: none;
+}
+
+.TaskItem {
+    width: 200px;
+    height: 70px;
+    display: flex;
+}
+
+.SystemItem, .AbnormalItem {
+    width: 300px;
+    height: 70px;
+    display: block;
+    font-size: .7em;
+}
+
+.TaskItem > div > h5, .SystemItem > h5, .AbnormalItem > h5 {
+    margin-left: 2px;
+}
+
+.SystemItem > hr, .AbnormalItem > hr {
+    margin: 0;
+    border-color: #F2F2F2;
+}
+
+.TaskItem > div > hr, .AbnormalItem > dir > hr {
+    margin: 0;
+}
+
+.TaskItem > button {
+    margin: 20px 0 0 10px;
+}
+
+.BtnSubmit {
+    font-size: .4em;
+    height: 30px;
+    margin: -5px 0 0 0;
+    width: 65px;
+}
+
+.BtnSubmit:active {
+    font-size: .5em;
+}

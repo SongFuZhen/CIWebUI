@@ -1,0 +1,49 @@
+.Welcome {
+    position: absolute;
+    height: 300px;
+    min-width: 900px;
+    width: 900px;
+}
+
+.SignIn {
+    position: absolute;
+    top: 35%;
+    min-width: 600px;
+    border: 2px solid #23527c;
+    border-radius: 5px;
+}
+
+/*.BtnSubmit {
+    padding:4px 0 0 20px;
+}*/
+
+.footer {
+    position: absolute;
+    min-width: 500px;
+    bottom: 0;
+    left: 40%;
+}
+
+.input-group {
+    margin: 20px 15px 20px 15px;
+    display: flex;
+}
+
+.input-group-addon {
+    width: 40px;
+    height: 34px;
+}
+
+.input-group .form-control {
+    width: 250px;
+}
+
+/*Register And Forget Password CSS*/
+
+.RgAndFGTPass {
+    position: absolute;
+    min-width: 400px;
+    left: 60%;
+    top: 62%;
+    font-size: 1.3em;
+}
