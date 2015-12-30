@@ -1,0 +1,11 @@
+//点击空白处，收起弹窗
+<script type="text/javascript">
+$(function(){
+ $(document).bind("click",function(e){
+  var target  = $(e.target);
+  if(target.closest(".pop").length == 0){
+   $(".pop").hide();
+  }
+ }) 
+})
+</script>
