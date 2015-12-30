@@ -102,7 +102,7 @@ ul > li > a {
 .toprightNav {
     position: absolute;
     display: flex;
-    right: 0;
+    right: 10px;
     top: 0;
     width: 400px;
     height: 60px;
@@ -297,4 +297,60 @@ ul > li > a {
 
 .BtnSubmit:active {
     font-size: .5em;
+}
+
+.nkcmanagement {
+    position: absolute;
+    top: 70px;
+    right: 160px;
+    width: 120px;
+    height: 70px;
+    background: #e0e0e0;
+    border-radius: 3px;
+
+}
+
+.nkcmanagement > i {
+    position: absolute;
+    right: -10px;
+    top: 10px;
+    color: #e0e0e0;
+}
+
+.nkcmanagement > hr {
+    margin-top: 35px;
+}
+
+.nkcmDepartment {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    height: 20px;
+    font-size: 1.1em;
+}
+
+.nkcmDepartment > a, .nkcmusers > a {
+    text-decoration: none;
+    color: #23527c;
+    outline: none;
+}
+
+.nkcmDepartment > a > i, .nkcmusers > a > i {
+    margin-right: 5px;
+}
+
+.nkcmDepartment > a:hover, .nkcmusers > a:hover {
+    font-size: 1.1em;
+}
+
+.nkcmDepartment > hr {
+    margin: 4px 0 0 0;
+}
+
+.nkcmusers {
+    position: absolute;
+    top: 43px;
+    left: 5px;
+    height: 20px;
+    font-size: 1.1em;
 }

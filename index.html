@@ -11,6 +11,7 @@
 
     <script src="js/basic/jquery-latest.js"></script>
     <script src="js/basic/jquery.jsonp.js"></script>
+    <script src="js/basic/jquery.cookie.js"></script>
     <script src="js/basic/d3.v3.min.js"></script>
     <script src="js/basic/basic.js"></script>
     <script src="js/basic/ajax.js"></script>
@@ -29,7 +30,7 @@
 
         <div class="input-group">
             <span class="input-addonleft"><i class="glyphicon glyphicon-lock"></i></span>
-            <input type="password" class="form-control" placeholder="Private Password">
+            <input type="password" class="form-control" placeholder="Private Password" onkeypress="EnterSignIn(event)">
             <span class="input-group-addon" style="visibility: hidden"><i></i></span>
         </div>
 
@@ -37,7 +38,7 @@
     </div>
 
     <div class="RgAndFGTPass">
-        <a onclick="RegisterShow('block')" href="#"><strong>New Here</strong></a>
+        <a onclick="RegisterShow()" href="#"><strong>New Here</strong></a>
         <em>&nbsp;Or&nbsp;</em>
         <a onclick="ForgetPasswordShow('block')" href="#"><strong>Forget Password?</strong></a>
     </div>
