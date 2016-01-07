@@ -21,13 +21,12 @@ window.onload = function () {
     /* var NavTaskShow = document.getElementsByClassName('NavTaskShow')[0];
      ShowTopNavMask(NavTaskShow, '.NavTaskShow');
      */
-
     AjaxGetTopNavHtml('NavDemo.html', 'GET');
 };
 
 
 function TopNavOperation() {
-    //旋转图片
+    //Image on TopNav
     var img = document.getElementsByClassName('topleftNav')[0].getElementsByTagName('img')[0];
     img.onmousemove = function () {
         img.style.transform = 'rotate(90deg)';
@@ -44,11 +43,11 @@ function TopNavOperation() {
     var Nick_Name = $.cookie('nickname');
     Nickname.innerHTML = Nick_Name;
 
-    var Icons = document.getElementsByClassName('icons')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
-
     Nickname.onclick = function (event) {
         ClickTopNavIcon(event, '.shownickname');
     };
+    /*Here is the top Icons*/
+    var Icons = document.getElementsByClassName('icons')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
 
     Icons[0].onclick = function (event) {
         ClickTopNavIcon(event, '.NavTaskShow');
@@ -62,9 +61,9 @@ function TopNavOperation() {
         ClickTopNavIcon(event, '.NavAbnormalShow');
     };
 
+    var NicknameContent = document.getElementsByClassName('nicknamecontent')[0].getElementsByTagName('ul')[0];
     /*Click Profile*/
-    var Profile = document.getElementsByClassName('nicknamecontent')[0].getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[1];
+    var Profile = NicknameContent.getElementsByTagName('li')[1];
 
     Profile.onclick = function () {
         Email_Pass_Name('Change Profile', 'example@cz-tek.com', 'New Password', 'Nacy', 'Change', 'block', 'ChangeProfile');
@@ -105,7 +104,7 @@ function TopNavOperation() {
                             }, 3000);
                             setTimeout(function () {
                                 Close();
-                                window.location.href = '../../index.html'
+                                window.location.href = '../index.html'
                             }, 3000);
                         } else {
                             ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', 'Email or Nickname Null.', background);
@@ -142,7 +141,7 @@ function TopNavOperation() {
                         }, 3000);
                         setTimeout(function () {
                             Close();
-                            window.location.href = '../../index.html'
+                            window.location.href = '../index.html'
                         }, 3000);
                     } else {
                         ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', 'Check Email And Nickname.', background);
@@ -155,6 +154,19 @@ function TopNavOperation() {
             }
         };
     };
+
+    var Management = NicknameContent.getElementsByTagName('li')[0];
+    var NKCManagement = document.getElementsByClassName('nkcmanagement')[0];
+
+    Management.onclick = function (event) {
+        ClickTopNavIcon(event, NKCManagement);
+    };
+
+    /* var Department = document.getElementsByClassName('nkcmDepartment')[0];
+     Department.onclick= function () {
+
+     }*/
+
 }
 
 function ClickTopNavIcon(event, MaskName) {
@@ -178,7 +190,9 @@ function ShowTopNavMask(MaskName) {
         }
     });
     document.onclick = function () {
-        $(MaskName).slideUp(500);
+        $(MaskName).hide(500);
+        /*此处隐藏nickname和management*/
+        $('.shownickname').hide(500);
         console.log(MaskName);
     };
 };

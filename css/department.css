@@ -1,0 +1,107 @@
+.DepartmentLeftNav {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 200px;
+    background: #F2F2F2;
+    /*Here is the js*/
+    text-align: center;
+}
+
+.DepartmentLeftNav > hr {
+    margin: 0;
+}
+
+.BasicInfo {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    height: 40px;
+    width: 200px;
+    color: gray;
+    text-align: left;
+}
+
+.BasicInfo > hr {
+    margin: 10px 0 0 0;
+}
+
+.DepartmentDescription > textarea {
+    outline: none;
+    background: #f2f2f2;
+    border: none;
+    resize: none;
+    margin: 0 0 0 4px;
+    border-radius: 3px;
+    /*overflow: hidden;*/
+}
+
+.DepartmentName {
+    width: 200px;
+    background: #f2f2f2;
+}
+
+.DepartmentName > input {
+    border-radius: 3px;
+    border: none;
+    width: 130px;
+    background: #f2f2f2;
+    overflow: hidden;
+}
+
+.DepartmentName > i,
+.DepartmentDescription > i {
+    cursor: pointer;
+    margin: 0 0 0 5px;
+}
+
+.BasicInfo > button {
+    margin: 10px 0 0 20px;
+}
+
+.Change:hover {
+    background: cornflowerblue;
+}
+
+.Delete:hover {
+    background: darkred;
+}
+
+/*Here is the tree  */
+.DepartmentContent {
+    position: absolute;
+    top: 60px;
+    left: 200px;
+}
+
+.AddDepartment > em:hover, .SeeUsers > em:hover {
+    font-size: .9em;
+}
+
+.DepartmentMembers {
+    position: absolute;
+    display: none;
+    top: 0;
+    right: 0;
+    width: 200px;
+    background: #f2f2f2;
+}
+
+.AddUsers {
+    margin: 10px 50px 0 50px;
+    width: 100px;
+}
+
+.DepartmentMembers > hr {
+    margin: 10px 0 0 0;
+    color: #e0e0e0;
+}
+
+.MembersShow {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    border: 1px solid #e0e0e0;
+    background: #f2f2f2;
+}

@@ -1,0 +1,60 @@
+.UsersLeftNav {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: #F2F2F2;
+    width: 200px;
+    /*高度使用js设置*/
+    height: 500px;
+}
+
+.UsersLeftNav > hr {
+    border-color: #ccc;
+    margin: 0;
+}
+
+.UsersLeftNav > h2 > a {
+    outline: none;
+    margin-left: 60px;
+    text-decoration: none;
+}
+
+.InviteUsers > a, .UsersList > a {
+    outline: none;
+    display: block;
+    padding: 5px 0 0 40px;
+    margin: 0;
+    width: 200px;
+    height: 50px;
+    text-decoration: none;
+}
+
+.InviteUsers > a:hover, .UsersList > a:hover {
+    color: white;
+    background: #ccc;
+}
+
+.UsersRightContent {
+    position: absolute;
+    top: 60px;
+    left: 200px;
+}
+
+.Contenttop > h2 {
+    margin: 20px 0 0 20px;
+}
+
+.Contenttop > hr {
+    margin: 10px 0 0 0;
+}
+
+.UsersList {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+}
+
+.UsersList > h2 {
+    margin-left: 20px;
+}

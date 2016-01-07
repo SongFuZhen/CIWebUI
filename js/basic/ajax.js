@@ -218,6 +218,7 @@ function AjaxSetPassword(url, type, newpassword, AuthToken) {
      })
      })*/
 }
+
 var ProfileFlagForInfos = "";
 function AjaxPutUserInfos(url, type, nickname, email, AuthToken) {
     $(document).ready(function () {
@@ -290,7 +291,6 @@ function AjaxGetUsersInfos(url, type, AuthToken) {
     })
 }
 
-
 function AjaxGetTopNavHtml(url, type) {
     $(document).ready(function () {
         $.ajax({
@@ -308,7 +308,203 @@ function AjaxGetTopNavHtml(url, type) {
     });
 }
 
-
-function AjaxGetAllKPI(url, type, page, size) {
-
+function AjaxGetAllHtml(url, type, Postion) {
+    $(document).ready(function () {
+        $.ajax({
+            url: url,
+            type: type,
+            async: false,
+            dataType: 'html',
+            success: function (data) {
+                Postion.innerHTML = data;
+            },
+            error: function () {
+                alert('error');
+            }
+        });
+    });
 }
+
+var RootJSON = '';
+function AjaxGetRootDepartment(url, type, AuthToken) {
+    Loading(0, 0, 0, 0, 'block');
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var ID = data[i].department.id;
+                var Name = data[i].department.name;
+                var Description = data[i].department.description;
+                var Has_Children = data[i].department.has_children;
+                var Members = data[i].department.members;
+                $('<ul class="ul' + ID + '"><li class="parent_li Child' + ID + '"><span id="' + ID + '" title="' + Description + '"><i class="glyphicon glyphicon-folder-open"></i>' + Name
+                    + '</span></li></ul>').appendTo($('.tree')).ready(function () {
+                });
+                RootJSON = data;
+                AjaxGetChildDepartment(url, type, ID, AuthToken);
+                RemoveDialog('Loading');
+            }
+        },
+        error: function () {
+            RemoveDialog('Loading');
+            alert('error');
+        }
+    });
+    return RootJSON;
+}
+
+function AjaxGetChildDepartment(url, type, ID, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: 'GET',
+        data: {department_id: ID},
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var childs = data[i].department;
+                if (childs.has_children) {
+                    $('<ul class="ul' + childs.id + '"><li class="parent_li Child' + childs.id + '" style="display: none;"> <span id="' + childs.id + '" title="' + childs.description + '"><i class="glyphicon glyphicon-plus-sign"></i>' +
+                        childs.name + '</span></li></ul>').appendTo($('.Child' + ID)).ready(function () {
+                    });
+                    AjaxGetChildDepartment(url, type, childs.id, AuthToken);
+                } else {
+                    $('<ul class="ul' + childs.id + '"><li class="parent_li Child' + childs.id + '" style="display:none;"> <span id="' + childs.id + '" title="' + childs.description + '"><i class="glyphicon glyphicon-leaf"></i>' +
+                        childs.name + '</span></li></ul>').appendTo($('.Child' + ID)).ready(function () {
+                    });
+                }
+            }
+        },
+        error: function () {
+            alert('error');
+        }
+    })
+}
+
+function AjaxAddDepartment(url, type, name, description, id, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {name: name, description: description, parent_id: id},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+
+                var CreateDepartment = data.customized_field.department;
+                var CreateDepartmentID = CreateDepartment.id;
+                var CreateDepartmentName = CreateDepartment.name;
+                var CreateDepartmentDescription = CreateDepartment.description;
+                var CreateDepartmentMembers = CreateDepartment.members;
+
+                //    Here Add Department to Page  ：name  ID  Description
+                $('<ul class="ul' + CreateDepartmentID + '"><li class="parent_li Child' + CreateDepartmentID + '"> <span id="' + CreateDepartmentID + '" title="' + CreateDepartmentDescription + '"><i class="glyphicon glyphicon-leaf"></i>' +
+                    CreateDepartmentName + '</span></li></ul>').appendTo($('.Child' + id)).ready(function () {
+                });
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+            //Delete AddDepartment Dialog
+            RemoveDialog('AddDepartmentDialog');
+            //删除掉MsgDialog
+
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        },
+        error: function () {
+            alert('error');
+        }
+    })
+}
+
+function AjaxChangeDepartment(url, type, name, description, id, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {name: name, description: description, id: id},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+
+                //    Set Page Show
+                var GetLi = document.getElementsByClassName('Child' + id)[0];
+                var GetLiSpan = GetLi.getElementsByTagName('span')[0];
+                GetLiSpan.setAttribute('title', description);
+                GetLiSpan.innerHTML = name;
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+            RemoveDialog('ShowConfirmDialog');
+            RemoveDialog('Masked');
+
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+            //删除掉MsgDialog
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        },
+        error: function () {
+            alert('error');
+        }
+    })
+}
+
+function AjaxDeleteDepartment(url, type, id, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {id: id},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+                //    Remove li Tag On Page.
+                var UlClass = 'ul' + id;
+                RemoveDialog(UlClass);
+                RemoveDialog('Masked');
+                RemoveDialog('ShowConfirmDialog');
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+            //Delete AddDepartment Dialog
+            RemoveDialog('AddDepartmentDialog');
+            //删除掉MsgDialog
+
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        },
+        error: function () {
+            alert('error');
+        }
+    })
+}
+

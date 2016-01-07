@@ -16,9 +16,9 @@ function Loading(top, right, bottom, left, avaliable) {
     LoadingDiv.style.opacity = 0.8;
     LoadingDiv.style.background = '#23537C';
     //设置ID
-    LoadingDiv.setAttribute('id', 'Loading');
+    LoadingDiv.setAttribute('class', 'Loading');
     //设置优先级别
-    LoadingDiv.style.zIndex = 1000;
+    LoadingDiv.style.zIndex = 2000;
     document.body.appendChild(LoadingDiv);
 
     var Circle = document.createElement('div');
@@ -147,7 +147,7 @@ function SlideToggle(name, slidedowntime, gaptime, slideuptime) {
     }, gaptime);
 }
 
-//此处name没有必要加.
+//此处name没有必要加'.'
 function RemoveDialog(name) {
     document.getElementsByClassName(name)[0].parentNode.removeChild(document.getElementsByClassName(name)[0]);
 }
@@ -378,3 +378,65 @@ function InputChangeColor(name) {
         name.style.borderTopLeftRadius = '0';
     }
 }
+
+function ShowConfirmDialog(top, right, bottom, left, avaliable, Title, Msg, CancleBtn, ConfirmBtn, background) {
+    var Masked = document.createElement('div');
+    Masked.style.display = avaliable;
+    Masked.style.position = 'absolute';
+    Masked.style.width = ClientWidth + 'px';
+    Masked.style.height = ClientHeight + 'px';
+    Masked.style.top = 0;
+    Masked.style.left = 0;
+    Masked.style.opacity = 0.8;
+    Masked.style.background = '#e0e0e0';
+    Masked.style.zIndex = 1000;
+    Masked.setAttribute('class', 'Masked');
+    document.body.appendChild(Masked);
+
+    var ShowConfirmDialog = document.createElement('div');
+    ShowConfirmDialog.style.position = 'absolute';
+    ShowConfirmDialog.style.width = '400px';
+    ShowConfirmDialog.style.height = '260px';
+    ShowConfirmDialog.style.display = avaliable;
+    ShowConfirmDialog.style.top = (ClientHeight - 260) / 2 + 'px';
+    ShowConfirmDialog.style.left = (ClientWidth - 400) / 2 + 'px';
+    ShowConfirmDialog.style.borderRadius = '3px';
+    ShowConfirmDialog.style.background = background;
+    ShowConfirmDialog.style.zIndex = 2000;
+    ShowConfirmDialog.setAttribute('class', 'ShowConfirmDialog');
+    ShowConfirmDialog.innerHTML = Title + '<hr/>';
+    ShowConfirmDialog.style.fontSize = '1.4em';
+    ShowConfirmDialog.style.fontWeight = 'bold';
+    ShowConfirmDialog.style.textAlign = 'center';
+    ShowConfirmDialog.style.padding = '20px 0 0 0';
+    document.body.appendChild(ShowConfirmDialog);
+
+
+    var ShowConfirmMsg = document.createElement('div');
+    ShowConfirmMsg.style.position = 'absolute';
+    ShowConfirmMsg.style.width = '400px';
+    ShowConfirmMsg.style.display = avaliable;
+    ShowConfirmMsg.setAttribute('class', 'ShowConfirmDialog');
+    ShowConfirmMsg.innerHTML = Msg;
+    ShowConfirmMsg.style.fontSize = '.8em';
+    ShowConfirmMsg.style.textAlign = 'center';
+    ShowConfirmMsg.style.fontWeight = 'normal';
+    ShowConfirmDialog.appendChild(ShowConfirmMsg);
+
+    var Cancle = document.createElement('button');
+    Cancle.style.position = 'absolute';
+    Cancle.style.top = '180px';
+    Cancle.style.left = '80px';
+    Cancle.setAttribute('class', 'BtnSubmit Change');
+    Cancle.innerHTML = CancleBtn;
+    ShowConfirmDialog.appendChild(Cancle);
+
+    var Confirm = document.createElement('button');
+    Confirm.style.position = 'absolute';
+    Confirm.style.top = '180px';
+    Confirm.style.left = '250px';
+    Confirm.setAttribute('class', 'BtnSubmit Delete');
+    Confirm.innerHTML = ConfirmBtn;
+    ShowConfirmDialog.appendChild(Confirm);
+}
+

@@ -7,6 +7,7 @@
     top: 0;
     left: 0;
     right: 0;
+    z-index: 1000;
 }
 
 .topleftNav {
@@ -25,7 +26,7 @@
     border-right: 1px solid #F2F2F2;
 }
 
-ul {
+.topleftNav > ul, .icons > ul, .nicknamecontent > ul {
     display: flex;
     margin: 4px 0 0 -40px;
 }
@@ -170,6 +171,7 @@ ul > li > a {
     border-radius: 3px;
     width: 150px;
     height: 150px;
+    z-index: 1000;
 }
 
 .shownickname > i {
@@ -301,13 +303,15 @@ ul > li > a {
 
 .nkcmanagement {
     position: absolute;
+    /*here is none*/
+    display: none;
     top: 70px;
     right: 160px;
     width: 120px;
     height: 70px;
     background: #e0e0e0;
     border-radius: 3px;
-
+    z-index: 1000;
 }
 
 .nkcmanagement > i {
