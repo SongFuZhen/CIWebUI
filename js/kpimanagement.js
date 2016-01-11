@@ -44,14 +44,14 @@ function LoadAllKpis() {
 
         $('<li><div class="Kpis"><table class="table"><tbody><tr>' +
             '<td style="border-right:1px solid #e0e0e0;"><h3 class="KpiName" id="' + kpi.kpi_id + '" title="' + kpi.kpi_name + '">' + kpi.kpi_name + '</h3></td>' +
-            '<td style="border-right:1px solid #e0e0e0;margin-top:20px ;"><h3 class="KpiDescription" title="' + kpi.description + '">' + kpi.description + '</h3></td>' +
+            '<td style="border-right:1px solid #e0e0e0;margin-top:20px; width: ' + (ClientWidth - 600) + 'px' + '"><h3 class="KpiDescription" title="' + kpi.description + '">' + kpi.description + '</h3></td>' +
             '<td class="TargetMin"><h3 style="border-right:1px solid #e0e0e0;">' + kpi.target_min_text + '</h3></td>' +
             '<td class="TargetMax"><h3 style="border-right:1px solid #e0e0e0;">' + kpi.target_max_text + '</h3></td>' +
             '<td class="KpiCreator" style="border-right:1px solid #e0e0e0;"><h3 title="' + SignedUsersInfo.user.email + '">' + SignedUsersInfo.user.nick_name + '</h3></td>' +
             '<td><button class="BtnSubmit Follow"><i class="glyphicon glyphicon-plus"></i> Follow</button></td></tr>' +
             '<tr>' +
             '<td style="border-right:1px solid #e0e0e0;"><h5>KPI Name</h5></td>' +
-            '<td style="border-right:1px solid #e0e0e0;"><h5 style="min-width: 340px;">Description</h5></td>' +
+            '<td style="border-right:1px solid #e0e0e0;width: ' + (ClientWidth - 600) + 'px' + ';"><h5>Description</h5></td>' +
             '<td><h5 style="width: 60px;">Min</h5></td>' +
             '<td><h5 style="width:60px;">Max</h5></td>' +
             '<td style="border-right:1px solid #e0e0e0;"><h5>Creator</h5></td>' +

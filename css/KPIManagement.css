@@ -70,7 +70,7 @@
 }
 
 .KpiDescription {
-    width: 340px;
+    min-width: 340px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -87,7 +87,7 @@
 }
 
 .Kpis > table > tbody > tr > td > h5 {
-    margin: -20px 0 0 0;
+    margin-top: -20px;
     color: #ccc;
     text-align: center;
 }
