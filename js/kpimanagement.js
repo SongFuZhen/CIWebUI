@@ -52,8 +52,8 @@ function LoadAllKpis() {
             '<tr>' +
             '<td style="border-right:1px solid #e0e0e0;"><h5>KPI Name</h5></td>' +
             '<td style="border-right:1px solid #e0e0e0;width: ' + (ClientWidth - 600) + 'px' + ';"><h5>Description</h5></td>' +
-            '<td><h5 style="width: 60px;">Min</h5></td>' +
-            '<td><h5 style="width:60px;">Max</h5></td>' +
+            '<td><h5 style="width: 80px;">Min</h5></td>' +
+            '<td><h5 style="width:80px;">Max</h5></td>' +
             '<td style="border-right:1px solid #e0e0e0;"><h5>Creator</h5></td>' +
             '</tr>' +
             '</tbody></table></div></li>').appendTo('.RightContent>ul').ready(function () {
