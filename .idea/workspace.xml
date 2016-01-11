@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="47b8ec20-81a4-4efa-a0b2-d98c40ea9867" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/KPIManagement.css" afterPath="$PROJECT_DIR$/css/KPIManagement.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kpimanagement.js" afterPath="$PROJECT_DIR$/js/kpimanagement.js" />
     </list>
     <ignored path="ClearInSight.iws" />
@@ -42,10 +41,10 @@
         <splitter split-orientation="vertical" split-proportion="0.8484375">
           <split-first>
             <leaf>
-              <file leaf-file-name="KPIManagement.css" pinned="false" current-in-tab="true">
+              <file leaf-file-name="KPIManagement.css" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/css/KPIManagement.css">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.3442623">
+                    <state vertical-scroll-proportion="-6.72">
                       <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
                       <folding />
                     </state>
@@ -89,29 +88,29 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="kpimanagement.js" pinned="false" current-in-tab="false">
+              <file leaf-file-name="kpimanagement.js" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/js/kpimanagement.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0">
-                      <caret line="53" column="97" selection-start-line="53" selection-start-column="97" selection-end-line="53" selection-end-column="97" />
+                    <state vertical-scroll-proportion="0.5945419">
+                      <caret line="68" column="63" selection-start-line="68" selection-start-column="63" selection-end-line="68" selection-end-column="63" />
                       <folding>
                         <element signature="e#0#41#0" expanded="false" />
-                        <marker date="1452508144165" expanded="true" signature="1445:1476" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="1609:1639" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="1609:1640" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="1609:1656" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="1609:1664" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="1609:1693" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="1609:1696" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="1842:1873" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="1962:1993" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="2079:2110" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="2376:2407" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="2459:2490" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="2459:2532" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="2591:2603" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="2650:2661" placeholder="..." />
-                        <marker date="1452508144165" expanded="true" signature="2704:2735" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="1445:1476" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="1609:1639" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="1609:1640" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="1609:1656" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="1609:1664" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="1609:1693" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="1609:1696" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="1842:1873" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="1962:1993" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="2079:2110" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="2376:2407" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="2459:2490" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="2459:2532" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="2591:2603" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="2650:2661" placeholder="..." />
+                        <marker date="1452508631802" expanded="true" signature="2704:2735" placeholder="..." />
                       </folding>
                     </state>
                   </provider>
@@ -201,8 +200,8 @@
         <option value="$PROJECT_DIR$/js/department.js" />
         <option value="$PROJECT_DIR$/js/basic/ajax.js" />
         <option value="$PROJECT_DIR$/Html/KPIManagement.html" />
-        <option value="$PROJECT_DIR$/js/kpimanagement.js" />
         <option value="$PROJECT_DIR$/css/KPIManagement.css" />
+        <option value="$PROJECT_DIR$/js/kpimanagement.js" />
       </list>
     </option>
   </component>
@@ -952,37 +951,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/kpimanagement.js">
+    <entry file="file://$PROJECT_DIR$/css/KPIManagement.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="97" selection-start-line="53" selection-start-column="97" selection-end-line="53" selection-end-column="97" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-            <marker date="1452508144165" expanded="true" signature="1445:1476" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="1609:1639" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="1609:1640" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="1609:1656" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="1609:1664" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="1609:1693" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="1609:1696" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="1842:1873" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="1962:1993" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="2079:2110" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="2376:2407" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="2459:2490" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="2459:2532" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="2591:2603" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="2650:2661" placeholder="..." />
-            <marker date="1452508144165" expanded="true" signature="2704:2735" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="-6.72">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/KPIManagement.css">
+    <entry file="file://$PROJECT_DIR$/js/kpimanagement.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3442623">
-          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.5945419">
+          <caret line="68" column="63" selection-start-line="68" selection-start-column="63" selection-end-line="68" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+            <marker date="1452508631802" expanded="true" signature="1445:1476" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="1609:1639" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="1609:1640" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="1609:1656" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="1609:1664" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="1609:1693" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="1609:1696" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="1842:1873" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="1962:1993" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="2079:2110" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="2376:2407" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="2459:2490" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="2459:2532" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="2591:2603" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="2650:2661" placeholder="..." />
+            <marker date="1452508631802" expanded="true" signature="2704:2735" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

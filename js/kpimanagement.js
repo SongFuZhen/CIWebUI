@@ -66,7 +66,7 @@ function LoadAllKpis() {
             KpiName.style.fontWeight = 'bold';
         }
 
-        if (kpi.description.length > 50) {
+        if (kpi.description.length > ((ClientWidth - 600) / 18)) {
             var KpiDescriptionFont = document.getElementsByClassName('KpiDescription')[i];
             KpiDescriptionFont.style.fontSize = '.9em';
             KpiDescriptionFont.style.fontWeight = 'bold';
