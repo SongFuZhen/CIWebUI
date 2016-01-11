@@ -16,7 +16,7 @@
     position: absolute;
     top: 40px;
     left: 0;
-    height: 40px;
+    /*height: 40px;*/
     width: 200px;
     color: gray;
     text-align: left;
@@ -67,6 +67,44 @@
     background: darkred;
 }
 
+.Leader {
+    width: 150px;
+    margin: 0 0 10px 25px;
+}
+
+.LeadersShow {
+    position: absolute;
+    display: none;
+    left: 200px;
+    top: 0;
+    width: 200px;
+    background: #f2f2f2;
+    z-index: 1000;
+    border-left: 1px solid #ccc;
+}
+
+.LeadersShow > i {
+    position: absolute;
+    left: 180px;
+    cursor: pointer;
+}
+
+.LeadersShow > hr {
+    margin: 0;
+}
+
+.LeadersShow > ul > li:hover {
+    background: #e0e0e0;
+}
+
+.DepartmentHeads > ul > li > i {
+    margin: -2px 0 0 3px;
+}
+
+.DepartmentHeads > ul > li > i:hover {
+    color: darkred;
+}
+
 /*Here is the tree  */
 .DepartmentContent {
     position: absolute;
@@ -87,8 +125,15 @@
     background: #f2f2f2;
 }
 
+.AddMembers > i {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+}
+
 .AddUsers {
-    margin: 10px 50px 0 50px;
+    margin: 20px 50px 0 50px;
     width: 100px;
 }
 
@@ -99,9 +144,94 @@
 
 .MembersShow {
     position: absolute;
-    display: block;
+    display: none;
     left: 0;
-    top: 0;
+    top: -1px;
     border: 1px solid #e0e0e0;
     background: #f2f2f2;
+    z-index: 1000;
+}
+
+.MembersShow > i {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.MembersShow > i:hover, .AddMembers > i:hover {
+    color: red;
+}
+
+.MembersList > ul > li, .LeadersShow > ul > li, .Leaders {
+    display: flex;
+    height: 30px;
+    margin: 0 0 0 -40px;
+    padding: 4px 0 0 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.MembersList > ul > li:hover, .LeadersShow > ul > li:hover, .Leaders:hover {
+    background: #e0e0e0;
+}
+
+.LeadersShow > ul > li, .Leaders {
+    padding: 4px 0 0 50px;
+}
+
+.MembersList > ul > li > i {
+    cursor: pointer;
+    display: none;
+    color: darkred;
+    margin: 0 0 0 5px;
+}
+
+.MembersShow > h2 {
+    text-align: center;
+}
+
+.MembersShow > hr {
+    border-color: #ccc;
+    margin: 10px 0 0;
+}
+
+.MembersShow > em > h4 {
+    margin-left: 20px;
+}
+
+.InviteBtn {
+    width: 100px;
+    margin: 10px 0 0 10px;
+}
+
+.Signed {
+    margin-left: 60px;
+}
+
+.CheckEmail {
+    width: 400px;
+    height: 60px;
+    border-radius: 3px;
+    border: 2px solid lightseagreen;
+    display: flex;
+    margin: 10px 0 0 10px;
+}
+
+.Email, .Nickname, .IsSigned {
+    width: 100px;
+    text-align: center;
+    line-height: 60px;
+    height: 60px;
+    font-size: 1.2em;
+    margin-left: 10px;
+}
+
+.Nickname {
+    margin-left: 55px;
+}
+
+.IsSigned {
+    margin-left: 35px;
+    color: green;
 }

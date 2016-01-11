@@ -308,23 +308,6 @@ function AjaxGetTopNavHtml(url, type) {
     });
 }
 
-function AjaxGetAllHtml(url, type, Postion) {
-    $(document).ready(function () {
-        $.ajax({
-            url: url,
-            type: type,
-            async: false,
-            dataType: 'html',
-            success: function (data) {
-                Postion.innerHTML = data;
-            },
-            error: function () {
-                alert('error');
-            }
-        });
-    });
-}
-
 var RootJSON = '';
 function AjaxGetRootDepartment(url, type, AuthToken) {
     Loading(0, 0, 0, 0, 'block');
@@ -343,13 +326,13 @@ function AjaxGetRootDepartment(url, type, AuthToken) {
                 var Description = data[i].department.description;
                 var Has_Children = data[i].department.has_children;
                 var Members = data[i].department.members;
-                $('<ul class="ul' + ID + '"><li class="parent_li Child' + ID + '"><span id="' + ID + '" title="' + Description + '"><i class="glyphicon glyphicon-folder-open"></i>' + Name
+                $('<ul class="ul' + ID + '"><li class="parent_li Child' + ID + '"><span id="' + ID + '" title="' + Description + '"><i class="glyphicon glyphicon-grain"></i>' + Name
                     + '</span></li></ul>').appendTo($('.tree')).ready(function () {
                 });
                 RootJSON = data;
                 AjaxGetChildDepartment(url, type, ID, AuthToken);
-                RemoveDialog('Loading');
             }
+            RemoveDialog('Loading');
         },
         error: function () {
             RemoveDialog('Loading');
@@ -402,18 +385,21 @@ function AjaxAddDepartment(url, type, name, description, id, AuthToken) {
         success: function (data) {
             var background = '#71C671';
             if (data.result_code.toString() == '1') {
+                if (!data.customized_field == 'null') {
+                    var CreateDepartment = data.customized_field.department;
+                    var CreateDepartmentID = CreateDepartment.id;
+                    var CreateDepartmentName = CreateDepartment.name;
+                    var CreateDepartmentDescription = CreateDepartment.description;
+                    var CreateDepartmentMembers = CreateDepartment.members;
+
+                    //    Here Add Department to Page  ：name  ID  Description
+                    $('<ul class="ul' + CreateDepartmentID + '"><li class="parent_li Child' + CreateDepartmentID + '"> <span id="' + CreateDepartmentID + '" title="' + CreateDepartmentDescription + '"><i class="glyphicon glyphicon-leaf"></i>' +
+                        CreateDepartmentName + '</span></li></ul>').appendTo($('.Child' + id)).ready(function () {
+                    });
+                } else {
+                    var background = '#DC143C';
+                }
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
-
-                var CreateDepartment = data.customized_field.department;
-                var CreateDepartmentID = CreateDepartment.id;
-                var CreateDepartmentName = CreateDepartment.name;
-                var CreateDepartmentDescription = CreateDepartment.description;
-                var CreateDepartmentMembers = CreateDepartment.members;
-
-                //    Here Add Department to Page  ：name  ID  Description
-                $('<ul class="ul' + CreateDepartmentID + '"><li class="parent_li Child' + CreateDepartmentID + '"> <span id="' + CreateDepartmentID + '" title="' + CreateDepartmentDescription + '"><i class="glyphicon glyphicon-leaf"></i>' +
-                    CreateDepartmentName + '</span></li></ul>').appendTo($('.Child' + id)).ready(function () {
-                });
             } else {
                 var background = '#DC143C';
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
@@ -508,3 +494,197 @@ function AjaxDeleteDepartment(url, type, id, AuthToken) {
     })
 }
 
+function AjaxGetAllMembers(url, type, id, AuthToken) {
+    var GetMembers = "";
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        data: {id: id},
+        async: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            GetMembers = data;
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    return GetMembers;
+}
+
+function AjaxRemoveUsers(url, type, id, userid, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        data: {id: id, user_id: userid},
+        async: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+                //    Set Page Show
+                var li = document.getElementById(userid);
+                li.parentNode.removeChild(li);
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+            //删除掉MsgDialog
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+}
+
+var AddUsersFlag = 0;
+function AjaxAddUsers(url, type, department_id, emails, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {id: department_id, emails: emails},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+                AddUsersFlag = 1;
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+            //删除掉MsgDialog
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        },
+        error: function (data) {
+            var background = '#DC143C';
+            ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', "emails is missing", background);
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+            //删除掉MsgDialog
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        }
+    });
+    return AddUsersFlag;
+}
+
+var SignedUsersInfo = "";
+function AjaxUserSingUp(url, type, email, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {email: email},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            SignedUsersInfo = data;
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    return SignedUsersInfo;
+}
+
+var SetManagerFlag = 0;
+function AjaxSetManager(url, type, id, user_id, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {id: id, user_id: user_id},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+                SetManagerFlag = 1;
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+            //Delete AddDepartment Dialog
+            //删除掉MsgDialog
+
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    return SetManagerFlag;
+}
+
+function AjaxRemoveManager(url, type, id, user_id, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {id: id, user_id: user_id},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+            //Delete AddDepartment Dialog
+            //删除掉MsgDialog
+
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+}
+
+var Accesses = "";
+function AjaxAccesses(url, type, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            Accesses = data;
+        },
+        error: function () {
+            alert('error');
+        }
+    })
+    return Accesses;
+}

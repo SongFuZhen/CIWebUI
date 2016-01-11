@@ -134,7 +134,7 @@ function ShowMsgDialog(top, right, bottom, left, avaliable, Msg, background) {
     ShowMsgDialog.style.textAlign = 'center';
     ShowMsgDialog.style.borderRadius = '3px';
     ShowMsgDialog.style.paddingTop = '20px';
-    ShowMsgDialog.style.zIndex = '1000';
+    ShowMsgDialog.style.zIndex = '2000';
     ShowMsgDialog.setAttribute('class', 'ShowMsgDialog');
     document.body.appendChild(ShowMsgDialog);
 }
@@ -427,7 +427,7 @@ function ShowConfirmDialog(top, right, bottom, left, avaliable, Title, Msg, Canc
     Cancle.style.position = 'absolute';
     Cancle.style.top = '180px';
     Cancle.style.left = '80px';
-    Cancle.setAttribute('class', 'BtnSubmit Change');
+    Cancle.setAttribute('class', 'BtnSubmit Cancel');
     Cancle.innerHTML = CancleBtn;
     ShowConfirmDialog.appendChild(Cancle);
 
@@ -435,8 +435,24 @@ function ShowConfirmDialog(top, right, bottom, left, avaliable, Title, Msg, Canc
     Confirm.style.position = 'absolute';
     Confirm.style.top = '180px';
     Confirm.style.left = '250px';
-    Confirm.setAttribute('class', 'BtnSubmit Delete');
+    Confirm.setAttribute('class', 'BtnSubmit Confirm');
     Confirm.innerHTML = ConfirmBtn;
     ShowConfirmDialog.appendChild(Confirm);
 }
 
+var wait = 10;
+function TimeDisabled(o) {
+    if (wait == 0) {
+        o.removeAttribute("disabled");
+        o.value = "Invite";
+        wait = 10;
+    } else {
+        o.setAttribute("disabled", 'disabled');
+        o.value = "wait " + wait + " s";
+        wait--;
+        setTimeout(function () {
+                TimeDisabled(o)
+            },
+            1000);
+    }
+}

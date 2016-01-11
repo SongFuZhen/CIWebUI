@@ -3,53 +3,100 @@
     top: 60px;
     left: 0;
     text-align: center;
-    width: 180px;
+    width: 200px;
     background: #F2F2F2;
 }
 
-.LeftNav > h3 {
-    font-family: Arial, "Microsoft YaHei UI", 宋体, 黑体, sans-serif;
-}
-
 .LeftNav > hr {
-    border-color: white;
     margin-bottom: 0;
 }
 
-.LeftNav > ul {
-    display: block;
-}
-
 .LeftNav > ul > li {
+    margin: 10px 0 0 -40px;
     text-align: center;
-    /*background: #000;*/
-    margin: 0;
-}
-
-.LeftNav > ul > hr {
-    border-color: #cccccc;
-    margin: 0;
 }
 
 .LeftNav > ul > li > a {
+    height: 40px;
+    line-height: 35px;
+    outline: none;
     text-decoration: none;
-    padding: 15px 0 0 0;
-    height: 50px;
     margin: 0;
 }
 
 .LeftNav > ul > li > a:hover {
-    background: #ccc;
+    background: #e0e0e0;
+    color: #000;
+    font-size: 1.2em;
 }
 
-.LeftNav > ul > li > button {
-    margin: 50px 0 0 0;
+.LeftNav > ul > li > hr {
+    margin: 0;
+}
+
+.LeftNav > button {
+    margin: 20px 0 0 0;
+    width: 100px;
 }
 
 /*Here is the Content CSS*/
 .RightContent {
     position: absolute;
     top: 60px;
-    left: 180px;
-    background: #ccc;
+    left: 200px;
+}
+
+.RightContent > ul > li {
+    margin: 0;
+}
+
+.Kpis {
+    height: 90px;
+    border-radius: 3px;
+    border: 1px solid #e0e0e0;
+    margin: 10px 0 0 0;
+    display: flex;
+    line-height: 90px;
+    text-align: center;
+    min-width: 900px;
+}
+
+.TargetMin, .TargetMax, .KpiCreator {
+    margin: 15px 0 0 0;
+}
+
+.TargetMin > h3, .TargetMax > h3 {
+    width: 60px;
+}
+
+.KpiDescription {
+    width: 340px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.KpiName {
+    color: dodgerblue;
+    width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Kpis > table > tbody > tr > td h5:first-child {
+    width: 130px;
+}
+
+.Kpis > table > tbody > tr > td > h5 {
+    margin: -20px 0 0 0;
+    color: #ccc;
+    text-align: center;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border: none;
+}
+
+.Follow {
+    margin: 20px 0 0 0;
+    min-width: 80px;
 }

@@ -5,7 +5,7 @@
     <title>Department</title>
     <!-- link start -->
     <link rel="stylesheet" href="../bootstrap-3.3.5-dist/css/bootstrap.css">
-    <!--<link rel="stylesheet" href="../css/basic/jquery.tag-editor.css">-->
+    <link rel="stylesheet" href="../css/basic/jquery.tag-editor.css">
     <link rel="stylesheet" href="../css/basic/basic.css">
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/basic/tree.css">
@@ -13,7 +13,7 @@
 
     <script src="../js/basic/jquery-latest.js"></script>
     <script src="../js/basic/jquery.cookie.js"></script>
-    <!--<script src="../js/basic/jquery.tag-editor.min.js"></script>-->
+    <script src="../js/basic/jquery.tag-editor.min.js"></script>
     <script src="../js/basic/basic.js"></script>
     <script src="../js/basic/ajax.js"></script>
     <script src="../js/nav.js"></script>
@@ -39,13 +39,29 @@
         <div class="DepartmentDescription">
             <em>Description:</em>
             <i class="glyphicon glyphicon-pencil"></i>
-            <textarea readonly="readonly" cols="25" rows="4" time="1"></textarea>
+            <textarea readonly="readonly" cols="25" rows="2" time="1"></textarea>
         </div>
         <hr>
         <button class="BtnSubmit Change">Change</button>
         <button class="BtnSubmit Delete">Delete</button>
+
+        <hr>
+        <div class="DepartmentHeads">
+            <h4>Department Heads</h4>
+            <button class="BtnSubmit Leader">Add Leader</button>
+            <ul>
+                <!--here is Department Leader-->
+            </ul>
+        </div>
     </div>
 
+    <div class="LeadersShow">
+        <h4>Users List</h4>
+        <hr>
+        <i class="glyphicon glyphicon-remove"></i>
+        <ul>
+        </ul>
+    </div>
 </div>
 
 <div class="DepartmentContent">
@@ -54,6 +70,7 @@
 
     <div class="DepartmentMembers">
         <div class="AddMembers">
+            <i class="glyphicon glyphicon-remove"></i>
             <button class="BtnSubmit AddUsers">
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Add Users</span>
@@ -62,12 +79,25 @@
         </div>
 
         <div class="MembersList">
-
+            <ul>
+            </ul>
         </div>
     </div>
     <div class="MembersShow">
+        <h2></h2>
+        <em></em>
+        <i class="glyphicon glyphicon-remove"></i>
+        <div>
+            <textarea id="InviteUsers"></textarea>
+        </div>
+        <input type="button" class="InviteBtn BtnSubmit" value="Invite"/>
+        <hr>
 
+        <div class="Signed">
+
+        </div>
     </div>
+</div>
 </div>
 </body>
 </html>
