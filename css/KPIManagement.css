@@ -51,7 +51,7 @@
 }
 
 .RightContent > ul > li {
-    margin: 0;
+    margin: 0 40px 0 0;
 }
 
 .Kpis {
@@ -103,6 +103,10 @@
 .Follow {
     margin: 0 0 0 0;
     min-width: 80px;
+}
+
+.Follow:hover, .Manage:hover {
+    font-size: .9em;
 }
 
 .Manage {

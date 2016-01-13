@@ -258,7 +258,6 @@ function Email_Pass_Name(TitleHint, EmailHint, PasswordHint, NickNameHint, BtnHi
     EmailInput.setAttribute('placeholder', EmailHint);
     Email.appendChild(EmailInput);
 
-
     //Password
     var Password = document.createElement('div');
     Password.style.position = 'absolute';
@@ -427,6 +426,7 @@ function ShowConfirmDialog(top, right, bottom, left, avaliable, Title, Msg, Canc
     Cancle.style.position = 'absolute';
     Cancle.style.top = '180px';
     Cancle.style.left = '80px';
+    Cancle.style.fontSize = '18px';
     Cancle.setAttribute('class', 'BtnSubmit Cancel');
     Cancle.innerHTML = CancleBtn;
     ShowConfirmDialog.appendChild(Cancle);
@@ -435,6 +435,7 @@ function ShowConfirmDialog(top, right, bottom, left, avaliable, Title, Msg, Canc
     Confirm.style.position = 'absolute';
     Confirm.style.top = '180px';
     Confirm.style.left = '250px';
+    Confirm.style.fontSize = '18px';
     Confirm.setAttribute('class', 'BtnSubmit Confirm');
     Confirm.innerHTML = ConfirmBtn;
     ShowConfirmDialog.appendChild(Confirm);

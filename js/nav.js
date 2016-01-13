@@ -37,7 +37,6 @@ function TopNavOperation() {
 
 //Show top nav mask
     var Nickname = document.getElementsByClassName('nickname')[0].getElementsByTagName('h4')[0];
-//var Email = document.cookie.split(";")[1].split("=")[1];
 
 //get cookie email
     var Nick_Name = $.cookie('nickname');
@@ -80,7 +79,6 @@ function TopNavOperation() {
             var urlsetpass = 'users/set_password';
             var urlinfos = 'users/infos';
             var background = '#DC143C';
-            //background = '#DC143C';//红色
 
             //获取到返回值
             /**
@@ -161,11 +159,6 @@ function TopNavOperation() {
     Management.onclick = function (event) {
         ClickTopNavIcon(event, NKCManagement);
     };
-
-    /* var Department = document.getElementsByClassName('nkcmDepartment')[0];
-     Department.onclick= function () {
-
-     }*/
 
 }
 

@@ -292,19 +292,17 @@ function AjaxGetUsersInfos(url, type, AuthToken) {
 }
 
 function AjaxGetTopNavHtml(url, type) {
-    $(document).ready(function () {
-        $.ajax({
-            url: url,
-            type: type,
-            dataType: 'html',
-            success: function (data) {
-                document.getElementsByClassName('GetTopNavContent')[0].innerHTML = data;
-                TopNavOperation();
-            },
-            error: function () {
-                alert('error');
-            }
-        });
+    $.ajax({
+        url: url,
+        type: type,
+        dataType: 'html',
+        success: function (data) {
+            document.getElementsByClassName('GetTopNavContent')[0].innerHTML = data;
+            TopNavOperation();
+        },
+        error: function () {
+            alert('error');
+        }
     });
 }
 
@@ -670,8 +668,8 @@ function AjaxRemoveManager(url, type, id, user_id, AuthToken) {
     });
 }
 
-var Accesses = "";
-function AjaxAccesses(url, type, AuthToken) {
+var GetKpis = "";
+function AjaxGetKpis(url, type, AuthToken) {
     $.ajax({
         url: urlhead + url,
         type: type,
@@ -680,11 +678,28 @@ function AjaxAccesses(url, type, AuthToken) {
             xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
         },
         success: function (data) {
-            Accesses = data;
+            GetKpis = data;
         },
         error: function () {
             alert('error');
         }
-    })
-    return Accesses;
+    });
+    return GetKpis;
+}
+
+var HtmlData = "";
+function AjaxGetHtml(url, type) {
+    $.ajax({
+        url: url,
+        type: type,
+        dataType: 'html',
+        async: false,
+        success: function (data) {
+            HtmlData = data;
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    return HtmlData;
 }

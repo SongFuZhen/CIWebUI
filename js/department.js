@@ -239,7 +239,7 @@ window.onload = function () {
                                             '<div class="Nickname">' + SignedUserInfo.user.nick_name +
                                             '</div><div class="IsSigned">Registered</div></div>'
                                         ).appendTo('.Signed').ready(function () {
-                                        });
+                                            });
 
                                         $('<li class="members" title="' + SignedUserInfo.user.email + '" id="' + SignedUserInfo.user.id + '">' + SignedUserInfo.user.nick_name + '</li>').appendTo($('.MembersList> ul')).ready(function () {
                                         });
@@ -247,7 +247,7 @@ window.onload = function () {
                                         $('<div class="CheckEmail col-sm-4"><div class="Email">' + GetEmails[i] + '</div>' +
                                             '<div class="Nickname"></div><div class="IsSigned" style="color:red">Will Invite</div></div>'
                                         ).appendTo('.Signed').ready(function () {
-                                        });
+                                            });
                                     }
                                 }
                             }
@@ -496,7 +496,7 @@ function DepartmentDialog(label) {
     var Cancel = document.createElement('button');
     var CancelStyle = Cancel.style;
     CancelStyle.position = 'absolute';
-    CancelStyle.top = '180px';
+    CancelStyle.top = '150px';
     CancelStyle.left = '50px';
     CancelStyle.display = 'block';
     Cancel.innerHTML = 'Cancel';
@@ -506,7 +506,7 @@ function DepartmentDialog(label) {
     var Confirm = document.createElement('button');
     var ConfirmStyle = Confirm.style;
     ConfirmStyle.position = 'absolute';
-    ConfirmStyle.top = '180px';
+    ConfirmStyle.top = '150px';
     ConfirmStyle.left = '180px';
     ConfirmStyle.display = 'block';
     Confirm.setAttribute('class', 'BtnSubmit');
