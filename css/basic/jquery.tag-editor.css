@@ -58,8 +58,8 @@
 /* tag style */
 .tag-editor .tag-editor-tag {
     padding-left: 5px;
-    color: #46799b;
-    background: #e0eaf1;
+    color: #23527c;
+    background: #F5DEB3;
     white-space: nowrap;
     overflow: hidden;
     cursor: pointer;
@@ -68,7 +68,7 @@
 
 /* delete icon */
 .tag-editor .tag-editor-delete {
-    background: #e0eaf1;
+    background: #F5DEB3;
     cursor: pointer;
     padding-right: 5px;
     border-radius: 0 2px 2px 0;

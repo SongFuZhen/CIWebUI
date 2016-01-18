@@ -327,8 +327,10 @@ function AjaxGetRootDepartment(url, type, AuthToken) {
                 $('<ul class="ul' + ID + '"><li class="parent_li Child' + ID + '"><span id="' + ID + '" title="' + Description + '"><i class="glyphicon glyphicon-grain"></i>' + Name
                     + '</span></li></ul>').appendTo($('.tree')).ready(function () {
                 });
+                var ChildJSON = new Array();
                 RootJSON = data;
-                AjaxGetChildDepartment(url, type, ID, AuthToken);
+                var ChildJSON = AjaxGetChildDepartment(url, type, ID, AuthToken);
+                ChildJSON.push(JSON.stringify(RootJSON));
             }
             RemoveDialog('Loading');
         },
@@ -340,6 +342,44 @@ function AjaxGetRootDepartment(url, type, AuthToken) {
     return RootJSON;
 }
 
+var AllDepartmentJSON = '';
+function AjaxGetAllDepartment(url, type, AuthToken) {
+    Loading(0, 0, 0, 0, 'block');
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var ID = data[i].department.id;
+                var Name = data[i].department.name;
+                var Description = data[i].department.description;
+                var Has_Children = data[i].department.has_children;
+                var Members = data[i].department.members;
+                $('<ul class="ul' + ID + '"><li class="parent_li Child' + ID + '"><span id="' + ID + '" title="' + Description + '"><i class="glyphicon glyphicon-grain"></i>' + Name
+                    + '</span></li></ul>').appendTo($('.tree')).ready(function () {
+                });
+                var ChildJSON = new Array();
+                ChildJSON = AjaxGetChildDepartment(url, type, ID, AuthToken);
+                ChildJSON.push(JSON.stringify(data));
+                AllDepartmentJSON = ChildJSON;
+            }
+            RemoveDialog('Loading');
+        },
+        error: function () {
+            RemoveDialog('Loading');
+            alert('error');
+        }
+    });
+    return AllDepartmentJSON;
+}
+
+
+var ChildJSON = new Array();
 function AjaxGetChildDepartment(url, type, ID, AuthToken) {
     $.ajax({
         url: urlhead + url,
@@ -357,18 +397,21 @@ function AjaxGetChildDepartment(url, type, ID, AuthToken) {
                     $('<ul class="ul' + childs.id + '"><li class="parent_li Child' + childs.id + '" style="display: none;"> <span id="' + childs.id + '" title="' + childs.description + '"><i class="glyphicon glyphicon-plus-sign"></i>' +
                         childs.name + '</span></li></ul>').appendTo($('.Child' + ID)).ready(function () {
                     });
+                    ChildJSON.push(JSON.stringify(data));
                     AjaxGetChildDepartment(url, type, childs.id, AuthToken);
                 } else {
                     $('<ul class="ul' + childs.id + '"><li class="parent_li Child' + childs.id + '" style="display:none;"> <span id="' + childs.id + '" title="' + childs.description + '"><i class="glyphicon glyphicon-leaf"></i>' +
                         childs.name + '</span></li></ul>').appendTo($('.Child' + ID)).ready(function () {
                     });
+                    ChildJSON.push(JSON.stringify(data));
                 }
             }
         },
         error: function () {
             alert('error');
         }
-    })
+    });
+    return ChildJSON;
 }
 
 function AjaxAddDepartment(url, type, name, description, id, AuthToken) {

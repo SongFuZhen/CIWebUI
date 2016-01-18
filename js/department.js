@@ -239,7 +239,7 @@ window.onload = function () {
                                             '<div class="Nickname">' + SignedUserInfo.user.nick_name +
                                             '</div><div class="IsSigned">Registered</div></div>'
                                         ).appendTo('.Signed').ready(function () {
-                                            });
+                                        });
 
                                         $('<li class="members" title="' + SignedUserInfo.user.email + '" id="' + SignedUserInfo.user.id + '">' + SignedUserInfo.user.nick_name + '</li>').appendTo($('.MembersList> ul')).ready(function () {
                                         });
@@ -247,7 +247,7 @@ window.onload = function () {
                                         $('<div class="CheckEmail col-sm-4"><div class="Email">' + GetEmails[i] + '</div>' +
                                             '<div class="Nickname"></div><div class="IsSigned" style="color:red">Will Invite</div></div>'
                                         ).appendTo('.Signed').ready(function () {
-                                            });
+                                        });
                                     }
                                 }
                             }

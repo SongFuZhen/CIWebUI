@@ -5,12 +5,19 @@
 window.onload = function () {
     AjaxGetTopNavHtml('NavDemo.html', 'GET');
 
+    $('#Dimensions').tagEditor({
+        placeholder: "Tips: Click Bottom Btn to Add.",
+    });
+
+    /*Set Tooltips*/
+    $('[data-toggle="tooltip"]').tooltip();
+
     var LeftNav = document.getElementsByClassName('LeftNav')[0];
     LeftNav.style.height = (ClientHeight - 60) + 'px';
 
     var RightContent = document.getElementsByClassName('RightContent')[0];
     /*When Load Show All KPI*/
-    LoadAllKpis();
+    //LoadAllKpis();
 
     /*Judge Which li Click*/
     var LeftNav = document.getElementsByClassName('LeftNav')[0];
@@ -35,19 +42,281 @@ window.onload = function () {
         LoadFollowedKpis();
     };
 
-    /*Create Button*/
-    var CreateBtn = document.getElementsByClassName('Create')[0];
-    CreateBtn.onclick = function () {
-        var url = 'CreateKPI.html';
-        var CreateKPIHtml = AjaxGetHtml(url, 'GET');
-        RightContent.innerHTML = CreateKPIHtml;
-    };
-
     function RemoveLi() {
         $('.LeftNav li').removeClass('IsClick');
         $('.RightContent ul li').remove();
     }
 
+    var AddDimentionBtn = document.getElementsByClassName('AddDimentionBtn')[0].getElementsByTagName('i')[0];
+    AddDimentionBtn.onclick = function () {
+        $('.AddDimensions').fadeIn(400);
+
+        /*Close Dimension Btn*/
+        var CloseDimension = document.getElementsByClassName('CloseDimension')[0].getElementsByTagName('i')[0];
+        CloseDimension.onclick = function () {
+            $('.AddDimensions').fadeOut(400);
+        };
+
+        var DimensionAddBtn = document.getElementsByClassName('DimensionAddBtn')[0];
+        DimensionAddBtn.onclick = function () {
+            var DimensionName = document.getElementsByClassName('AddDimensions')[0].getElementsByTagName('input')[0].value;
+            var DimensionType = document.getElementById('DimensionType').value;
+
+            if (DimensionName == "") {
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', 'Dimension Name cannot Empty', '#DC143C');
+                SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+                //Delete AddDepartment Dialog
+                //删除掉MsgDialog
+                setTimeout(function () {
+                    RemoveDialog('ShowMsgDialog');
+                }, 3000);
+            } else {
+                /* $('<li><div class="tag-editor-spacer">,</div><div class="tag-editor-tag" data-toggle="tooltip" data-placement="top" title="' + DimensionType + '">' + DimensionName + '</div>' +
+                 '<div class="tag-editor-delete"><i></i></div></li>').appendTo('.tag-editor').ready(function () {
+                 });*/
+                $('#Dimensions').tagEditor('addTag', DimensionName, DimensionType);
+            }
+        }
+    };
+
+    var CreateKPIBtn = document.getElementsByClassName('modal-footer')[0].getElementsByTagName('button');
+
+    var BasicHeader = document.getElementsByClassName('BasicHeader')[0];
+    var AssignToHeader = document.getElementsByClassName('AssignToHeader')[0];
+    var ViewableHeader = document.getElementsByClassName('ViewableHeader')[0];
+
+    var BasicInfo = document.getElementsByClassName('basic-info')[0];
+    var AssignTo = document.getElementsByClassName('assign-to')[0];
+    var Viewable = document.getElementsByClassName('viewable')[0];
+
+    var BasicHeaderFont = BasicHeader.getElementsByTagName('h4')[0];
+    var AssignToHeaderFont = AssignToHeader.getElementsByTagName('h4')[0];
+    var ViewableHeaderFont = ViewableHeader.getElementsByTagName('h4')[0];
+
+    var PreStepBtn = CreateKPIBtn[0];
+    var NextStepBtn = CreateKPIBtn[1];
+    var FinishBtn = CreateKPIBtn[2];
+
+    PreStepBtn.onclick = function () {
+        if (AssignTo.getAttribute('isopen') == 'yes') {
+            BasicInfo.style.display = 'block';
+            AssignTo.style.display = 'none';
+            Viewable.style.display = 'none';
+            BasicInfo.setAttribute('isopen', 'yes');
+            AssignTo.setAttribute('isopen', 'no');
+            Viewable.setAttribute('isopen', 'no');
+            BasicHeader.style.borderBottom = '4px solid lightseagreen';
+            AssignToHeader.style.border = 'none';
+            ViewableHeader.style.border = 'none';
+            BasicHeaderFont.style.color = '#FFA500';
+            AssignToHeaderFont.style.color = '#000';
+            ViewableHeaderFont.style.color = '#000';
+        } else if (Viewable.getAttribute('isopen') === 'yes') {
+            BasicInfo.style.display = 'none';
+            AssignTo.style.display = 'block';
+            Viewable.style.display = 'none';
+            BasicInfo.setAttribute('isopen', 'no');
+            AssignTo.setAttribute('isopen', 'yes');
+            Viewable.setAttribute('isopen', 'no');
+            BasicHeader.style.border = 'none';
+            AssignToHeader.style.borderBottom = '4px solid lightseagreen';
+            ViewableHeader.style.border = 'none';
+            BasicHeaderFont.style.color = '#000';
+            AssignToHeaderFont.style.color = '#FFA500';
+            ViewableHeaderFont.style.color = '#000';
+        }
+    };
+
+    NextStepBtn.onclick = function () {
+        if (BasicInfo.getAttribute('isopen') == 'yes') {
+            BasicInfo.style.display = 'none';
+            AssignTo.style.display = 'block';
+            Viewable.style.display = 'none';
+            BasicInfo.setAttribute('isopen', 'no');
+            AssignTo.setAttribute('isopen', 'yes');
+            Viewable.setAttribute('isopen', 'no');
+            BasicHeader.style.border = 'none';
+            AssignToHeader.style.borderBottom = '4px solid lightseagreen';
+            Viewable.style.border = 'none';
+            BasicHeaderFont.style.color = '#000';
+            AssignToHeaderFont.style.color = '#FFA500';
+            ViewableHeaderFont.style.color = '#000';
+
+            /*Here can get All Value*/
+            console.log($('#Dimensions').tagEditor('getTags')[0].tags);
+        } else if (AssignTo.getAttribute('isopen') == 'yes') {
+            BasicInfo.style.display = 'none';
+            AssignTo.style.display = 'none';
+            Viewable.style.display = 'block';
+            BasicInfo.setAttribute('isopen', 'no');
+            AssignTo.setAttribute('isopen', 'no');
+            Viewable.setAttribute('isopen', 'yes');
+            BasicHeader.style.border = 'none';
+            AssignToHeader.style.border = 'none';
+            ViewableHeader.style.borderBottom = '4px solid lightseagreen';
+            BasicHeaderFont.style.color = '#000';
+            AssignToHeaderFont.style.color = '#000';
+            ViewableHeaderFont.style.color = '#FFA500';
+            $('.GroupUserList').fadeOut(400);
+        }
+    };
+
+    var ViewMsgShow = document.getElementsByClassName('ViewMsgShow');
+    var PartialPublic = ViewMsgShow[2].getElementsByTagName('span')[0].getElementsByTagName('input')[0];
+    PartialPublic.onclick = function () {
+        /*var ChooseNav = document.getElementsByClassName('ChooseNav')[0];
+         ChooseNav.style.display = 'block';*/
+        $('.ChooseNav').fadeIn(400);
+
+        var CloseCheckBox = document.getElementsByClassName('CloseCheckBox')[0].getElementsByTagName('i')[0];
+        CloseCheckBox.onclick = function () {
+            $('.ChooseNav').fadeOut(400);
+        };
+
+        var NewGroupBtn = document.getElementsByClassName('NewGroupBtn')[0];
+        NewGroupBtn.onclick = function () {
+            $('.ChooseNav').hide();
+            $('.NewGroup').fadeIn(400);
+
+            var CloseAddGroup = document.getElementsByClassName('CloseAddGroup')[0].getElementsByTagName('i')[0];
+            CloseAddGroup.onclick = function () {
+                $('.NewGroup').fadeOut(400);
+                $('.ChooseNav').fadeIn(400);
+            };
+
+            var AddGroupUsers = document.getElementsByClassName('AddGroupUsers')[0].getElementsByTagName('i')[0];
+            AddGroupUsers.onclick = function () {
+                $('.GroupUserList').fadeIn(400);
+                $('.GroupUserList').animate({right: '0'});
+            };
+            var OKUsers = document.getElementsByClassName('OKUsers')[0];
+            OKUsers.onclick = function () {
+                $('.GroupUserList').fadeOut(400);
+                $('.NewGroup').fadeOut(400);
+                $('.ChooseNav').fadeIn(400);
+            }
+        }
+    };
+
+    var CloseGroupUserList = document.getElementsByClassName('CloseGroupUserList')[0].getElementsByTagName('i')[0];
+    CloseGroupUserList.onclick = function () {
+        $('.GroupUserList').fadeOut(400);
+    };
+
+
+    /*获取所有的值*/
+    var url = 'users/departments';
+    var Token = $.cookie('token');
+    var AllDepartmentJSON = new Array();
+    AllDepartmentJSON = AjaxGetAllDepartment(url, 'GET', Token);
+
+
+    /*Assign To Who  Start*/
+    /**
+     *解析数组，将之放置在一个数组中
+     * 但是数组中套着数组
+     * @type {Array}
+     */
+    var AllMembers = new Array();
+    var AllDepartment = new Array();
+    var UniqueDepartmentJSON;
+    for (var i = 0; i < AllDepartmentJSON.length; i++) {
+        UniqueDepartmentJSON = $.parseJSON(AllDepartmentJSON[i]);
+        for (var j = 0; j < UniqueDepartmentJSON.length; j++) {
+            var AllID = UniqueDepartmentJSON[j].department.id;
+            var AllName = UniqueDepartmentJSON[j].department.name;
+
+            AllDepartment.push({ID: AllID, Name: AllName});
+            AllMembers.push(UniqueDepartmentJSON[j].department.members);
+        }
+    }
+
+    /**
+     * 将数组的数组放置到一个数组中
+     * @type {Array}
+     */
+
+    var GetAllDepartment = new Array();
+    for (var i = 0; i < AllDepartment.length; i++) {
+        var DepartmentJSON = JSON.stringify(AllDepartment[i]).toString();
+        GetAllDepartment.push(DepartmentJSON);
+    }
+
+    var GetAllMembers = new Array();
+    for (var i = 0; i < AllMembers.length; i++) {
+        for (var j = 0; j < AllMembers[i].length; j++) {
+            GetAllMembers.push(AllMembers[i][j]);
+        }
+    }
+
+    /*No Repeat*/
+    var NoRepeatDepartment = ArrayIsRepeat(GetAllDepartment);
+    //console.log(NoRepeatDepartment);
+
+    var NoRepeatMembers = ArrayIsRepeat(GetAllMembers);
+    //console.log(NoRepeatMembers);
+
+    for (var i = 0; i < NoRepeatDepartment.length; i++) {
+        var NoRepeatDepartmentJSON = eval("(" + NoRepeatDepartment[i] + ")");
+        var NoRepeatDepartmentID = NoRepeatDepartmentJSON.ID;
+        var NoRepeatDepartmentName = NoRepeatDepartmentJSON.Name;
+        $('<option value="' + NoRepeatDepartmentID + '">' + NoRepeatDepartmentName + '</option>').appendTo('#AssignDepartment').ready(function () {
+        });
+    }
+
+    var AssignToWho = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-1')[0].getElementsByTagName('i')[0];
+    AssignToWho.onclick = function () {
+        $('.GroupUserList').fadeIn(400);
+        $('.GroupUserList').animate({right: '200px'});
+        /*删除列表中的所有li*/
+        $('.List ul li').remove();
+        for (var i = 0; i < NoRepeatMembers.length; i++) {
+            $('<li> <input type="radio" name="AssignToPeople" value="' + NoRepeatMembers[i] + '">' + NoRepeatMembers[i] + '</li>').appendTo('.List>ul').ready(function () {
+            });
+        }
+
+        var RadioIsChecked = document.getElementsByName('AssignToPeople');
+        console.log(RadioIsChecked.length);
+        /* for (var j = 0; j < RadioIsChecked.length; j++) {
+         if (RadioIsChecked[j].checked) {
+         console.log(12123)
+         var AssignToWho = document.getElementsByClassName('col-md-7')[0].getElementsByTagName('input')[0];
+         AssignToWho.value = RadioIsChecked[i].value;
+         }
+         }*/
+
+
+        var AssignToPeopleBtn = document.getElementsByClassName('GroupUserList')[0].getElementsByTagName('button')[0];
+        AssignToPeopleBtn.onclick = function () {
+            for (var j = 0; j < RadioIsChecked.length; j++) {
+                if (RadioIsChecked[j].checked) {
+                    console.log(12123)
+                    var AssignToWho = document.getElementsByClassName('col-md-7')[0].getElementsByTagName('input')[0];
+                    AssignToWho.value = RadioIsChecked[j].value;
+                }
+            }
+        }
+    };
+
+    /*Assign To Who  End*/
+
+
+
+    var Finish = document.getElementsByClassName('Finish')[0];
+    Finish.onclick = function () {
+        var viewable_code = 0;
+        var ViewType = document.getElementsByName('ViewType');
+        for (var i = 0; i < ViewType.length; i++) {
+            if (ViewType[i].checked) {
+                viewable_code = ViewType[i].value;
+            }
+        }
+        console.log(viewable_code);
+
+        /*    console.log($('#DefaultFrequency').val());
+         console.log($('#uom').val());
+         console.log($('#Dimensions').tagEditor('getTags')[0].tags);*/
+    }
 };
 
 function LoadAllKpis() {
@@ -162,7 +431,7 @@ function LoadKpis(LoadKpis, Token) {
             var KpiName = document.getElementsByClassName('KpiName')[i];
             KpiName.style.fontSize = '.9em';
             KpiName.style.fontWeight = 'bold';
-        } 
+        }
 
         if (kpi.description.length > ((ClientWidth - 600) / 18)) {
             var KpiDescriptionFont = document.getElementsByClassName('KpiDescription')[i];
@@ -170,4 +439,19 @@ function LoadKpis(LoadKpis, Token) {
             KpiDescriptionFont.style.fontWeight = 'bold';
         }
     }
+}
+
+/*Array Is Repeat*/
+function ArrayIsRepeat(array) {
+    var NoRepeat = new Array();
+    var p = 0;
+    for (var i = 0; i < array.length; i++) {
+        for (var j = 0; j < NoRepeat.length; j++) {
+            if (NoRepeat[j] == array[i]) break; // 检查重复
+        }
+        if (j >= NoRepeat.length) { // 没重复就增加它
+            NoRepeat[p++] = array[i];
+        }
+    }
+    return NoRepeat;
 }

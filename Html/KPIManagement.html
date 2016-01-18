@@ -5,12 +5,15 @@
     <title>KPIManagement</title>
     <!-- link start -->
     <link rel="stylesheet" href="../bootstrap-3.3.5-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/basic/jquery.tag-editor.css">
     <link rel="stylesheet" href="../css/basic/basic.css">
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/KPIManagement.css">
 
     <script src="../js/basic/jquery-latest.js"></script>
     <script src="../js/basic/jquery.cookie.js"></script>
+    <script src="../js/basic/jquery.tag-editor.js"></script>
+    <script src="../bootstrap-3.3.5-dist/js/bootstrap.js"></script>
     <script src="../js/basic/basic.js"></script>
     <script src="../js/basic/ajax.js"></script>
     <script src="../js/nav.js"></script>
@@ -32,12 +35,310 @@
         <li><a href="#">Created</a></li>
         <li><a href="#">Followed</a></li>
     </ul>
-    <button class="BtnSubmit Create">Create</button>
+    <button type="button" class="BtnSubmit Create" data-toggle="modal" data-target="#CreateKpi">Create</button>
 </div>
 
+<!--Use BootStrap Modal-->
+<div class="modal fade" id="CreateKpi" tabindex="-1" role="dialog" aria-labelledby="CreateKpiLabel"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h2>Create KPI</h2>
+            </div>
+            <div class="modal-body">
+                <!--Header-->
+                <div class="row">
+                    <div class="col-md-4 BasicHeader">
+                        <h4>Basic Information</h4>
+                    </div>
+                    <div class="col-md-4 AssignToHeader">
+                        <h4>Assign To</h4>
+                    </div>
+                    <div class="col-md-4 ViewableHeader">
+                        <h4>Viewable</h4>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="basic-info" isopen="yes">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" placeholder="* Name" class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <select name="" id="DefaultFrequency" class="SelectCls">
+                                <option value="0">Hour</option>
+                                <option value="1">Day</option>
+                                <option value="2">Week</option>
+                                <option value="3">Month</option>
+                                <option value="4">Quater</option>
+                                <option value="5">Year</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <textarea placeholder="Description" cols="34"></textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <textarea placeholder="Dimensions" id="Dimensions" style="display: none"
+                                      cols="34"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <select id="uom" class="SelectCls">
+                                <option value="1234">1234</option>
+                                <option value="12.34">12.34</option>
+                                <option value="12%">12%</option>
+                                <option value="12.34%">12.34%</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 AddDimentionBtn" style="display: flex;">
+                            <span>Click to add Dimension </span>
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" placeholder="* Target Min" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" placeholder="* Target Max" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="assign-to" isopen="no">
+                    <div class="alert alert-success alert-dismissible WarningAlert" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <strong>Tips!</strong> You can do it Later.
+                    </div>
+
+                    <div class="row AssignToWho">
+                        <div class="col-md-4">
+                            <h4>Assign To Who?</h4>
+                        </div>
+                        <div class="col-md-7" style="display: flex">
+                            <input type="text" class="form-control" placeholder="Only One User's Email">
+                        </div>
+                        <div class="col-md-1">
+                            <i class="glyphicon glyphicon-user UsersIcon"></i>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>Which Department?</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <select id="AssignDepartment" class="SelectCls">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>What Frequency?</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <select name="" id="Frequency" class="SelectCls">
+                                <option value="0">Hour</option>
+                                <option value="1">Day</option>
+                                <option value="2">Week</option>
+                                <option value="3">Month</option>
+                                <option value="4">Quater</option>
+                                <option value="5">Year</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>What's Time?</h4>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" placeholder="* time">
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="CheckBox" style="margin: 15px 0 0 0;">
+                                <input type="checkbox" value="None" id="notification" name="check" checked="checked"/>
+                                <label for="notification"></label>
+                                <p title="Auto Notification" data-toggle="tooltip" data-placement="top">
+                                    Notification?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="viewable" isopen="no">
+                    <div class="alert alert-success alert-dismissible WarningAlert" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <strong>Tips!</strong> You can do it Later.
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="input-group col-md-10 ViewMsgShow">
+                             <span class="input-group-addon">
+                                 <input type="radio" value="0" name="ViewType" checked="checked">
+                             </span>
+                            <input type="text" class="form-control" readonly="readonly"
+                                   value="Public              |   Everyone can see it.">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="input-group col-md-10 ViewMsgShow">
+                             <span class="input-group-addon">
+                                 <input type="radio" value="1" name="ViewType">
+                             </span>
+                            <input type="text" class="form-control" readonly="readonly"
+                                   value="Private         　|   Only you can see it.">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="input-group col-md-10 ViewMsgShow">
+                             <span class="input-group-addon">
+                                 <input type="radio" value="2" name="ViewType">
+                             </span>
+                            <input type="text" class="form-control" readonly="readonly"
+                                   value="Partial Public   |   Only selected People can see it.">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="input-group col-md-10 ViewMsgShow">
+                             <span class="input-group-addon">
+                                 <input type="radio" value="3" name="ViewType">
+                             </span>
+                            <input type="text" class="form-control" readonly="readonly"
+                                   value="Block Specific  |   Only selected people cannot see it.">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <button type="button" class="BtnSubmit">Pre</button>
+                <button type="button" class="BtnSubmit">Next</button>
+                <button type="button" class="BtnSubmit Finish">Finish</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="AddDimensions">
+        <div class="CloseDimension">
+            <h4>Dimension</h4>
+            <i class="glyphicon glyphicon-remove"></i>
+        </div>
+
+        <hr>
+        <input type="text" class="form-control">
+        <select name="" id="DimensionType" class="SelectCls">
+            <option value="text">text</option>
+            <option value="number">number</option>
+            <option value="location">location</option>
+        </select>
+
+        <button class="BtnSubmit DimensionAddBtn"><i class="glyphicon glyphicon-plus"></i>Add</button>
+    </div>
+
+
+    <div class="NewGroup">
+        <div class="CloseAddGroup">
+            <h4>Add New Group</h4>
+            <i class="glyphicon glyphicon-remove"></i>
+        </div>
+        <input type="text" placeholder="* Group Name" class="form-control GroupName">
+
+        <div class="AddGroupUsers">
+            <h4>Group Users</h4>
+            <i class="glyphicon glyphicon-plus-sign" style="color: lightseagreen;"></i>
+        </div>
+
+        <div class="GroupUsers">
+            <ul>
+
+            </ul>
+        </div>
+
+        <button class="BtnSubmit OKUsers"><i class="glyphicon glyphicon-ok"></i> OK</button>
+    </div>
+
+    <div class="GroupUserList" style="display: none;">
+        <div class="CloseGroupUserList">
+            <h4>UserList</h4>
+            <i class="glyphicon glyphicon-remove"></i>
+        </div>
+
+        <div class="List">
+            <ul>
+            </ul>
+        </div>
+        <button class="BtnSubmit"><i class="glyphicon glyphicon-ok"></i>OK</button>
+    </div>
+    <div class="ChooseNav">
+        <div class="CloseCheckBox">
+            <h4>Partial Public</h4>
+            <i class="glyphicon glyphicon-remove"></i>
+        </div>
+        <hr>
+        <div class="CheckBox">
+            <input type="checkbox" value="None" id="Tag1" name="check" checked="checked"/>
+            <label for="Tag1"></label>
+            <p title="Tag1" data-toggle="tooltip" data-placement="top">Tag1</p>
+        </div>
+        <hr>
+
+        <div class="CheckBox">
+            <input type="checkbox" value="None" id="Tag2" name="check" checked="checked"/>
+            <label for="Tag2"></label>
+            <p title="Tag2" data-toggle="tooltip" data-placement="top">CreateKPIFirst</p>
+        </div>
+        <hr>
+
+        <div class="CheckBox">
+            <input type="checkbox" value="None" id="Tag3" name="check" checked="checked"/>
+            <label for="Tag3"></label>
+            <p title="Tag3" data-toggle="tooltip" data-placement="top">Tag3</p>
+        </div>
+        <hr>
+
+        <div class="CheckBox">
+            <input type="checkbox" value="None" id="Tag4" name="check" checked="checked"/>
+            <label for="Tag4"></label>
+            <p title="Tag4" data-toggle="tooltip" data-placement="top">Tag4</p>
+        </div>
+        <hr>
+
+        <button class="BtnSubmit NewGroupBtn"><i class="glyphicon glyphicon-plus"></i>New Group</button>
+    </div>
+</div>
 <div class="RightContent">
     <ul>
     </ul>
+</div>
+
 </div>
 </body>
 </html>
