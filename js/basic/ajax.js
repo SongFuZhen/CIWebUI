@@ -1,7 +1,8 @@
 /**
  * Created by zero on 2015/12/22.
  */
-var urlhead = 'http://112.124.28.10:8001/api/v2/';
+//var urlhead = 'http://112.124.28.10:8001/api/v2/';
+var urlhead = 'http://192.168.1.70:3000/api/v2/';
 
 function AjaxSignIn(url, type, email, password, LoadHref) {
     $(document).ready(function () {
@@ -192,31 +193,6 @@ function AjaxSetPassword(url, type, newpassword, AuthToken) {
         });
     });
     return ProfileFlagForPass;
-    /*$(document).ready(function () {
-     $.ajax({
-     crossDomain: true,
-     url: urlhead + url,
-     type: 'POST',
-     data: {new_password: newpassword},
-     dataType: 'json',
-     /!* headers: {
-     "Authorization": "Bearer " + AuthToken,
-     "Content-Type": "application/json",
-     "Access-Control-Allow-Origin": "*"
-     },*!/
-     beforeSend: function (xhr) {
-     xhr.setRequestHeader('Content-Type', 'application/json');
-     xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
-     xhr.setRequestHeader('Access-Control-Allow-Origin', 'localhost:63342');
-     },
-     success: function (data) {
-     alert('success');
-     },
-     error: function () {
-     alert('error');
-     }
-     })
-     })*/
 }
 
 var ProfileFlagForInfos = "";
@@ -378,7 +354,6 @@ function AjaxGetAllDepartment(url, type, AuthToken) {
     return AllDepartmentJSON;
 }
 
-
 var ChildJSON = new Array();
 function AjaxGetChildDepartment(url, type, ID, AuthToken) {
     $.ajax({
@@ -533,26 +508,6 @@ function AjaxDeleteDepartment(url, type, id, AuthToken) {
             alert('error');
         }
     })
-}
-
-function AjaxGetAllMembers(url, type, id, AuthToken) {
-    var GetMembers = "";
-    $.ajax({
-        url: urlhead + url,
-        type: type,
-        data: {id: id},
-        async: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
-        },
-        success: function (data) {
-            GetMembers = data;
-        },
-        error: function () {
-            alert('error');
-        }
-    });
-    return GetMembers;
 }
 
 function AjaxRemoveUsers(url, type, id, userid, AuthToken) {
@@ -711,25 +666,6 @@ function AjaxRemoveManager(url, type, id, user_id, AuthToken) {
     });
 }
 
-var GetKpis = "";
-function AjaxGetKpis(url, type, AuthToken) {
-    $.ajax({
-        url: urlhead + url,
-        type: type,
-        async: false,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
-        },
-        success: function (data) {
-            GetKpis = data;
-        },
-        error: function () {
-            alert('error');
-        }
-    });
-    return GetKpis;
-}
-
 function AjaxCreateKpis(url, type, kpis, assignments, AuthToken) {
     $.ajax({
         url: urlhead + url,
@@ -758,4 +694,43 @@ function AjaxCreateKpis(url, type, kpis, assignments, AuthToken) {
             alert('error');
         }
     });
+}
+
+function AjaxGetAllMembers(url, type, id, AuthToken) {
+    var GetMembers = "";
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        data: {id: id},
+        async: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            GetMembers = data;
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    return GetMembers;
+}
+
+var GetList = "";
+function AjaxGetList(url, type, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            GetList = data;
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    return GetList;
 }

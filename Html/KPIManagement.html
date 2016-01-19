@@ -72,12 +72,8 @@
 
                         <div class="col-md-6">
                             <select name="" id="DefaultFrequency" class="SelectCls">
-                                <option value="0">Hour</option>
-                                <option value="1">Day</option>
-                                <option value="2">Week</option>
-                                <option value="3">Month</option>
-                                <option value="4">Quater</option>
-                                <option value="5">Year</option>
+                                <option value="" disabled selected style="text-align: center;">Default Frequency
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -96,10 +92,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <select id="uom" class="SelectCls">
-                                <option value="1234">1234</option>
-                                <option value="12.34">12.34</option>
-                                <option value="12%">12%</option>
-                                <option value="12.34%">12.34%</option>
+                                <option value="" style="text-align: center" disabled="disabled" selected="selected">Unit
+                                    of measurements
+                                </option>
                             </select>
                         </div>
 
@@ -114,7 +109,9 @@
                         </div>
 
                         <div class="col-md-6" style="position: absolute;top: 182px;left: 300px">
-                            <input type="text" placeholder="Calculate Method" class="form-control">
+                            <select id="calculatemethod" class="SelectCls">
+                                <option value="" disabled selected style="text-align: center;">Calculate Method</option>
+                            </select>
                         </div>
                     </div>
 
@@ -140,7 +137,8 @@
                             <input type="text" class="form-control" placeholder="Only One User's Email">
                         </div>
                         <div class="col-md-1">
-                            <i class="glyphicon glyphicon-user UsersIcon"></i>
+                            <!--<i class="glyphicon glyphicon-user UsersIcon"></i>-->
+                            <i class="UserIsSigned"></i>
                         </div>
                     </div>
 
@@ -150,6 +148,7 @@
                         </div>
                         <div class="col-md-7">
                             <select id="AssignDepartment" class="SelectCls">
+                                <option value="" disabled selected style="text-align: center;">Department</option>
                             </select>
                         </div>
                     </div>
@@ -159,13 +158,10 @@
                             <h4>What Frequency?</h4>
                         </div>
                         <div class="col-md-7">
-                            <select name="" id="Frequency" class="SelectCls">
-                                <option value="0">Hour</option>
-                                <option value="1">Day</option>
-                                <option value="2">Week</option>
-                                <option value="3">Month</option>
-                                <option value="4">Quater</option>
-                                <option value="5">Year</option>
+                            <select id="Frequency" class="SelectCls">
+                                <option disabled="disabled" value="" selected="selected" style="text-align: center">
+                                    Frequency
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -310,6 +306,7 @@
         <hr style="margin: 5px 0 5px 0">
 
         <div class="ShowGroup">
+            <!-- input id 设置为GroupID  value 设置为 Group Number  title 设置为Group Number-->
             <div class="CheckBox">
                 <input type="radio" value="100" id="Tag1" name="GroupList"/>
                 <label for="Tag1"></label>

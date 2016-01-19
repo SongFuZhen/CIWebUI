@@ -270,6 +270,13 @@
     display: none;
 }
 
+.UserIsSigned {
+    color: green;
+    display: none;
+    font-size: 1.5em;
+    margin: 5px 0 0 -15px;
+}
+
 .UsersIcon:hover {
     color: darkred;
 }
@@ -391,7 +398,7 @@
 
 .GroupUserList {
     position: absolute;
-    height: 490px;
+    height: 485px;
     background: white;
     top: 30px;
     width: 175px;

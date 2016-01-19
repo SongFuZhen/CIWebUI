@@ -156,13 +156,6 @@ window.onload = function () {
         var GroupList = document.getElementsByName('GroupList');
         console.log(GroupList.length);
 
-        /*获取到单选按钮点击事件*/
-
-        $(":radio").click(function () {
-            console.log($(this).val());
-            console.log($(this).attr("id"));
-        });
-
         var NewGroupBtn = document.getElementsByClassName('NewGroupBtn')[0];
         NewGroupBtn.onclick = function () {
 
@@ -224,6 +217,13 @@ window.onload = function () {
             }
         }
     };
+
+    /*获取到单选按钮点击事件*/
+
+    $(":radio").click(function () {
+        console.log($(this).val());
+        console.log($(this).attr("id"));
+    });
 
     var CloseGroupUserList = document.getElementsByClassName('CloseGroupUserList')[0].getElementsByTagName('i')[0];
     CloseGroupUserList.onclick = function () {
@@ -289,27 +289,53 @@ window.onload = function () {
         });
     }
 
-    var AssignToWho = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-1')[0].getElementsByTagName('i')[0];
-    AssignToWho.onclick = function () {
-        $('.GroupUserList').fadeIn(400);
-        $('.GroupUserList').animate({right: '200px'});
-        /*删除列表中的所有li*/
-        $('.List ul li').remove();
-        for (var i = 0; i < NoRepeatMembers.length; i++) {
-            $('<li> <input type="radio" name="AssignToPeople" value="' + NoRepeatMembers[i] + '">' + NoRepeatMembers[i] + '</li>').appendTo('.List>ul').ready(function () {
-            });
-        }
+    /*此处为点击user 图标*/
+    /*
+     var AssignToWho = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-1')[0].getElementsByTagName('i')[0];
+     AssignToWho.onclick = function () {
+     $('.GroupUserList').fadeIn(400);
+     $('.GroupUserList').animate({right: '200px'});
+     /!*删除列表中的所有li*!/
+     $('.List ul li').remove();
+     for (var i = 0; i < NoRepeatMembers.length; i++) {
+     $('<li> <input type="radio" name="AssignToPeople" value="' + NoRepeatMembers[i] + '">' + NoRepeatMembers[i] + '</li>').appendTo('.List>ul').ready(function () {
+     });
+     }
 
-        var RadioIsChecked = document.getElementsByName('AssignToPeople');
-        console.log(RadioIsChecked.length);
+     var RadioIsChecked = document.getElementsByName('AssignToPeople');
+     console.log(RadioIsChecked.length);
 
-        var AssignToPeopleBtn = document.getElementsByClassName('GroupUserList')[0].getElementsByTagName('button')[0];
-        AssignToPeopleBtn.onclick = function () {
-            for (var j = 0; j < RadioIsChecked.length; j++) {
-                if (RadioIsChecked[j].checked) {
-                    var AssignToWho = document.getElementsByClassName('col-md-7')[0].getElementsByTagName('input')[0];
-                    AssignToWho.value = RadioIsChecked[j].value;
-                }
+     var AssignToPeopleBtn = document.getElementsByClassName('GroupUserList')[0].getElementsByTagName('button')[0];
+     AssignToPeopleBtn.onclick = function () {
+     for (var j = 0; j < RadioIsChecked.length; j++) {
+     if (RadioIsChecked[j].checked) {
+     var AssignToWho = document.getElementsByClassName('col-md-7')[0].getElementsByTagName('input')[0];
+     AssignToWho.value = RadioIsChecked[j].value;
+     }
+     }
+     }
+     };*/
+
+
+    var AssignToWhoInput = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-7')[0].getElementsByTagName('input')[0];
+    var AssignToWho = "";
+    AssignToWhoInput.onblur = function () {
+        AssignToWho = AssignToWhoInput.value.trim();
+        if (!AssignToWho == "") {
+            var UserIsSigned = document.getElementsByClassName('UserIsSigned')[0];
+            UserIsSigned.style.display = 'block';
+            UserIsSigned.removeAttribute('class');
+
+            var url = 'users/signuped';
+            var Token = $.cookie('token');
+            var IsSigned = AjaxUserSingUp(url, 'POST', AssignToWho, Token);
+            if (IsSigned.user == null) {
+                UserIsSigned.style.color = 'red';
+                UserIsSigned.setAttribute('class', 'glyphicon glyphicon-remove-sign UserIsSigned');
+                UserIsSigned.setAttribute('title', 'The User have not Signuped.');
+            } else {
+                UserIsSigned.style.color = 'green';
+                UserIsSigned.setAttribute('class', 'glyphicon glyphicon-ok-sign UserIsSigned');
             }
         }
     };
@@ -327,13 +353,13 @@ window.onload = function () {
         var uom = $('#uom').val();
         var TargetMin = Row[3].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
         var TargetMax = Row[4].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
-        var CalculateMethod = Row[3].getElementsByClassName('col-md-6')[1].getElementsByTagName('input')[0].value;
+        var CalculateMethod = $('#calculatemethod').val();
 
         //var Kpi_Dimension = $('#Dimensions').tagEditor('getTags')[0].tags;
         var GetDimensions = document.getElementsByClassName('GetDimensions')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
         var Attributes = new Array();
-        console.log("GetDimensions" + GetDimensions.length);
-        if (GetDimensions.length > 0) {
+
+        if (GetDimensions.length > 1) {
             for (var i = 1; i < GetDimensions.length; i++) {
                 var AttributeName = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].innerHTML;
                 var AttributeType = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].getAttribute('title');
@@ -353,21 +379,7 @@ window.onload = function () {
             viewable_code: viewable_code,
             user_group_id: ""
         };
-        var kpis = {
-            kpi_name: Kpi_Name,
-            description: Kpi_Description,
-            target_min: TargetMin,
-            target_max: TargetMax,
-            uom: uom,
-            frequency: Default_Frequency,
-            calculate_method: CalculateMethod,
-            viewable: Viewable,
-            attributes: Attributes
-        };
 
-        console.log(JSON.stringify(kpis));
-
-        var AssignToWho = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-7')[0].getElementsByTagName('input')[0].value;
         var AssignDepartment = $('#AssignDepartment').val();
         var Frequency = $('#Frequency').val();
         var InputTime = document.getElementsByClassName('InputTime')[0].value;
@@ -385,16 +397,29 @@ window.onload = function () {
             auto_notification: AutoNotification
         }];
 
-        console.log(JSON.stringify(assignments));
+        var kpis = {
+            kpi_name: Kpi_Name,
+            description: Kpi_Description,
+            target_min: TargetMin,
+            target_max: TargetMax,
+            uom: uom,
+            frequency: Default_Frequency,
+            calculate_method: CalculateMethod,
+            viewable: Viewable,
+            attributes: Attributes
+        };
 
-        AjaxCreateKpis(url, 'POST', JSON.stringify(kpis), JSON.stringify(assignments), Token);
+        console.log(Attributes);
+        console.log(assignments);
+
+        AjaxCreateKpis(url, 'POST', kpis, assignments, Token);
     };
 };
 
 function LoadAllKpis() {
     var accessesurl = 'kpis/users/accesses';
     var Token = $.cookie('token');
-    var Accesses = AjaxGetKpis(accessesurl, 'GET', Token);
+    var Accesses = AjaxGetList(accessesurl, 'GET', Token);
 
     LoadKpis(Accesses, Token);
 }
@@ -402,14 +427,14 @@ function LoadAllKpis() {
 function LoadCreatedKpis() {
     var accessesurl = 'kpis/users/created';
     var Token = $.cookie('token');
-    var CreatedKpis = AjaxGetKpis(accessesurl, 'GET', Token);
+    var CreatedKpis = AjaxGetList(accessesurl, 'GET', Token);
     LoadKpis(CreatedKpis, Token);
 }
 
 function LoadFollowedKpis() {
     var accessesurl = 'kpis/users/followed';
     var Token = $.cookie('token');
-    var FollowedKpis = AjaxGetKpis(accessesurl, 'GET', Token);
+    var FollowedKpis = AjaxGetList(accessesurl, 'GET', Token);
     LoadKpis(FollowedKpis, Token);
 }
 
@@ -536,7 +561,24 @@ function InitParams() {
         placeholder: "Tips: Click Bottom Btn to Add.",
         forceLowercase: false
     });
+
+    /*Set UOM Calculate_Method  timing_frequencies*/
+
+    var uomurl = 'kpis/unit_of_measurements';
+    var calculateurl = 'kpis/calculate_methods';
+    var frequencyurl = 'kpis/timing_frequencies';
+    var Token = $.cookie('token');
+
+    var UOMList = AjaxGetList(uomurl, 'GET', Token);
+    var CalculateList = AjaxGetList(calculateurl, 'GET', Token);
+    var FrequencyList = AjaxGetList(frequencyurl, 'GET', Token);
+
+    GetListWithFor(UOMList, 'uom');
+    GetListWithFor(CalculateList, 'calculatemethod');
+    GetListWithFor(FrequencyList, 'DefaultFrequency');
+    GetListWithFor(FrequencyList, 'Frequency');
 }
+
 function SetPosition() {
     /*Position Start*/
     var LeftNav = document.getElementsByClassName('LeftNav')[0];
@@ -588,4 +630,12 @@ function LeftNavFun() {
 function RemoveLi() {
     $('.LeftNav li').removeClass('IsClick');
     $('.RightContent ul li').remove();
+}
+
+function GetListWithFor(data, id) {
+    for (var i = 0; i < data.length; i++) {
+        $('<option value="' + data[i].id + '">' + data[i].name + '</option>').appendTo('#' + id).ready(function () {
+        });
+    }
+    console.log(data)
 }
