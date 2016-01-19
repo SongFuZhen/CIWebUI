@@ -4,49 +4,13 @@
 
 window.onload = function () {
     AjaxGetTopNavHtml('NavDemo.html', 'GET');
-
-    $('#Dimensions').tagEditor({
-        placeholder: "Tips: Click Bottom Btn to Add.",
-        forceLowercase: false
-    });
-
-    /*Set Tooltips*/
-    $('[data-toggle="tooltip"]').tooltip();
-
-    var LeftNav = document.getElementsByClassName('LeftNav')[0];
-    LeftNav.style.height = (ClientHeight - 60) + 'px';
+    SetPosition();
+    InitParams();
 
     var RightContent = document.getElementsByClassName('RightContent')[0];
     /*When Load Show All KPI*/
     //LoadAllKpis();
-
-    /*Judge Which li Click*/
-    var LeftNav = document.getElementsByClassName('LeftNav')[0];
-    var LeftNavLi = LeftNav.getElementsByTagName('ul')[0].getElementsByTagName('li');
-
-    LeftNavLi[0].onclick = function () {
-        /*Remove All Li*/
-        RemoveLi();
-        $(this).addClass('IsClick');
-        LoadAllKpis();
-    };
-
-    LeftNavLi[1].onclick = function () {
-        RemoveLi();
-        $(this).addClass('IsClick');
-        LoadCreatedKpis();
-    };
-
-    LeftNavLi[2].onclick = function () {
-        RemoveLi();
-        $(this).addClass('IsClick');
-        LoadFollowedKpis();
-    };
-
-    function RemoveLi() {
-        $('.LeftNav li').removeClass('IsClick');
-        $('.RightContent ul li').remove();
-    }
+    LeftNavFun();
 
     var AddDimentionBtn = document.getElementsByClassName('AddDimentionBtn')[0].getElementsByTagName('i')[0];
     AddDimentionBtn.onclick = function () {
@@ -72,9 +36,6 @@ window.onload = function () {
                     RemoveDialog('ShowMsgDialog');
                 }, 3000);
             } else {
-                /* $('<li><div class="tag-editor-spacer">,</div><div class="tag-editor-tag" data-toggle="tooltip" data-placement="top" title="' + DimensionType + '">' + DimensionName + '</div>' +
-                 '<div class="tag-editor-delete"><i></i></div></li>').appendTo('.tag-editor').ready(function () {
-                 });*/
                 $('#Dimensions').tagEditor('addTag', DimensionName, DimensionType);
             }
         }
@@ -125,6 +86,10 @@ window.onload = function () {
             BasicHeaderFont.style.color = '#000';
             AssignToHeaderFont.style.color = '#FFA500';
             ViewableHeaderFont.style.color = '#000';
+
+            $('.ChooseNav').fadeOut(400);
+            $('.NewGroup').fadeOut(400);
+            $('.GroupUserList').fadeOut(400);
         }
     };
 
@@ -143,8 +108,8 @@ window.onload = function () {
             AssignToHeaderFont.style.color = '#FFA500';
             ViewableHeaderFont.style.color = '#000';
 
-            /*Here can get All Value*/
-            console.log($('#Dimensions').tagEditor('getTags')[0].tags);
+            /*Display AddDimensions Dialog*/
+            $('.AddDimensions').fadeOut(400);
         } else if (AssignTo.getAttribute('isopen') == 'yes') {
             BasicInfo.style.display = 'none';
             AssignTo.style.display = 'none';
@@ -163,8 +128,69 @@ window.onload = function () {
     };
 
     var ViewMsgShow = document.getElementsByClassName('ViewMsgShow');
+    var Public = ViewMsgShow[0].getElementsByTagName('span')[0].getElementsByTagName('input')[0];
+    Public.onclick = function () {
+        $('.GroupUserList').fadeOut(400);
+        $('.NewGroup').fadeOut(400);
+        $('.ChooseNav').fadeOut(400);
+    };
+
+    var Private = ViewMsgShow[1].getElementsByTagName('span')[0].getElementsByTagName('input')[0];
+    Private.onclick = function () {
+        $('.GroupUserList').fadeOut(400);
+        $('.NewGroup').fadeOut(400);
+        $('.ChooseNav').fadeOut(400);
+    };
+
     var PartialPublic = ViewMsgShow[2].getElementsByTagName('span')[0].getElementsByTagName('input')[0];
     PartialPublic.onclick = function () {
+        /*var ChooseNav = document.getElementsByClassName('ChooseNav')[0];
+         ChooseNav.style.display = 'block';*/
+        $('.ChooseNav').fadeIn(400);
+
+        var CloseCheckBox = document.getElementsByClassName('CloseCheckBox')[0].getElementsByTagName('i')[0];
+        CloseCheckBox.onclick = function () {
+            $('.ChooseNav').fadeOut(400);
+        };
+
+        var GroupList = document.getElementsByName('GroupList');
+        console.log(GroupList.length);
+
+        /*获取到单选按钮点击事件*/
+
+        $(":radio").click(function () {
+            console.log($(this).val());
+            console.log($(this).attr("id"));
+        });
+
+        var NewGroupBtn = document.getElementsByClassName('NewGroupBtn')[0];
+        NewGroupBtn.onclick = function () {
+
+            $('.ChooseNav').hide();
+            $('.NewGroup').fadeIn(400);
+
+            var CloseAddGroup = document.getElementsByClassName('CloseAddGroup')[0].getElementsByTagName('i')[0];
+            CloseAddGroup.onclick = function () {
+                $('.NewGroup').fadeOut(400);
+                $('.ChooseNav').fadeIn(400);
+            };
+
+            var AddGroupUsers = document.getElementsByClassName('AddGroupUsers')[0].getElementsByTagName('i')[0];
+            AddGroupUsers.onclick = function () {
+                $('.GroupUserList').fadeIn(400);
+                $('.GroupUserList').animate({right: ((ClientWidth - 600) / 2 - 385) + 'px'});
+            };
+            var OKUsers = document.getElementsByClassName('OKUsers')[0];
+            OKUsers.onclick = function () {
+                $('.GroupUserList').fadeOut(400);
+                $('.NewGroup').fadeOut(400);
+                $('.ChooseNav').fadeIn(400);
+            }
+        }
+    };
+
+    var BlockSpecific = ViewMsgShow[3].getElementsByTagName('span')[0].getElementsByTagName('input')[0];
+    BlockSpecific.onclick = function () {
         /*var ChooseNav = document.getElementsByClassName('ChooseNav')[0];
          ChooseNav.style.display = 'block';*/
         $('.ChooseNav').fadeIn(400);
@@ -188,7 +214,7 @@ window.onload = function () {
             var AddGroupUsers = document.getElementsByClassName('AddGroupUsers')[0].getElementsByTagName('i')[0];
             AddGroupUsers.onclick = function () {
                 $('.GroupUserList').fadeIn(400);
-                $('.GroupUserList').animate({right: '0'});
+                $('.GroupUserList').animate({right: ((ClientWidth - 600) / 2 - 385) + 'px'});
             };
             var OKUsers = document.getElementsByClassName('OKUsers')[0];
             OKUsers.onclick = function () {
@@ -208,9 +234,7 @@ window.onload = function () {
     /*获取所有的值*/
     var url = 'users/departments';
     var Token = $.cookie('token');
-    var AllDepartmentJSON = new Array();
     AllDepartmentJSON = AjaxGetAllDepartment(url, 'GET', Token);
-
 
     /*Assign To Who  Start*/
     /**
@@ -291,9 +315,7 @@ window.onload = function () {
     };
 
     /*Assign To Who  End*/
-
-    var Finish = document.getElementsByClassName('Finish')[0];
-    Finish.onclick = function () {
+    FinishBtn.onclick = function () {
         var url = 'kpis';
         var Token = $.cookie('token');
 
@@ -504,4 +526,66 @@ function ArrayIsRepeat(array) {
         }
     }
     return NoRepeat;
+}
+
+function InitParams() {
+    /*Set Tooltips*/
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $('#Dimensions').tagEditor({
+        placeholder: "Tips: Click Bottom Btn to Add.",
+        forceLowercase: false
+    });
+}
+function SetPosition() {
+    /*Position Start*/
+    var LeftNav = document.getElementsByClassName('LeftNav')[0];
+    LeftNav.style.height = (ClientHeight - 60) + 'px';
+
+    var ModalPosition = document.getElementsByClassName('modal')[0];
+    ModalPosition.style.top = (ClientHeight - 600) / 2 + 'px';
+
+    var AddDimensionsPosition = document.getElementsByClassName('AddDimensions')[0];
+    AddDimensionsPosition.style.right = ((ClientWidth - 600) / 2 - 205) + 'px';
+
+    var ChooseNavPosition = document.getElementsByClassName('ChooseNav')[0];
+    ChooseNavPosition.style.right = ((ClientWidth - 600) / 2 - 205) + 'px';
+
+    var NewGroupPosition = document.getElementsByClassName('NewGroup')[0];
+    NewGroupPosition.style.right = ((ClientWidth - 600) / 2 - 205) + 'px';
+
+    var GroupUserListPosition = document.getElementsByClassName('GroupUserList')[0];
+    GroupUserListPosition.style.right = ((ClientWidth - 600) / 2 - 405) + 'px';
+    /*Position End*/
+}
+
+function LeftNavFun() {
+    /*Judge Which li Click*/
+    var LeftNav = document.getElementsByClassName('LeftNav')[0];
+    var LeftNavLi = LeftNav.getElementsByTagName('ul')[0].getElementsByTagName('li');
+
+    LeftNavLi[0].onclick = function () {
+        /*Remove All Li*/
+        RemoveLi();
+        $(this).addClass('IsClick');
+        LoadAllKpis();
+    };
+
+    LeftNavLi[1].onclick = function () {
+        RemoveLi();
+        $(this).addClass('IsClick');
+        LoadCreatedKpis();
+    };
+
+    LeftNavLi[2].onclick = function () {
+        RemoveLi();
+        $(this).addClass('IsClick');
+        LoadFollowedKpis();
+    };
+
+}
+
+function RemoveLi() {
+    $('.LeftNav li').removeClass('IsClick');
+    $('.RightContent ul li').remove();
 }

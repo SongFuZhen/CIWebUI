@@ -59,6 +59,7 @@
     background: white;
     border-radius: 3px;
     border: 2px solid lightseagreen;
+    margin: 0 0 0 20px;
 }
 
 .CheckBox label:after {
@@ -76,7 +77,15 @@
     transform: rotate(-45deg);
 }
 
+.CheckBox > input[type='radio'] {
+    margin: 5px 0 0 20px;
+}
+
 .CheckBox input[type=checkbox]:checked + label:after {
+    opacity: 1;
+}
+
+.CheckBox input[type=radio]:checked + label:after {
     opacity: 1;
 }
 
@@ -85,6 +94,7 @@
     position: absolute;
     top: 0;
     left: 30px;
+    margin: 0 0 0 20px;
 }
 
 /* end .CheckBox */

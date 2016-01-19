@@ -205,6 +205,10 @@
     display: flex;
 }
 
+.AddDimensions {
+    position: absolute;
+}
+
 .AddDimensions > hr {
     margin: 10px 0 15px 0;
 }
@@ -289,18 +293,21 @@
 
 .ChooseNav, .NewGroup {
     position: absolute;
-    right: 179px;
     top: 30px;
     width: 200px;
-    height: 490px;
+    height: 485px;
     background: white;
     border-radius: 3px;
     display: none;
 }
 
-.CheckBox {
-    margin: 20px 0 0 20px;
-    top: -10px;
+.ShowGroup {
+    height: 360px;
+    overflow-y: auto;
+}
+
+.ShowGroup > hr {
+    margin: 6px 0 6px;
 }
 
 .ChooseNav > hr, .NewGroup > hr {
@@ -354,10 +361,13 @@
 }
 
 .GroupUsers {
+    position: absolute;
+    top: 110px;
     text-align: center;
     height: 277px;
     overflow-y: auto;
     margin-top: 25px;
+    width: 200px;
 }
 
 .GroupUsers > ul > li, .GroupUserList > ul > li, .List > ul > li {
@@ -376,11 +386,11 @@
 .OKUsers {
     position: absolute;
     left: 50px;
+    top: 410px;
 }
 
 .GroupUserList {
     position: absolute;
-    right: 0;
     height: 490px;
     background: white;
     top: 30px;

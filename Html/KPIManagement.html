@@ -126,7 +126,7 @@
                 </div>
 
                 <div class="assign-to" isopen="no">
-                    <div class="alert alert-success alert-dismissible WarningAlert" role="alert">
+                    <div class="alert alert-warning alert-dismissible WarningAlert" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
                         <strong>Tips!</strong> You can do it Later.
@@ -179,10 +179,12 @@
                         </div>
 
                         <div class="col-md-3">
-                            <div class="CheckBox" style="margin: 15px 0 0 0;">
+                            <div class="CheckBox" style="margin: 5px 0 0 -10px;">
                                 <input type="checkbox" value="true" id="notification" name="check" checked="checked"/>
-                                <label for="notification"></label>
-                                <p title="Auto Notification" data-toggle="tooltip" data-placement="top">
+                                <label for="notification" style="margin: 0"></label>
+
+                                <p title="Auto Notification" style="margin: 0" data-toggle="tooltip"
+                                   data-placement="top">
                                     Notification?</p>
                             </div>
                         </div>
@@ -190,7 +192,7 @@
                 </div>
 
                 <div class="viewable" isopen="no">
-                    <div class="alert alert-success alert-dismissible WarningAlert" role="alert">
+                    <div class="alert alert-warning alert-dismissible WarningAlert" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
                         <strong>Tips!</strong> You can do it Later.
@@ -200,7 +202,7 @@
                         <div class="col-md-1"></div>
                         <div class="input-group col-md-10 ViewMsgShow">
                              <span class="input-group-addon">
-                                 <input type="radio" value="0" name="ViewType" checked="checked">
+                                 <input type="radio" value="0" name="ViewType" checked>
                              </span>
                             <input type="text" class="form-control" readonly="readonly"
                                    value="Public              |   Everyone can see it.">
@@ -282,7 +284,6 @@
 
         <div class="GroupUsers">
             <ul>
-
             </ul>
         </div>
 
@@ -303,38 +304,44 @@
     </div>
     <div class="ChooseNav">
         <div class="CloseCheckBox">
-            <h4>Partial Public</h4>
+            <h4>Choose A Group</h4>
             <i class="glyphicon glyphicon-remove"></i>
         </div>
-        <hr>
-        <div class="CheckBox">
-            <input type="checkbox" value="None" id="Tag1" name="check" checked="checked"/>
-            <label for="Tag1"></label>
-            <p title="Tag1" data-toggle="tooltip" data-placement="top">Tag1</p>
-        </div>
-        <hr>
+        <hr style="margin: 5px 0 5px 0">
 
-        <div class="CheckBox">
-            <input type="checkbox" value="None" id="Tag2" name="check" checked="checked"/>
-            <label for="Tag2"></label>
-            <p title="Tag2" data-toggle="tooltip" data-placement="top">CreateKPIFirst</p>
-        </div>
-        <hr>
+        <div class="ShowGroup">
+            <div class="CheckBox">
+                <input type="radio" value="100" id="Tag1" name="GroupList"/>
+                <label for="Tag1"></label>
 
-        <div class="CheckBox">
-            <input type="checkbox" value="None" id="Tag3" name="check" checked="checked"/>
-            <label for="Tag3"></label>
-            <p title="Tag3" data-toggle="tooltip" data-placement="top">Tag3</p>
-        </div>
-        <hr>
+                <p title="Tag1" data-toggle="tooltip" data-placement="top">Tag1</p>
+            </div>
+            <hr>
 
-        <div class="CheckBox">
-            <input type="checkbox" value="None" id="Tag4" name="check" checked="checked"/>
-            <label for="Tag4"></label>
-            <p title="Tag4" data-toggle="tooltip" data-placement="top">Tag4</p>
-        </div>
-        <hr>
+            <div class="CheckBox">
+                <input type="radio" value="120" id="Tag2" name="GroupList"/>
+                <label for="Tag2"></label>
 
+                <p title="Tag2" data-toggle="tooltip" data-placement="top">CreateKPIFirst</p>
+            </div>
+            <hr>
+
+            <div class="CheckBox">
+                <input type="radio" value="150" id="Tag3" name="GroupList"/>
+                <label for="Tag3"></label>
+
+                <p title="Tag3" data-toggle="tooltip" data-placement="top">Tag3</p>
+            </div>
+            <hr>
+
+            <div class="CheckBox">
+                <input type="radio" value="131" id="Tag4" name="GroupList"/>
+                <label for="Tag4"></label>
+
+                <p title="Tag4" data-toggle="tooltip" data-placement="top">Tag4</p>
+            </div>
+            <hr>
+        </div>
         <button class="BtnSubmit NewGroupBtn"><i class="glyphicon glyphicon-plus"></i>New Group</button>
     </div>
 </div>

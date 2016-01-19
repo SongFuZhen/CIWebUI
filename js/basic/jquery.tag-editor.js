@@ -4,7 +4,6 @@
  GitHub: https://github.com/Pixabay/jQuery-tagEditor
  License: http://www.opensource.org/licenses/mit-license.php
  */
-
 (function ($) {
     // auto grow input (stackoverflow.com/questions/931207)
     $.fn.tagEditorInput = function () {
@@ -56,7 +55,7 @@
 
                     if (o.maxTags && ed.data('tags').length >= o.maxTags) return false;
                     // insert new tag
-                    $('<li><div class="tag-editor-spacer">&nbsp;' + o.delimiter[0] + '</div><div class="tag-editor-tag" title="' + title + '"></div><div class="tag-editor-delete"><i></i></div></li>').appendTo(ed).find('.tag-editor-tag')
+                    $('<li><div class="tag-editor-spacer">&nbsp;' + o.delimiter[0] + '</div><div class="tag-editor-tag" data-toggle="tooltip" data-placement="top" title="' + title + '"></div><div class="tag-editor-delete"><i></i></div></li>').appendTo(ed).find('.tag-editor-tag')
                         .html('<input type="text" maxlength="' + o.maxLength + '">').addClass('active').find('input').val(val).blur();
                     if (!blur) ed.click();
                     else $('.placeholder', ed).remove();
@@ -101,7 +100,7 @@
             var el = $(this), tag_list = []; // cache current tags
 
             // create editor (ed) instance
-            var ed = $('<ul ' + (o.clickDelete ? 'oncontextmenu="return false;" ' : '') + 'class="tag-editor"  style="height: 70px;overflow: auto;background: #f2f2f2;" ></ul>').insertAfter(el);
+            var ed = $('<ul ' + (o.clickDelete ? 'oncontextmenu="return false;" ' : '') + 'class="tag-editor"  style="height: 70px;overflow: auto;background: #f2f2f2;font-size: 12px;font-weight: bold;" ></ul>').insertAfter(el);
             el.addClass('tag-editor-hidden-src') // hide original field
                 .data('options', o) // set data on hidden field
                 .on('focus.tag-editor', function () {
