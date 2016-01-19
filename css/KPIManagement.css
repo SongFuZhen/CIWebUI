@@ -215,9 +215,11 @@
 }
 
 .AddDimentionBtn > i {
-    margin-left: 4px;
     color: lightseagreen;
     cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: -30px
 }
 
 .AddDimensions {
@@ -225,7 +227,7 @@
     height: 200px;
     position: absolute;
     right: 180px;
-    top: 315px;
+    top: 240px;
     width: 200px;
     border-radius: 3px;
     text-align: center;

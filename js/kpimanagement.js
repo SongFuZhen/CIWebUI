@@ -7,6 +7,7 @@ window.onload = function () {
 
     $('#Dimensions').tagEditor({
         placeholder: "Tips: Click Bottom Btn to Add.",
+        forceLowercase: false
     });
 
     /*Set Tooltips*/
@@ -277,20 +278,11 @@ window.onload = function () {
 
         var RadioIsChecked = document.getElementsByName('AssignToPeople');
         console.log(RadioIsChecked.length);
-        /* for (var j = 0; j < RadioIsChecked.length; j++) {
-         if (RadioIsChecked[j].checked) {
-         console.log(12123)
-         var AssignToWho = document.getElementsByClassName('col-md-7')[0].getElementsByTagName('input')[0];
-         AssignToWho.value = RadioIsChecked[i].value;
-         }
-         }*/
-
 
         var AssignToPeopleBtn = document.getElementsByClassName('GroupUserList')[0].getElementsByTagName('button')[0];
         AssignToPeopleBtn.onclick = function () {
             for (var j = 0; j < RadioIsChecked.length; j++) {
                 if (RadioIsChecked[j].checked) {
-                    console.log(12123)
                     var AssignToWho = document.getElementsByClassName('col-md-7')[0].getElementsByTagName('input')[0];
                     AssignToWho.value = RadioIsChecked[j].value;
                 }
@@ -300,10 +292,33 @@ window.onload = function () {
 
     /*Assign To Who  End*/
 
-
-
     var Finish = document.getElementsByClassName('Finish')[0];
     Finish.onclick = function () {
+        var url = 'kpis';
+        var Token = $.cookie('token');
+
+        var Basic_Info = document.getElementsByClassName('basic-info')[0];
+        var Row = Basic_Info.getElementsByClassName('row');
+        var Kpi_Name = Row[0].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
+        var Default_Frequency = $('#DefaultFrequency').val();
+        var Kpi_Description = Row[1].getElementsByClassName('col-md-6')[0].getElementsByTagName('textarea')[0].value;
+        var uom = $('#uom').val();
+        var TargetMin = Row[3].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
+        var TargetMax = Row[4].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
+        var CalculateMethod = Row[3].getElementsByClassName('col-md-6')[1].getElementsByTagName('input')[0].value;
+
+        //var Kpi_Dimension = $('#Dimensions').tagEditor('getTags')[0].tags;
+        var GetDimensions = document.getElementsByClassName('GetDimensions')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
+        var Attributes = new Array();
+        console.log("GetDimensions" + GetDimensions.length);
+        if (GetDimensions.length > 0) {
+            for (var i = 1; i < GetDimensions.length; i++) {
+                var AttributeName = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].innerHTML;
+                var AttributeType = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].getAttribute('title');
+                Attributes.push({attribute_name: AttributeName, attribute_type: AttributeType});
+            }
+        }
+
         var viewable_code = 0;
         var ViewType = document.getElementsByName('ViewType');
         for (var i = 0; i < ViewType.length; i++) {
@@ -311,12 +326,47 @@ window.onload = function () {
                 viewable_code = ViewType[i].value;
             }
         }
-        console.log(viewable_code);
 
-        /*    console.log($('#DefaultFrequency').val());
-         console.log($('#uom').val());
-         console.log($('#Dimensions').tagEditor('getTags')[0].tags);*/
-    }
+        var Viewable = {
+            viewable_code: viewable_code,
+            user_group_id: ""
+        };
+        var kpis = {
+            kpi_name: Kpi_Name,
+            description: Kpi_Description,
+            target_min: TargetMin,
+            target_max: TargetMax,
+            uom: uom,
+            frequency: Default_Frequency,
+            calculate_method: CalculateMethod,
+            viewable: Viewable,
+            attributes: Attributes
+        };
+
+        console.log(JSON.stringify(kpis));
+
+        var AssignToWho = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-7')[0].getElementsByTagName('input')[0].value;
+        var AssignDepartment = $('#AssignDepartment').val();
+        var Frequency = $('#Frequency').val();
+        var InputTime = document.getElementsByClassName('InputTime')[0].value;
+        var AutoNotificationFlag = document.getElementsByClassName('assign-to')[0].getElementsByClassName('row')[3].getElementsByClassName('col-md-3')[0].getElementsByTagName('input')[0];
+        var AutoNotification = false;
+        if (AutoNotificationFlag.checked) {
+            AutoNotification = true;
+        }
+
+        var assignments = [{
+            user: AssignToWho,
+            department_id: AssignDepartment,
+            time: InputTime,
+            frequency: Frequency,
+            auto_notification: AutoNotification
+        }];
+
+        console.log(JSON.stringify(assignments));
+
+        AjaxCreateKpis(url, 'POST', JSON.stringify(kpis), JSON.stringify(assignments), Token);
+    };
 };
 
 function LoadAllKpis() {

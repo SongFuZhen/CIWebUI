@@ -730,19 +730,32 @@ function AjaxGetKpis(url, type, AuthToken) {
     return GetKpis;
 }
 
-var HtmlData = "";
-function AjaxGetHtml(url, type) {
+function AjaxCreateKpis(url, type, kpis, assignments, AuthToken) {
     $.ajax({
-        url: url,
+        url: urlhead + url,
         type: type,
-        dataType: 'html',
         async: false,
+        data: {kpi: kpis, assignments: assignments},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
         success: function (data) {
-            HtmlData = data;
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+            //Delete AddDepartment Dialog
+            //删除掉MsgDialog
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
         },
         error: function () {
             alert('error');
         }
     });
-    return HtmlData;
 }

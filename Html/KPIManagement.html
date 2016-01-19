@@ -44,7 +44,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
                 <h2>Create KPI</h2>
             </div>
@@ -86,7 +87,7 @@
                             <textarea placeholder="Description" cols="34"></textarea>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 GetDimensions">
                             <textarea placeholder="Dimensions" id="Dimensions" style="display: none"
                                       cols="34"></textarea>
                         </div>
@@ -102,8 +103,7 @@
                             </select>
                         </div>
 
-                        <div class="col-md-6 AddDimentionBtn" style="display: flex;">
-                            <span>Click to add Dimension </span>
+                        <div class="col-md-6 AddDimentionBtn">
                             <i class="glyphicon glyphicon-plus"></i>
                         </div>
                     </div>
@@ -111,6 +111,10 @@
                     <div class="row">
                         <div class="col-md-6">
                             <input type="text" placeholder="* Target Min" class="form-control">
+                        </div>
+
+                        <div class="col-md-6" style="position: absolute;top: 182px;left: 300px">
+                            <input type="text" placeholder="Calculate Method" class="form-control">
                         </div>
                     </div>
 
@@ -171,12 +175,12 @@
                             <h4>What's Time?</h4>
                         </div>
                         <div class="col-md-5">
-                            <input type="text" class="form-control" placeholder="* time">
+                            <input type="text" class="InputTime form-control" placeholder="* time">
                         </div>
 
                         <div class="col-md-3">
                             <div class="CheckBox" style="margin: 15px 0 0 0;">
-                                <input type="checkbox" value="None" id="notification" name="check" checked="checked"/>
+                                <input type="checkbox" value="true" id="notification" name="check" checked="checked"/>
                                 <label for="notification"></label>
                                 <p title="Auto Notification" data-toggle="tooltip" data-placement="top">
                                     Notification?</p>

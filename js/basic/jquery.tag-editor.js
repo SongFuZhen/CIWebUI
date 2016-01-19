@@ -217,7 +217,7 @@
                     // guess cursor position in text input
                     var left_percent = Math.abs(($(this).offset().left - e.pageX) / $(this).width()), caret_pos = parseInt(tag.length * left_percent),
                         input = $(this).html('<input type="text" maxlength="' + o.maxLength + '" value="' + escape(tag) + '">').addClass('active').find('input');
-                    input.data('old_tag', tag).tagEditorInput().focus().caret(caret_pos);
+                    //input.data('old_tag', tag).tagEditorInput().focus().caret(caret_pos);
                     if (o.autocomplete) {
                         var aco = $.extend({}, o.autocomplete);
                         // extend user provided autocomplete select method
@@ -395,16 +395,16 @@
             });
 
             // create initial tags
-            var tags = o.initialTags.length ? o.initialTags : el.val().split(o.dregex);
-            for (var i = 0; i < tags.length; i++) {
-                if (o.maxTags && i >= o.maxTags) break;
-                var tag = $.trim(tags[i].replace(/ +/, ' '));
-                if (tag) {
-                    if (o.forceLowercase) tag = tag.toLowerCase();
-                    tag_list.push(tag);
-                    ed.append('<li><div class="tag-editor-spacer">&nbsp;' + o.delimiter[0] + '</div><div class="tag-editor-tag">' + escape(tag) + '</div><div class="tag-editor-delete"><i></i></div></li>');
-                }
-            }
+            /* var tags = o.initialTags.length ? o.initialTags : el.val().split(o.dregex);
+             for (var i = 0; i < tags.length; i++) {
+             if (o.maxTags && i >= o.maxTags) break;
+             var tag = $.trim(tags[i].replace(/ +/, ' '));
+             if (tag) {
+             if (o.forceLowercase) tag = tag.toLowerCase();
+             tag_list.push(tag);
+             ed.append('<li><div class="tag-editor-spacer">&nbsp;' + o.delimiter[0] + '</div><div class="tag-editor-tag" title="' + title + '">' + escape(tag) + '</div><div class="tag-editor-delete"><i></i></div></li>');
+             }
+             }*/
             update_globals(true); // true -> no onChange callback
 
             // init sortable
