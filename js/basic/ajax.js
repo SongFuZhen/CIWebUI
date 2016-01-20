@@ -2,7 +2,7 @@
  * Created by zero on 2015/12/22.
  */
 //var urlhead = 'http://112.124.28.10:8001/api/v2/';
-var urlhead = 'http://192.168.1.70:3000/api/v2/';
+var urlhead = 'http://112.124.28.10:8001/api/v2/';
 
 function AjaxSignIn(url, type, email, password, LoadHref) {
     $(document).ready(function () {
@@ -318,42 +318,6 @@ function AjaxGetRootDepartment(url, type, AuthToken) {
     return RootJSON;
 }
 
-var AllDepartmentJSON = '';
-function AjaxGetAllDepartment(url, type, AuthToken) {
-    Loading(0, 0, 0, 0, 'block');
-    $.ajax({
-        url: urlhead + url,
-        type: type,
-        dataType: 'json',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
-        },
-        async: false,
-        success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var ID = data[i].department.id;
-                var Name = data[i].department.name;
-                var Description = data[i].department.description;
-                var Has_Children = data[i].department.has_children;
-                var Members = data[i].department.members;
-                $('<ul class="ul' + ID + '"><li class="parent_li Child' + ID + '"><span id="' + ID + '" title="' + Description + '"><i class="glyphicon glyphicon-grain"></i>' + Name
-                    + '</span></li></ul>').appendTo($('.tree')).ready(function () {
-                });
-                var ChildJSON = new Array();
-                ChildJSON = AjaxGetChildDepartment(url, type, ID, AuthToken);
-                ChildJSON.push(JSON.stringify(data));
-                AllDepartmentJSON = ChildJSON;
-            }
-            RemoveDialog('Loading');
-        },
-        error: function () {
-            RemoveDialog('Loading');
-            alert('error');
-        }
-    });
-    return AllDepartmentJSON;
-}
-
 var ChildJSON = new Array();
 function AjaxGetChildDepartment(url, type, ID, AuthToken) {
     $.ajax({
@@ -510,6 +474,41 @@ function AjaxDeleteDepartment(url, type, id, AuthToken) {
     })
 }
 
+var AllDepartmentJSON = '';
+function AjaxGetAllDepartment(url, type, AuthToken) {
+    Loading(0, 0, 0, 0, 'block');
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        async: false,
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var ID = data[i].department.id;
+                var Name = data[i].department.name;
+                var Description = data[i].department.description;
+                var Has_Children = data[i].department.has_children;
+                var Members = data[i].department.members;
+                $('<ul class="ul' + ID + '"><li class="parent_li Child' + ID + '"><span id="' + ID + '" title="' + Description + '"><i class="glyphicon glyphicon-grain"></i>' + Name
+                    + '</span></li></ul>').appendTo($('.tree')).ready(function () {
+                });
+                var ChildJSON = new Array();
+                ChildJSON = AjaxGetChildDepartment(url, type, ID, AuthToken);
+                ChildJSON.push(JSON.stringify(data));
+                AllDepartmentJSON = ChildJSON;
+            }
+            RemoveDialog('Loading');
+        },
+        error: function () {
+            RemoveDialog('Loading');
+            alert('error');
+        }
+    });
+    return AllDepartmentJSON;
+}
 function AjaxRemoveUsers(url, type, id, userid, AuthToken) {
     $.ajax({
         url: urlhead + url,
@@ -733,4 +732,36 @@ function AjaxGetList(url, type, AuthToken) {
         }
     });
     return GetList;
+}
+
+var creategroups = "";
+function AjaxCreateGroups(url, type, usergroup, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {user_groups: usergroup},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            creategroups = data;
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    return creategroups;
 }

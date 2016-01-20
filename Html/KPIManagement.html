@@ -134,11 +134,11 @@
                             <h4>Assign To Who?</h4>
                         </div>
                         <div class="col-md-7" style="display: flex">
-                            <input type="text" class="form-control" placeholder="Only One User's Email">
+                            <input type="text" class="form-control" readonly placeholder="Only One User's Email">
                         </div>
                         <div class="col-md-1">
-                            <!--<i class="glyphicon glyphicon-user UsersIcon"></i>-->
-                            <i class="UserIsSigned"></i>
+                            <i class="glyphicon glyphicon-user UsersIcon"></i>
+                            <!--<i class="UserIsSigned"></i>-->
                         </div>
                     </div>
 
@@ -224,6 +224,8 @@
                              </span>
                             <input type="text" class="form-control" readonly="readonly"
                                    value="Partial Public   |   Only selected People can see it.">
+
+                            <span class="input-group-addon ShowChoosedGroup"></span>
                         </div>
                     </div>
 
@@ -235,6 +237,8 @@
                              </span>
                             <input type="text" class="form-control" readonly="readonly"
                                    value="Block Specific  |   Only selected people cannot see it.">
+                            <span class="input-group-addon ShowNotChoosedGroup" data-toggle="tooltip"
+                                  data-placement="top"></span>
                         </div>
                     </div>
                 </div>
@@ -286,9 +290,21 @@
         <button class="BtnSubmit OKUsers"><i class="glyphicon glyphicon-ok"></i> OK</button>
     </div>
 
-    <div class="GroupUserList" style="display: none;">
+    <div class="GroupUserList">
         <div class="CloseGroupUserList">
-            <h4>UserList</h4>
+            <h4>GroupUserList</h4>
+            <i class="glyphicon glyphicon-remove"></i>
+        </div>
+
+        <div class="GroupList">
+            <ul>
+            </ul>
+        </div>
+    </div>
+
+    <div class="AssignUserList">
+        <div class="CloseAssignUserList">
+            <h4>AssignUserList</h4>
             <i class="glyphicon glyphicon-remove"></i>
         </div>
 
@@ -296,7 +312,7 @@
             <ul>
             </ul>
         </div>
-        <button class="BtnSubmit"><i class="glyphicon glyphicon-ok"></i>OK</button>
+        <!--<button class="BtnSubmit" style="margin-left: 10px;"><i class="glyphicon glyphicon-ok"></i>OK</button>-->
     </div>
     <div class="ChooseNav">
         <div class="CloseCheckBox">
@@ -306,46 +322,13 @@
         <hr style="margin: 5px 0 5px 0">
 
         <div class="ShowGroup">
-            <!-- input id 设置为GroupID  value 设置为 Group Number  title 设置为Group Number-->
-            <div class="CheckBox">
-                <input type="radio" value="100" id="Tag1" name="GroupList"/>
-                <label for="Tag1"></label>
-
-                <p title="Tag1" data-toggle="tooltip" data-placement="top">Tag1</p>
-            </div>
-            <hr>
-
-            <div class="CheckBox">
-                <input type="radio" value="120" id="Tag2" name="GroupList"/>
-                <label for="Tag2"></label>
-
-                <p title="Tag2" data-toggle="tooltip" data-placement="top">CreateKPIFirst</p>
-            </div>
-            <hr>
-
-            <div class="CheckBox">
-                <input type="radio" value="150" id="Tag3" name="GroupList"/>
-                <label for="Tag3"></label>
-
-                <p title="Tag3" data-toggle="tooltip" data-placement="top">Tag3</p>
-            </div>
-            <hr>
-
-            <div class="CheckBox">
-                <input type="radio" value="131" id="Tag4" name="GroupList"/>
-                <label for="Tag4"></label>
-
-                <p title="Tag4" data-toggle="tooltip" data-placement="top">Tag4</p>
-            </div>
-            <hr>
         </div>
         <button class="BtnSubmit NewGroupBtn"><i class="glyphicon glyphicon-plus"></i>New Group</button>
     </div>
-</div>
-<div class="RightContent">
-    <ul>
-    </ul>
-</div>
+    <div class="RightContent">
+        <ul>
+        </ul>
+    </div>
 
 </div>
 </body>

@@ -267,14 +267,7 @@
     margin: 8px 0 0 -10px;
     color: darkcyan;
     cursor: pointer;
-    display: none;
-}
-
-.UserIsSigned {
-    color: green;
-    display: none;
-    font-size: 1.5em;
-    margin: 5px 0 0 -15px;
+    /*display: none;*/
 }
 
 .UsersIcon:hover {
@@ -321,19 +314,19 @@
     margin: 2px 0 0 0;
 }
 
-.CloseCheckBox, .CloseAddGroup, .CloseGroupUserList, .CloseDimension {
+.CloseCheckBox, .CloseAddGroup, .CloseGroupUserList, .CloseAssignUserList, .CloseDimension {
     display: flex;
     text-align: center;
 }
 
-.CloseAddGroup > h4, .AddGroupUsers > h4, .CloseCheckBox > h4, .CloseGroupUserList > h4, .CloseDimension > h4 {
+.CloseAddGroup > h4, .AddGroupUsers > h4, .CloseCheckBox > h4, .CloseAssignUserList > h4, .CloseGroupUserList > h4, .CloseDimension > h4 {
     position: relative;
     left: 40px;
     top: 10px;
 }
 
-.CloseGroupUserList > h4 {
-    left: 50px;
+.CloseGroupUserList > h4, .CloseAssignUserList > h4 {
+    left: 30px;
 }
 
 .CloseDimension > h4 {
@@ -344,7 +337,7 @@
     top: 0;
 }
 
-.CloseCheckBox > i, .CloseAddGroup > i, .AddGroupUsers > i, .CloseGroupUserList > i, .CloseDimension > i {
+.CloseCheckBox > i, .CloseAddGroup > i, .AddGroupUsers > i, .CloseGroupUserList > i, .CloseAssignUserList > i, .CloseDimension > i {
     position: absolute;
     right: 4px;
     color: #cccccc;
@@ -377,13 +370,12 @@
     width: 200px;
 }
 
-.GroupUsers > ul > li, .GroupUserList > ul > li, .List > ul > li {
+.GroupUsers > ul > li, .GroupUserList > ul > li, .AssignUserList > ul > li, .List > ul > li, .GroupList > ul > li {
     border-bottom: 1px solid #ccc;
     margin: 0 0 0 -40px;
     text-align: left;
     height: 30px;
     padding: 5px 0 0 20px;
-    cursor: pointer;
 }
 
 .GroupUsers > ul > li:first-child {
@@ -396,7 +388,7 @@
     top: 410px;
 }
 
-.GroupUserList {
+.GroupUserList, .AssignUserList {
     position: absolute;
     height: 485px;
     background: white;
@@ -404,10 +396,15 @@
     width: 175px;
     border-radius: 3px;
     text-align: center;
+    display: none;
 }
 
-.List {
-    height: 360px;
+.ShowChoosedGroup, .ShowNotChoosedGroup {
+    width: 100px;
+}
+
+.List, .GroupList {
+    height: 390px;
     overflow-y: auto;
     margin: 10px 0 0 0;
 }
