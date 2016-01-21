@@ -1,0 +1,175 @@
+var NewGroupBtn = document.getElementsByClassName('NewGroupBtn')[0];
+NewGroupBtn.onclick = function () {
+$('.ChooseNav').hide();
+$('.NewGroup').fadeIn(400);
+
+var CloseAddGroup = document.getElementsByClassName('CloseAddGroup')[0].getElementsByTagName('i')[0];
+CloseAddGroup.onclick = function () {
+$('.NewGroup').fadeOut(400);
+$('.GroupUserList').fadeOut(400);
+$('.ChooseNav').fadeIn(400);
+};
+
+var AddGroupUsers = document.getElementsByClassName('AddGroupUsers')[0].getElementsByTagName('i')[0];
+AddGroupUsers.onclick = function () {
+$('.GroupUserList').fadeIn(400);
+$('.GroupUserList').animate({right: ((ClientWidth - 600) / 2 - 385) + 'px'});
+
+/*删除列表中的所有li*/
+$('.GroupList ul li').remove();
+GetAllGroupUserList();
+
+
+var AllGroupUsersList = document.getElementsByName('AllGroupUsersList');
+console.log(AllGroupUsersList.length);
+
+ChooseGroupUserList();
+};
+
+var OKUsers = document.getElementsByClassName('OKUsers')[0];
+OKUsers.onclick = function () {
+var GroupName = document.getElementsByClassName('GroupName')[0];
+if (GroupName.value == "") {
+/*提示输入*/
+GroupName.style.border = '2px solid darkred';
+var background = '#DC143C';
+ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', "Input Group Name", background);
+SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+setTimeout(function () {
+RemoveDialog('ShowMsgDialog');
+}, 3000);
+} else {
+var GroupUsersLi = document.getElementsByClassName('GroupUsers')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
+var url = 'user_groups';
+var Token = $.cookie('token');
+
+if (GroupUsersLi.length == 0) {
+ShowConfirmDialog((ClientHeight - 260) / 2, (ClientWidth - 400) / 2, (ClientHeight - 260) / 2, (ClientWidth - 400) / 2, 'block', "No User", "Are you Sure?<br/><br/><strong>Your Group Have No Users.</strong> ", "Back", "Sure", 'white');
+var Masked = document.getElementsByClassName('Masked')[0];
+Masked.style.top = '60px';
+Masked.style.left = '200px';
+Masked.style.zIndex = '2000';
+Masked.style.background = '#23527c';
+
+var Cancel = document.getElementsByClassName('Cancel')[0];
+var Confirm = document.getElementsByClassName('Confirm')[0];
+Cancel.onclick = function () {
+RemoveDialog('ShowConfirmDialog');
+RemoveDialog('Masked');
+};
+
+Confirm.onclick = function () {
+/*没有填写用户列表*/
+var UsersGroups = {
+name: GroupName.value,
+users: [""]
+};
+var AjaxCreateGroupsDate = AjaxCreateGroups(url, 'POST', UsersGroups, Token);
+var id = AjaxCreateGroupsDate.customized_field.id;
+var name = AjaxCreateGroupsDate.customized_field.name;
+var members = AjaxCreateGroupsDate.customized_field.members;
+
+$('<div class="CheckBox"><input type="radio" grouplist  name="GroupList" title="' + members + '" value="' + name + '" id="' + id + '"/>' +
+    '<label for="' + id + '"></label>' +
+    '<p data-toggle="tooltip" data-placement="bottom" data-original-title="' + members + '" title="' + members + '">' + name + '</p></div><hr>').appendTo('.ShowGroup').ready(function () {
+});
+
+RemoveDialog('ShowConfirmDialog');
+RemoveDialog('Masked');
+
+$('.GroupUserList').fadeOut(400);
+$('.NewGroup').fadeOut(400);
+$('.ChooseNav').fadeIn(400);
+};
+} else {
+var UsersList = new Array();
+for (var i = 0; i < GroupUsersLi.length; i++) {
+UsersList.push(GroupUsersLi[i].getAttribute('id'));
+}
+
+var UsersGroups = {
+name: GroupName.value,
+users: UsersList
+};
+
+var AjaxCreateGroupsDate = AjaxCreateGroups(url, 'POST', UsersGroups, Token);
+var id = AjaxCreateGroupsDate.customized_field.id;
+var name = AjaxCreateGroupsDate.customized_field.name;
+var members = AjaxCreateGroupsDate.customized_field.members;
+
+$('<div class="CheckBox"><input type="radio" grouplist  name="GroupList" title="' + members + '" value="' + name + '" id="' + id + '"/>' +
+    '<label for="' + id + '"></label>' +
+    '<p data-toggle="tooltip" data-placement="bottom" data-original-title="' + members + '" title="' + members + '">' + name + '</p></div><hr>').appendTo('.ShowGroup').ready(function () {
+});
+$('[data-toggle="tooltip"]').tooltip();
+
+$('.GroupUserList').fadeOut(400);
+$('.NewGroup').fadeOut(400);
+$('.ChooseNav').fadeIn(400);
+}
+}
+};
+}
+
+
+
+
+function ChooseGroupUserList() {
+    $("[name=AllGroupUsersList]").click(function () {
+        console.log("Click  123456");
+        var title = $(this).attr("title");
+        var id = $(this).attr("id");
+        var value = $(this).val();
+
+        $('<li style="display:flex;" data-toggle="tooltip" data-placement="bottom" data-original-title="' + title + '" id="' + id + '" value="' + value + '" title="' + title + '">' + value +
+            '<i class="glyphicon glyphicon-remove" style="display: none; margin: 0 0 0 5px; color:darkred;"></i></li>').appendTo('.GroupUsers>ul').ready(function () {
+        });
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $(this).parent().parent().remove();
+        var GroupUsers = document.getElementsByClassName('GroupUsers')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
+
+        $('.GroupUsers>ul>li').each(function (index) {
+            var GroupUsersIcon = GroupUsers[index].getElementsByTagName('i')[0];
+            $(this).mouseover(function () {
+                GroupUsersIcon.style.display = 'block';
+                GroupUsersIcon.style.cursor = 'pointer';
+                GroupUsersIcon.onclick = function () {
+                    $(this).parent().tooltip('hide');
+                    /*Remove List */
+                    $(this).parent().remove();
+
+                    var value = $(this).parent().attr('value');
+                    var id = $(this).parent().attr('id');
+                    var title = $(this).parent().attr('title');
+
+                    $('<li><div class="CheckBox" groupuserlist style="margin-left: -20px"><input type="checkbox" name="AllGroupUsersList" title="' + title + '" value="' + value + '" id="' + id + '"/>' +
+                        '<label for="' + id + '"></label>' +
+                        '<p data-toggle="tooltip" data-original-title="' + title + '" data-placement="bottom" title="' + title + '">' + value + '</p></div></li>').appendTo('.GroupList>ul').ready(function () {
+                    });
+                    $('[data-toggle="tooltip"]').tooltip();
+                };
+            });
+
+            $(this).mouseout(function () {
+                GroupUsersIcon.style.display = 'none';
+            });
+        });
+    });
+}
+
+
+
+function GetAllGroupUserList() {
+    /*获取所有的用户列表*/
+    var url = 'users/brief_infos';
+    var Token = $.cookie('token');
+    var AllDepartmentJSON = AjaxGetList(url, 'GET', Token);
+    for (var i = 0; i < AllDepartmentJSON.length; i++) {
+        $('<li><div class="CheckBox" groupuserlist style="margin-left: -20px"><input type="checkbox" name="AllGroupUsersList" title="' + AllDepartmentJSON[i].email + '" value="' + AllDepartmentJSON[i].nick_name + '" id="' + AllDepartmentJSON[i].id + '"/>' +
+            '<label for="' + AllDepartmentJSON[i].id + '"></label>' +
+            '<p data-toggle="tooltip" data-placement="bottom" title="' + AllDepartmentJSON[i].email + '">' + AllDepartmentJSON[i].nick_name + '</p></div></li>').appendTo('.GroupList>ul').ready(function () {
+        });
+    }
+    $('[data-toggle="tooltip"]').tooltip();
+}

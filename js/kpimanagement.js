@@ -28,6 +28,7 @@ window.onload = function () {
             var DimensionType = document.getElementById('DimensionType').value;
 
             if (DimensionName == "") {
+                document.getElementsByClassName('AddDimensions')[0].getElementsByTagName('input')[0].style.border = '2px solid darkred';
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', 'Dimension Name cannot Empty', '#DC143C');
                 SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
                 //Delete AddDepartment Dialog
@@ -36,6 +37,7 @@ window.onload = function () {
                     RemoveDialog('ShowMsgDialog');
                 }, 3000);
             } else {
+                document.getElementsByClassName('AddDimensions')[0].getElementsByTagName('input')[0].style.border = '1px solid #ccc';
                 $('#Dimensions').tagEditor('addTag', DimensionName, DimensionType);
             }
         }
@@ -63,70 +65,193 @@ window.onload = function () {
     /*step control*/
     PreStepBtn.onclick = function () {
         if (AssignTo.getAttribute('isopen') == 'yes') {
+            BasicInfo.style.display = 'none';
+            AssignTo.style.display = 'none';
+            Viewable.style.display = 'block';
+
+            BasicInfo.setAttribute('isopen', 'no');
+            AssignTo.setAttribute('isopen', 'no');
+            Viewable.setAttribute('isopen', 'yes');
+
+            BasicHeader.style.border = 'none';
+            AssignToHeader.style.border = 'none';
+            ViewableHeader.style.borderBottom = '4px solid lightseagreen';
+
+            BasicHeaderFont.style.color = '#000';
+            AssignToHeaderFont.style.color = '#000';
+            ViewableHeaderFont.style.color = '#FFA500';
+
+            $('.AssignUserList').fadeOut(400);
+        } else if (Viewable.getAttribute('isopen') === 'yes') {
             BasicInfo.style.display = 'block';
             AssignTo.style.display = 'none';
             Viewable.style.display = 'none';
+
             BasicInfo.setAttribute('isopen', 'yes');
             AssignTo.setAttribute('isopen', 'no');
             Viewable.setAttribute('isopen', 'no');
+
             BasicHeader.style.borderBottom = '4px solid lightseagreen';
             AssignToHeader.style.border = 'none';
             ViewableHeader.style.border = 'none';
+
             BasicHeaderFont.style.color = '#FFA500';
             AssignToHeaderFont.style.color = '#000';
             ViewableHeaderFont.style.color = '#000';
-        } else if (Viewable.getAttribute('isopen') === 'yes') {
-            BasicInfo.style.display = 'none';
-            AssignTo.style.display = 'block';
-            Viewable.style.display = 'none';
-            BasicInfo.setAttribute('isopen', 'no');
-            AssignTo.setAttribute('isopen', 'yes');
-            Viewable.setAttribute('isopen', 'no');
-            BasicHeader.style.border = 'none';
-            AssignToHeader.style.borderBottom = '4px solid lightseagreen';
-            ViewableHeader.style.border = 'none';
-            BasicHeaderFont.style.color = '#000';
-            AssignToHeaderFont.style.color = '#FFA500';
-            ViewableHeaderFont.style.color = '#000';
 
             $('.ChooseNav').fadeOut(400);
-            $('.NewGroup').fadeOut(400);
-            $('.GroupUserList').fadeOut(400);
         }
     };
 
     NextStepBtn.onclick = function () {
         if (BasicInfo.getAttribute('isopen') == 'yes') {
+            FinishBtn.removeAttribute('disabled');
+
+            BasicInfo.style.display = 'none';
+            AssignTo.style.display = 'none';
+            Viewable.style.display = 'block';
+
+            BasicInfo.setAttribute('isopen', 'no');
+            AssignTo.setAttribute('isopen', 'no');
+            Viewable.setAttribute('isopen', 'yes');
+
+            BasicHeader.style.border = 'none';
+            AssignToHeader.style.border = 'none';
+            ViewableHeader.style.borderBottom = '4px solid lightseagreen';
+
+            BasicHeaderFont.style.color = '#000';
+            AssignToHeaderFont.style.color = '#000';
+            ViewableHeaderFont.style.color = '#FFA500';
+
+            /*Display AddDimensions Dialog*/
+            $('.AddDimensions').fadeOut(400);
+        } else if (Viewable.getAttribute('isopen') == 'yes') {
             BasicInfo.style.display = 'none';
             AssignTo.style.display = 'block';
             Viewable.style.display = 'none';
+
             BasicInfo.setAttribute('isopen', 'no');
             AssignTo.setAttribute('isopen', 'yes');
             Viewable.setAttribute('isopen', 'no');
+
             BasicHeader.style.border = 'none';
             AssignToHeader.style.borderBottom = '4px solid lightseagreen';
-            Viewable.style.border = 'none';
+            ViewableHeader.style.border = 'none';
+
             BasicHeaderFont.style.color = '#000';
             AssignToHeaderFont.style.color = '#FFA500';
             ViewableHeaderFont.style.color = '#000';
 
-            /*Display AddDimensions Dialog*/
-            $('.AddDimensions').fadeOut(400);
-        } else if (AssignTo.getAttribute('isopen') == 'yes') {
-            BasicInfo.style.display = 'none';
-            AssignTo.style.display = 'none';
-            Viewable.style.display = 'block';
-            BasicInfo.setAttribute('isopen', 'no');
-            AssignTo.setAttribute('isopen', 'no');
-            Viewable.setAttribute('isopen', 'yes');
-            BasicHeader.style.border = 'none';
-            AssignToHeader.style.border = 'none';
-            ViewableHeader.style.borderBottom = '4px solid lightseagreen';
-            BasicHeaderFont.style.color = '#000';
-            AssignToHeaderFont.style.color = '#000';
-            ViewableHeaderFont.style.color = '#FFA500';
             $('.AssignUserList').fadeOut(400);
         }
+    };
+
+
+    /*此处为点击user 图标*/
+    var AssignToWhoIcon = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-1')[0].getElementsByTagName('i')[0];
+    var AssignToWho = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-7')[0].getElementsByTagName('input')[0];
+    AssignToWhoIcon.onclick = function () {
+        $('.AssignUserList').fadeIn(400);
+        $('.AssignUserList').animate({right: ((ClientWidth - 600) / 2 - 180) + 'px'});
+        /*删除列表中的所有li*/
+        $('.List ul li').remove();
+
+        GetAllAssignUserList();
+        /*获取到单选按钮点击事件*/
+        $("[name=AllUsersList]").click(function () {
+            AssignToWho.value = $(this).val();
+            AssignToWho.setAttribute('title', $(this).attr("title"));
+            AssignToWho.setAttribute('value', $(this).val());
+            AssignToWho.setAttribute('data-toggle', 'tooltip');
+            AssignToWho.setAttribute('data-placement', 'bottom');
+            AssignToWho.setAttribute('data-original-title', $(this).attr('title'));
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    };
+    FinishBtn.onclick = function () {
+        var url = 'kpis';
+        var Token = $.cookie('token');
+
+        var Basic_Info = document.getElementsByClassName('basic-info')[0];
+        var Row = Basic_Info.getElementsByClassName('row');
+        var Kpi_Name = Row[0].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
+        var Default_Frequency = $('#DefaultFrequency').val();
+        var Kpi_Description = Row[1].getElementsByClassName('col-md-6')[0].getElementsByTagName('textarea')[0].value;
+        var uom = $('#uom').val();
+        var TargetMin = Row[3].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
+        var TargetMax = Row[4].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
+        var CalculateMethod = $('#calculatemethod').val();
+
+        //var Kpi_Dimension = $('#Dimensions').tagEditor('getTags')[0].tags;
+        var GetDimensions = document.getElementsByClassName('GetDimensions')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
+        var Attributes = new Array();
+
+        if (GetDimensions.length > 1) {
+            for (var i = 1; i < GetDimensions.length; i++) {
+                var AttributeName = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].innerHTML;
+                var AttributeType = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].getAttribute('data-original-title');
+                Attributes.push({attribute_name: AttributeName, attribute_type: AttributeType});
+            }
+        } else {
+            Attributes = [];
+        }
+
+        console.log('Attributes======');
+        console.log(Attributes);
+        console.log('Attributes======');
+
+        var viewable_code = 0;
+        var ViewType = document.getElementsByName('ViewType');
+        for (var i = 0; i < ViewType.length; i++) {
+            if (ViewType[i].checked) {
+                viewable_code = ViewType[i].value;
+            }
+        }
+
+        var Viewable = {
+            viewable_code: viewable_code,
+            user_group_id: ""
+        };
+
+        var AssignDepartment = $('#AssignDepartment').val();
+        var Frequency = $('#Frequency').val();
+        var InputTime = document.getElementsByClassName('InputTime')[0].value;
+        var AutoNotificationFlag = document.getElementsByClassName('assign-to')[0].getElementsByClassName('row')[3].getElementsByClassName('col-md-3')[0].getElementsByTagName('input')[0];
+        var AutoNotification = false;
+        if (AutoNotificationFlag.checked) {
+            AutoNotification = true;
+        }
+
+        var assignments = new Array();
+
+        if (!AssignToWho.getAttribute('data-original-title') == "") {
+            assignments.push({
+                user: AssignToWho.getAttribute('data-original-title'),
+                department_id: AssignDepartment,
+                time: InputTime,
+                frequency: Frequency,
+                auto_notification: AutoNotification
+            });
+        } else {
+            assignments = [];
+        }
+
+        var kpis = {
+            kpi_name: Kpi_Name,
+            description: Kpi_Description,
+            target_min: TargetMin,
+            target_max: TargetMax,
+            uom: uom,
+            frequency: parseInt(Default_Frequency),
+            calculate_method: parseInt(CalculateMethod),
+            viewable: Viewable,
+            attributes: Attributes
+        };
+
+        console.log(kpis);
+        console.log(JSON.stringify(assignments));
+
+        AjaxCreateKpis(url, 'POST', kpis, assignments, Token);
     };
 
     /*four viewable style*/
@@ -161,145 +286,6 @@ window.onload = function () {
         };
 
         ClickGroup('ShowChoosedGroup');
-
-        var NewGroupBtn = document.getElementsByClassName('NewGroupBtn')[0];
-        NewGroupBtn.onclick = function () {
-            $('.ChooseNav').hide();
-            $('.NewGroup').fadeIn(400);
-
-            var CloseAddGroup = document.getElementsByClassName('CloseAddGroup')[0].getElementsByTagName('i')[0];
-            CloseAddGroup.onclick = function () {
-                $('.NewGroup').fadeOut(400);
-                $('.GroupUserList').fadeOut(400);
-                $('.ChooseNav').fadeIn(400);
-
-                $("[name=AllGroupUsersList]").click(function () {
-                    var title = $(this).attr("title");
-                    var id = $(this).attr("id");
-                    var value = $(this).val();
-                    $('<li style="display:flex;" id="' + id + '" value="' + value + '" title="' + title + '">' + value +
-                        '<i class="glyphicon glyphicon-remove" style="display: none; margin: 0 0 0 5px; color:darkred;"></i></li>').appendTo('.GroupUsers>ul').ready(function () {
-                    });
-
-                    $('[data-toggle="tooltip"]').tooltip();
-
-                    var GroupUsers = document.getElementsByClassName('GroupUsers')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
-
-                    $('.GroupUsers>ul>li').each(function (index) {
-                        var GroupUsersIcon = GroupUsers[index].getElementsByTagName('i')[0];
-                        $(this).mouseover(function () {
-                            GroupUsersIcon.style.display = 'block';
-                            GroupUsersIcon.style.cursor = 'pointer';
-                            GroupUsersIcon.onclick = function () {
-                                console.log('Click Here');
-                                /*Remove List */
-                                GroupUsers[index].remove();
-                            };
-                        });
-
-                        $(this).mouseout(function () {
-                            GroupUsersIcon.style.display = 'none';
-                        });
-                    });
-                });
-            };
-
-            var AddGroupUsers = document.getElementsByClassName('AddGroupUsers')[0].getElementsByTagName('i')[0];
-            AddGroupUsers.onclick = function () {
-                $('.GroupUserList').fadeIn(400);
-                $('.GroupUserList').animate({right: ((ClientWidth - 600) / 2 - 385) + 'px'});
-
-                /*删除列表中的所有li*/
-                $('.GroupList ul li').remove();
-                GetAllGroupUserList();
-            };
-
-
-            var OKUsers = document.getElementsByClassName('OKUsers')[0];
-            OKUsers.onclick = function () {
-                var GroupName = document.getElementsByClassName('GroupName')[0];
-                if (GroupName.value == "") {
-                    /*提示输入*/
-                    GroupName.style.border = '2px solid darkred';
-                    var background = '#DC143C';
-                    ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', "Input Group Name", background);
-                    SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
-                    setTimeout(function () {
-                        RemoveDialog('ShowMsgDialog');
-                    }, 3000);
-                } else {
-                    var GroupUsersLi = document.getElementsByClassName('GroupUsers')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
-                    var url = 'user_groups';
-                    var Token = $.cookie('token');
-
-                    if (GroupUsersLi.length == 0) {
-                        ShowConfirmDialog((ClientHeight - 260) / 2, (ClientWidth - 400) / 2, (ClientHeight - 260) / 2, (ClientWidth - 400) / 2, 'block', "No User", "Are you Sure?<br/><br/><strong>Your Group Have No Users.</strong> ", "Back", "Sure", 'white');
-                        var Masked = document.getElementsByClassName('Masked')[0];
-                        Masked.style.top = '60px';
-                        Masked.style.left = '200px';
-                        Masked.style.zIndex = '2000';
-                        Masked.style.background = '#23527c';
-
-                        var Cancel = document.getElementsByClassName('Cancel')[0];
-                        var Confirm = document.getElementsByClassName('Confirm')[0];
-                        Cancel.onclick = function () {
-                            RemoveDialog('ShowConfirmDialog');
-                            RemoveDialog('Masked');
-                        };
-
-                        Confirm.onclick = function () {
-                            /*没有填写用户列表*/
-                            var UsersGroups = {
-                                name: GroupName.value,
-                                users: [""]
-                            };
-                            var AjaxCreateGroupsDate = AjaxCreateGroups(url, 'POST', UsersGroups, Token);
-                            var id = AjaxCreateGroupsDate.customized_field.id;
-                            var name = AjaxCreateGroupsDate.customized_field.name;
-                            var members = AjaxCreateGroupsDate.customized_field.members;
-
-                            $('<div class="CheckBox"><input type="radio" grouplist  name="GroupList" title="' + members + '" value="' + name + '" id="' + id + '"/>' +
-                                '<label for="' + id + '"></label>' +
-                                '<p data-toggle="tooltip" data-placement="bottom" data-original-title="' + members + '" title="' + members + '">' + name + '</p></div><hr>').appendTo('.ShowGroup').ready(function () {
-                            });
-
-                            RemoveDialog('ShowConfirmDialog');
-                            RemoveDialog('Masked');
-
-                            $('.GroupUserList').fadeOut(400);
-                            $('.NewGroup').fadeOut(400);
-                            $('.ChooseNav').fadeIn(400);
-                        };
-                    } else {
-                        var UsersList = new Array();
-                        for (var i = 0; i < GroupUsersLi.length; i++) {
-                            UsersList.push(GroupUsersLi[i].getAttribute('id'));
-                        }
-
-                        var UsersGroups = {
-                            name: GroupName.value,
-                            users: UsersList
-                        };
-
-                        var AjaxCreateGroupsDate = AjaxCreateGroups(url, 'POST', UsersGroups, Token);
-                        var id = AjaxCreateGroupsDate.customized_field.id;
-                        var name = AjaxCreateGroupsDate.customized_field.name;
-                        var members = AjaxCreateGroupsDate.customized_field.members;
-
-                        $('<div class="CheckBox"><input type="radio" grouplist  name="GroupList" title="' + members + '" value="' + name + '" id="' + id + '"/>' +
-                            '<label for="' + id + '"></label>' +
-                            '<p data-toggle="tooltip" data-placement="bottom" data-original-title="' + members + '" title="' + members + '">' + name + '</p></div><hr>').appendTo('.ShowGroup').ready(function () {
-                        });
-
-                        $('.GroupUserList').fadeOut(400);
-                        $('.NewGroup').fadeOut(400);
-                        $('.ChooseNav').fadeIn(400);
-                    }
-
-
-                }
-            };
-        }
     };
 
     BlockSpecific.onclick = function () {
@@ -310,37 +296,7 @@ window.onload = function () {
         CloseCheckBox.onclick = function () {
             $('.ChooseNav').fadeOut(400);
         };
-
         ClickGroup('ShowNotChoosedGroup');
-
-        var NewGroupBtn = document.getElementsByClassName('NewGroupBtn')[0];
-        NewGroupBtn.onclick = function () {
-            $('.ChooseNav').hide();
-            $('.NewGroup').fadeIn(400);
-
-            var CloseAddGroup = document.getElementsByClassName('CloseAddGroup')[0].getElementsByTagName('i')[0];
-            CloseAddGroup.onclick = function () {
-                $('.NewGroup').fadeOut(400);
-                $('.ChooseNav').fadeIn(400);
-            };
-
-            var GroupUserList = document.getElementsByClassName('GroupUserList')[0].getElementsByTagName('i')[0];
-            GroupUserList.onclick = function () {
-                $('.GroupUserList').fadeIn(400);
-                $('.GroupUserList').animate({right: ((ClientWidth - 600) / 2 - 385) + 'px'});
-
-                /*删除列表中的所有li*/
-                $('.GroupList ul li').remove();
-                GetAllGroupUserList();
-            };
-
-            var OKUsers = document.getElementsByClassName('OKUsers')[0];
-            OKUsers.onclick = function () {
-                $('.GroupUserList').fadeOut(400);
-                $('.NewGroup').fadeOut(400);
-                $('.ChooseNav').fadeIn(400);
-            }
-        }
     };
 
     var CloseAssignUserList = document.getElementsByClassName('CloseAssignUserList')[0].getElementsByTagName('i')[0];
@@ -353,101 +309,6 @@ window.onload = function () {
         $('.GroupUserList').fadeOut(400);
     };
 
-    /*此处为点击user 图标*/
-    var AssignToWhoIcon = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-1')[0].getElementsByTagName('i')[0];
-    var AssignToWho = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-7')[0].getElementsByTagName('input')[0];
-    AssignToWhoIcon.onclick = function () {
-        $('.AssignUserList').fadeIn(400);
-        $('.AssignUserList').animate({right: ((ClientWidth - 600) / 2 - 180) + 'px'});
-        /*删除列表中的所有li*/
-        $('.List ul li').remove();
-
-        GetAllAssignUserList();
-        /*获取到单选按钮点击事件*/
-        $("[name=AllUsersList]").click(function () {
-            AssignToWho.value = $(this).val();
-            AssignToWho.setAttribute('title', $(this).attr("title"));
-            AssignToWho.setAttribute('value', $(this).val());
-            AssignToWho.setAttribute('data-toggle', 'tooltip');
-            AssignToWho.setAttribute('data-placement', 'bottom');
-            AssignToWho.setAttribute('data-original-title', $(this).attr('title'));
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    };
-
-    FinishBtn.onclick = function () {
-        var url = 'kpis';
-        var Token = $.cookie('token');
-
-        var Basic_Info = document.getElementsByClassName('basic-info')[0];
-        var Row = Basic_Info.getElementsByClassName('row');
-        var Kpi_Name = Row[0].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
-        var Default_Frequency = $('#DefaultFrequency').val();
-        var Kpi_Description = Row[1].getElementsByClassName('col-md-6')[0].getElementsByTagName('textarea')[0].value;
-        var uom = $('#uom').val();
-        var TargetMin = Row[3].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
-        var TargetMax = Row[4].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
-        var CalculateMethod = $('#calculatemethod').val();
-
-        //var Kpi_Dimension = $('#Dimensions').tagEditor('getTags')[0].tags;
-        var GetDimensions = document.getElementsByClassName('GetDimensions')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
-        var Attributes = new Array();
-
-        if (GetDimensions.length > 1) {
-            for (var i = 1; i < GetDimensions.length; i++) {
-                var AttributeName = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].innerHTML;
-                var AttributeType = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].getAttribute('title');
-                Attributes.push({attribute_name: AttributeName, attribute_type: AttributeType});
-            }
-        }
-
-        var viewable_code = 0;
-        var ViewType = document.getElementsByName('ViewType');
-        for (var i = 0; i < ViewType.length; i++) {
-            if (ViewType[i].checked) {
-                viewable_code = ViewType[i].value;
-            }
-        }
-
-        var Viewable = {
-            viewable_code: viewable_code,
-            user_group_id: ""
-        };
-
-        var AssignDepartment = $('#AssignDepartment').val();
-        var Frequency = $('#Frequency').val();
-        var InputTime = document.getElementsByClassName('InputTime')[0].value;
-        var AutoNotificationFlag = document.getElementsByClassName('assign-to')[0].getElementsByClassName('row')[3].getElementsByClassName('col-md-3')[0].getElementsByTagName('input')[0];
-        var AutoNotification = false;
-        if (AutoNotificationFlag.checked) {
-            AutoNotification = true;
-        }
-
-        var assignments = [{
-            user: AssignToWho,
-            department_id: AssignDepartment,
-            time: InputTime,
-            frequency: Frequency,
-            auto_notification: AutoNotification
-        }];
-
-        var kpis = {
-            kpi_name: Kpi_Name,
-            description: Kpi_Description,
-            target_min: TargetMin,
-            target_max: TargetMax,
-            uom: uom,
-            frequency: Default_Frequency,
-            calculate_method: CalculateMethod,
-            viewable: Viewable,
-            attributes: Attributes
-        };
-
-        /*  console.log(Attributes);
-         console.log(assignments);*/
-
-        AjaxCreateKpis(url, 'POST', kpis, assignments, Token);
-    };
 };
 
 function LoadAllKpis() {
@@ -591,10 +452,31 @@ function InitParams() {
     $('[data-toggle="tooltip"]').tooltip();
 
     $('#Dimensions').tagEditor({
-        placeholder: "Tips: Click Bottom Btn to Add.",
         forceLowercase: false
     });
 
+    $('#ChoosedGroupUsers').tagEditor3parments({
+        forceLowercase: false,
+        beforeTagDelete: function (field, editor, tags, val) {
+            $('li', editor).each(function (index) {
+                var li = $(this);
+                if (li.find('.tag-editor-tag').html() == val) {
+                    console.log(li.find('.tag-editor-tag')[0].attributes);
+                    var title = li.find('.tag-editor-tag')[0].attributes[1].value;
+                    var id = li.find('.tag-editor-tag')[0].attributes[4].value;
+                    var value = li.find('.tag-editor-tag')[0].attributes[5].value;
+
+                    $('<li><div class="CheckBox" groupuserlist style="margin-left: -20px"><input type="checkbox" name="AllGroupUsersList" title="' + title + '" value="' + value + '" id="' + id + '"/>' +
+                        '<label for="' + id + '"></label>' +
+                        '<p data-toggle="tooltip" data-original-title="' + title + '" data-placement="bottom" title="' + title + '">' + value + '</p></div></li>').appendTo('.GroupList>ul').ready(function () {
+                    });
+
+                    $('[data-toggle="tooltip"]').tooltip();
+                    ChooseGroupUserList();
+                }
+            });
+        }
+    });
     /*Set UOM Calculate_Method  timing_frequencies*/
     var uomurl = 'kpis/unit_of_measurements';
     var calculateurl = 'kpis/calculate_methods';
@@ -618,8 +500,11 @@ function SetPosition() {
     var LeftNav = document.getElementsByClassName('LeftNav')[0];
     LeftNav.style.height = (ClientHeight - 60) + 'px';
 
-    var ModalPosition = document.getElementsByClassName('modal')[0];
-    ModalPosition.style.top = (ClientHeight - 600) / 2 + 'px';
+    var CreateGroupModal = document.getElementById('CreateGroup');
+    CreateGroupModal.style.top = (ClientHeight - 600) / 2 + 'px';
+
+    var CreateKpiModal = document.getElementById('CreateKpi');
+    CreateKpiModal.style.top = (ClientHeight - 600) / 2 + 'px';
 
     var AddDimensionsPosition = document.getElementsByClassName('AddDimensions')[0];
     AddDimensionsPosition.style.right = ((ClientWidth - 600) / 2 - 205) + 'px';
@@ -662,11 +547,47 @@ function LeftNavFun() {
         LoadFollowedKpis();
     };
 
+    LeftNavLi[3].onclick = function () {
+        RemoveLi();
+        $(this).addClass('IsClick');
+
+        var RightContent = document.getElementsByClassName('RightContent')[0];
+        RightContent.style.width = (ClientWidth - 200) + 'px';
+        RightContent.getElementsByTagName('ul')[0].style.marginTop = '65px';
+
+        $('<div style="position: absolute;top: 0;left: 60px; display: flex;height: 65px;border-bottom: 1px solid #f2f2f2;">' +
+            '<button class="BtnSubmit"  data-toggle="modal" data-target="#CreateGroup" style="width: 200px;"><i class="glyphicon glyphicon-plus" style="margin-right: 20px;"></i>' +
+            '<span>New Group</span></button></div>').appendTo('.RightContent').ready(function () {
+        });
+
+        GetAllGroupUserList();
+
+        $('.GroupUserList').fadeIn(400);
+        $('.GroupUserList').animate({right: ((ClientWidth - 600) / 2) - 200 + 'px'});
+
+        ChooseGroupUserList();
+
+        var url = 'user_groups/for_kpis';
+        var Token = $.cookie('token');
+        var Groups = AjaxGetList(url, 'GET', Token);
+        console.log(Groups);
+        for (var i = 0; i < Groups.length; i++) {
+            var GroupName = Groups[i].user_group.name;
+            var GroupId = Groups[i].user_group.id;
+            var GroupMember = Groups[i].user_group.members;
+
+            $('<div class="col-md-5 GroupListStyle"><div class="col-md-2 GroupNameStyle" id="' + GroupId + '"><h2>' + GroupName + '</h2></div>' +
+                '<div class="col-md-8 GroupMembersStyle" data-toggle="tooltip" data-placement="bottom" title="' + GroupMember + '">' + GroupMember + '</div>' +
+                '<div class="col-md-2"><button class="BtnSubmit ChangeBtn"><i class="glyphicon glyphicon-edit"></i><span>Edit</span> </button></div></div>').appendTo('.RightContent>ul').ready(function () {
+            });
+        }
+        $('[data-toggle="tooltip"]').tooltip();
+    };
 }
 
 function RemoveLi() {
+    $('.RightContent ul').empty();
     $('.LeftNav li').removeClass('IsClick');
-    $('.RightContent ul li').remove();
 }
 
 function GetListWithFor(data, id) {
@@ -677,6 +598,7 @@ function GetListWithFor(data, id) {
     /* console.log(data)*/
 }
 
+/*Get All Department*/
 function GetAllDepartmentList() {
     /*获取所有的值*/
     var getalldeprtmenturl = 'users/departments';
@@ -723,6 +645,7 @@ function GetAllDepartmentList() {
     }
 }
 
+/*Get All Users List*/
 function GetAllAssignUserList() {
     /*获取所有的用户列表*/
     var url = 'users/brief_infos';
@@ -737,21 +660,7 @@ function GetAllAssignUserList() {
     $('[data-toggle="tooltip"]').tooltip();
 }
 
-
-function GetAllGroupUserList() {
-    /*获取所有的用户列表*/
-    var url = 'users/brief_infos';
-    var Token = $.cookie('token');
-    var AllDepartmentJSON = AjaxGetList(url, 'GET', Token);
-    for (var i = 0; i < AllDepartmentJSON.length; i++) {
-        $('<li><div class="CheckBox" groupuserlist style="margin-left: -20px"><input type="checkbox" name="AllGroupUsersList" title="' + AllDepartmentJSON[i].email + '" value="' + AllDepartmentJSON[i].nick_name + '" id="' + AllDepartmentJSON[i].id + '"/>' +
-            '<label for="' + AllDepartmentJSON[i].id + '"></label>' +
-            '<p data-toggle="tooltip" data-placement="bottom" title="' + AllDepartmentJSON[i].email + '">' + AllDepartmentJSON[i].nick_name + '</p></div></li>').appendTo('.GroupList>ul').ready(function () {
-        });
-    }
-    $('[data-toggle="tooltip"]').tooltip();
-}
-
+/*Get All Group List*/
 function GetAllGroupList() {
     /*Clear All*/
     $('.ShowGroup').empty();
@@ -763,7 +672,8 @@ function GetAllGroupList() {
     for (var i = 0; i < GetAllGroupListData.length; i++) {
         $('<div class="CheckBox"><input type="radio" grouplist  name="GroupList" title="' + GetAllGroupListData[i].user_group.members + '" value="' + GetAllGroupListData[i].user_group.name + '" id="' + GetAllGroupListData[i].user_group.id + '"/>' +
             '<label for="' + GetAllGroupListData[i].user_group.id + '"></label>' +
-            '<p data-toggle="tooltip" data-placement="bottom" title="' + GetAllGroupListData[i].user_group.members + '">' + GetAllGroupListData[i].user_group.name + '</p></div><hr>').appendTo('.ShowGroup').ready(function () {
+            '<p data-toggle="tooltip" data-placement="bottom" title="' + GetAllGroupListData[i].user_group.members + '">' + GetAllGroupListData[i].user_group.name + '</p>' +
+            '</div><hr>').appendTo('.ShowGroup').ready(function () {
         });
     }
     $('[data-toggle="tooltip"]').tooltip();
@@ -800,4 +710,34 @@ function RemoveAttr() {
     $('.ShowNotChoosedGroup').removeAttr('data-toggle');
     $('.ShowNotChoosedGroup').removeAttr('data-original-title');
 
+}
+
+
+function GetAllGroupUserList() {
+    $('.GroupList>ul>li').remove();
+    /*获取所有的用户列表*/
+    var url = 'users/brief_infos';
+    var Token = $.cookie('token');
+    var AllDepartmentJSON = AjaxGetList(url, 'GET', Token);
+    for (var i = 0; i < AllDepartmentJSON.length; i++) {
+        $('<li><div class="CheckBox" groupuserlist style="margin-left: -20px"><input type="checkbox" name="AllGroupUsersList" title="' + AllDepartmentJSON[i].email + '" value="' + AllDepartmentJSON[i].nick_name + '" id="' + AllDepartmentJSON[i].id + '"/>' +
+            '<label for="' + AllDepartmentJSON[i].id + '"></label>' +
+            '<p data-toggle="tooltip" data-placement="bottom" title="' + AllDepartmentJSON[i].email + '">' + AllDepartmentJSON[i].nick_name + '</p></div></li>').appendTo('.GroupList>ul').ready(function () {
+        });
+    }
+    $('[data-toggle="tooltip"]').tooltip();
+}
+
+function ChooseGroupUserList() {
+    $("[name=AllGroupUsersList]").click(function () {
+        var title = $(this).attr("title");
+        var id = $(this).attr("id");
+        var value = $(this).val();
+
+        console.log(title + '...' + id + '...' + value);
+        $('#ChoosedGroupUsers').tagEditor3parments('addTag', value, title, id);
+
+        $('[data-toggle="tooltip"]').tooltip();
+        $(this).parent().parent().remove();
+    });
 }

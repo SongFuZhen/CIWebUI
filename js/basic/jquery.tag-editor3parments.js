@@ -28,7 +28,7 @@
     };
 
     // plugin with val as parameter for public methods
-    $.fn.tagEditor = function (options, val, title, blur) {
+    $.fn.tagEditor3parments = function (options, val, title, id, blur) {
 
         // helper
         function escape(tag) {
@@ -36,7 +36,7 @@
         }
 
         // build options dictionary with default values
-        var blur_result, o = $.extend({}, $.fn.tagEditor.defaults, options), selector = this;
+        var blur_result, o = $.extend({}, $.fn.tagEditor3parments.defaults, options), selector = this;
 
         // store regex and default delimiter in options for later use
         o.dregex = new RegExp('[' + o.delimiter.replace('-', '\-') + ']', 'g');
@@ -55,7 +55,7 @@
 
                     if (o.maxTags && ed.data('tags').length >= o.maxTags) return false;
                     // insert new tag
-                    $('<li><div class="tag-editor-spacer">&nbsp;' + o.delimiter[0] + '</div><div class="tag-editor-tag" data-toggle="tooltip" data-placement="auto" data-original-title="' + title + '" title="' + title + '"></div><div class="tag-editor-delete"><i></i></div></li>').appendTo(ed).find('.tag-editor-tag')
+                    $('<li><div class="tag-editor-spacer">&nbsp;' + o.delimiter[0] + '</div><div class="tag-editor-tag" value="' + val + '" id="' + id + '" data-toggle="tooltip" data-placement="auto" data-original-title="' + title + '" title="' + title + '"></div><div class="tag-editor-delete"><i></i></div></li>').appendTo(ed).find('.tag-editor-tag')
                         .html('<input type="text" maxlength="' + o.maxLength + '">').addClass('active').find('input').val(val).blur();
                     $('[data-toggle="tooltip"]').tooltip();
                     if (!blur) ed.click();
@@ -417,7 +417,7 @@
         });
     };
 
-    $.fn.tagEditor.defaults = {
+    $.fn.tagEditor3parments.defaults = {
         initialTags: [],
         maxTags: 0,
         maxLength: 50,

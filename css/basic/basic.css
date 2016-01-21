@@ -36,6 +36,15 @@
     font-size: 1.2em;
 }
 
+.BtnSubmit:disabled, .BtnSubmit[disabled]:active, .BtnSubmit[disabled]:hover {
+    font-size: 1em;
+    color: #000;
+    padding: 0;
+    background: #cccccc;
+    cursor: not-allowed;
+    background: #cccccc;
+}
+
 .DialogBtn:hover {
     cursor: pointer;
     background: lightseagreen;

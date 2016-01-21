@@ -153,6 +153,7 @@
 .tag-editor {
     margin: 0;
     border: 1px solid #ccc;
+    min-height: 70px;
 }
 
 .col-md-6 > textarea {
@@ -195,10 +196,6 @@
 
 .basic-info {
     display: block;
-}
-
-.tag-editor {
-    min-height: 70px;
 }
 
 .AddDimentionBtn {
@@ -302,7 +299,7 @@
 }
 
 .ShowGroup {
-    height: 360px;
+    height: 420px;
     overflow-y: auto;
 }
 
@@ -407,4 +404,47 @@
     height: 390px;
     overflow-y: auto;
     margin: 10px 0 0 0;
+}
+
+.GroupListStyle {
+    min-width: 400px;
+    display: flex;
+    border: 1px solid lightseagreen;
+    border-radius: 3px;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    margin: 20px 0 0 20px;
+}
+
+.GroupNameStyle {
+    margin-top: -7px;
+    margin-left: -10px;
+}
+
+.GroupMembersStyle {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right: 20px;
+    border-left: 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
+}
+
+.ChangeBtn {
+    margin: 12px 0 0 10px;
+    line-height: 30px;
+}
+
+.ChangeBtn > span {
+    margin-left: 10px;
+}
+
+.ChoosedGroupUsers > ul {
+    height: 160px;
+    margin-right: -30px;
+    overflow: auto;
+    background: #f2f2f2;
+    font-size: 12px;
+    font-weight: bold;
 }

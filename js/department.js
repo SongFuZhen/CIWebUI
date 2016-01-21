@@ -33,8 +33,8 @@ window.onload = function () {
     var GetRootMembers = AjaxGetAllMembers(getmembers, 'GET', RootJSON[0].department.id, AutoToken);
     for (var i = 0; i < GetRootMembers.length; i++) {
         if (GetRootMembers[i].is_manager) {
-            $('<li class="Leaders" id="' + GetMembers[i].user.id + '" title="' + GetMembers[i].user.email + '">' +
-                '' + GetMembers[i].user.nick_name + '<i class="glyphicon glyphicon-remove" style="display: none;"></i></li>').appendTo('.DepartmentHeads>ul').ready(function () {
+            $('<li class="Leaders" id="' + GetRootMembers[i].user.id + '" title="' + GetRootMembers[i].user.email + '">' +
+                '' + GetRootMembers[i].user.nick_name + '<i class="glyphicon glyphicon-remove" style="display: none;"></i></li>').appendTo('.DepartmentHeads>ul').ready(function () {
             });
         }
     }
