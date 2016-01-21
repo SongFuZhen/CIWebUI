@@ -173,6 +173,35 @@ window.onload = function () {
                 $('.GroupUserList').fadeOut(400);
                 $('.ChooseNav').fadeIn(400);
 
+                $("[name=AllGroupUsersList]").click(function () {
+                    var title = $(this).attr("title");
+                    var id = $(this).attr("id");
+                    var value = $(this).val();
+                    $('<li style="display:flex;" id="' + id + '" value="' + value + '" title="' + title + '">' + value +
+                        '<i class="glyphicon glyphicon-remove" style="display: none; margin: 0 0 0 5px; color:darkred;"></i></li>').appendTo('.GroupUsers>ul').ready(function () {
+                    });
+
+                    $('[data-toggle="tooltip"]').tooltip();
+
+                    var GroupUsers = document.getElementsByClassName('GroupUsers')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
+
+                    $('.GroupUsers>ul>li').each(function (index) {
+                        var GroupUsersIcon = GroupUsers[index].getElementsByTagName('i')[0];
+                        $(this).mouseover(function () {
+                            GroupUsersIcon.style.display = 'block';
+                            GroupUsersIcon.style.cursor = 'pointer';
+                            GroupUsersIcon.onclick = function () {
+                                console.log('Click Here');
+                                /*Remove List */
+                                GroupUsers[index].remove();
+                            };
+                        });
+
+                        $(this).mouseout(function () {
+                            GroupUsersIcon.style.display = 'none';
+                        });
+                    });
+                });
             };
 
             var AddGroupUsers = document.getElementsByClassName('AddGroupUsers')[0].getElementsByTagName('i')[0];
@@ -185,35 +214,6 @@ window.onload = function () {
                 GetAllGroupUserList();
             };
 
-            $("[name=AllGroupUsersList]").click(function () {
-                var title = $(this).attr("title");
-                var id = $(this).attr("id");
-                var value = $(this).val();
-                $('<li style="display:flex;" id="' + id + '" value="' + value + '" title="' + title + '">' + value +
-                    '<i class="glyphicon glyphicon-remove" style="display: none; margin: 0 0 0 5px; color:darkred;"></i></li>').appendTo('.GroupUsers>ul').ready(function () {
-                });
-
-                $('[data-toggle="tooltip"]').tooltip();
-
-                var GroupUsers = document.getElementsByClassName('GroupUsers')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
-
-                $('.GroupUsers>ul>li').each(function (index) {
-                    var GroupUsersIcon = GroupUsers[index].getElementsByTagName('i')[0];
-                    $(this).mouseover(function () {
-                        GroupUsersIcon.style.display = 'block';
-                        GroupUsersIcon.style.cursor = 'pointer';
-                        GroupUsersIcon.onclick = function () {
-                            console.log('Click Here');
-                            /*Remove List */
-                            GroupUsers[index].remove();
-                        };
-                    });
-
-                    $(this).mouseout(function () {
-                        GroupUsersIcon.style.display = 'none';
-                    });
-                });
-            });
 
             var OKUsers = document.getElementsByClassName('OKUsers')[0];
             OKUsers.onclick = function () {
