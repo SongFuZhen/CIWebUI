@@ -684,7 +684,6 @@ function AjaxCreateKpis(url, type, kpis, assignments, AuthToken) {
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
             }
             SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
-            //Delete AddDepartment Dialog
             //删除掉MsgDialog
             setTimeout(function () {
                 RemoveDialog('ShowMsgDialog');

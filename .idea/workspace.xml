@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="47b8ec20-81a4-4efa-a0b2-d98c40ea9867" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/basic/ajax.js" afterPath="$PROJECT_DIR$/js/basic/ajax.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kpimanagement.js" afterPath="$PROJECT_DIR$/js/kpimanagement.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ClearInSight.iws" />
@@ -179,11 +178,11 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="ajax.js" pinned="false" current-in-tab="false">
+              <file leaf-file-name="ajax.js" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/js/basic/ajax.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0">
-                      <caret line="769" column="0" selection-start-line="769" selection-start-column="0" selection-end-line="769" selection-end-column="0" />
+                    <state vertical-scroll-proportion="0.73969376">
+                      <caret line="686" column="26" selection-start-line="686" selection-start-column="26" selection-end-line="686" selection-end-column="26" />
                       <folding>
                         <element signature="e#0#41#0" expanded="false" />
                         <element signature="n#!!block;n#AjaxSignIn#0" expanded="false" />
@@ -216,17 +215,33 @@
                         <element signature="e#6099#6457#0" expanded="false" />
                         <element signature="e#6304#6352#0" expanded="false" />
                         <element signature="n#!!block;n#AjaxSetPassword#0" expanded="false" />
+                        <element signature="e#6605#8557#0" expanded="false" />
+                        <element signature="e#6622#8549#0" expanded="false" />
                         <element signature="e#6793#6886#0" expanded="false" />
+                        <element signature="e#6981#8148#0" expanded="false" />
+                        <element signature="e#7083#7529#0" expanded="false" />
                         <element signature="e#7149#7283#0" expanded="false" />
+                        <element signature="e#7535#7855#0" expanded="false" />
                         <element signature="e#7872#8042#0" expanded="false" />
+                        <element signature="e#8181#8539#0" expanded="false" />
+                        <element signature="e#8386#8434#0" expanded="false" />
+                        <element signature="n#!!block;n#AjaxPutUserInfos#0" expanded="false" />
+                        <element signature="e#8725#10690#0" expanded="false" />
+                        <element signature="e#8742#10682#0" expanded="false" />
                         <element signature="e#8921#9014#0" expanded="false" />
+                        <element signature="e#9109#10281#0" expanded="false" />
                         <element signature="e#9211#9651#0" expanded="false" />
                         <element signature="e#9277#9411#0" expanded="false" />
                         <element signature="e#9657#9986#0" expanded="false" />
                         <element signature="e#10004#10175#0" expanded="false" />
+                        <element signature="e#10314#10672#0" expanded="false" />
                         <element signature="e#10519#10567#0" expanded="false" />
                         <element signature="n#!!block;n#AjaxGetUsersInfos#0" expanded="false" />
+                        <element signature="e#10813#11839#0" expanded="false" />
+                        <element signature="e#10830#11832#0" expanded="false" />
                         <element signature="e#10927#11020#0" expanded="false" />
+                        <element signature="e#11089#11684#0" expanded="false" />
+                        <element signature="e#11717#11822#0" expanded="false" />
                         <element signature="n#!!block;n#AjaxGetTopNavHtml#0" expanded="false" />
                         <element signature="e#11895#12195#0" expanded="false" />
                         <element signature="e#11994#12121#0" expanded="false" />
@@ -275,9 +290,13 @@
                         <element signature="e#19764#19972#0" expanded="false" />
                         <element signature="e#20188#20250#0" expanded="false" />
                         <element signature="e#20297#20336#0" expanded="false" />
+                        <element signature="n#!!block;n#AjaxGetAllDepartment#0" expanded="false" />
+                        <element signature="e#20474#21754#0" expanded="false" />
                         <element signature="e#20585#20670#0" expanded="false" />
+                        <element signature="e#20727#21643#0" expanded="false" />
                         <element signature="e#20779#21596#0" expanded="false" />
                         <element signature="e#21337#21356#0" expanded="false" />
+                        <element signature="e#21672#21748#0" expanded="false" />
                         <element signature="n#!!block;n#AjaxRemoveUsers#0" expanded="false" />
                         <element signature="e#21861#23021#0" expanded="false" />
                         <element signature="e#22009#22094#0" expanded="false" />
@@ -290,6 +309,9 @@
                         <element signature="e#23129#24541#0" expanded="false" />
                         <element signature="e#23287#23372#0" expanded="false" />
                         <element signature="e#23407#24117#0" expanded="false" />
+                        <element signature="e#23501#23699#0" expanded="false" />
+                        <element signature="e#23705#23913#0" expanded="false" />
+                        <element signature="e#24037#24099#0" expanded="false" />
                         <element signature="e#24150#24535#0" expanded="false" />
                         <element signature="e#24455#24517#0" expanded="false" />
                         <element signature="n#!!block;n#AjaxUserSingUp#0" expanded="false" />
@@ -316,20 +338,33 @@
                         <element signature="e#27286#27348#0" expanded="false" />
                         <element signature="e#27395#27434#0" expanded="false" />
                         <element signature="n#!!block;n#AjaxGetAllMembers#0" expanded="false" />
-                        <element signature="e#28693#29060#0" expanded="false" />
-                        <element signature="e#28824#28909#0" expanded="false" />
-                        <element signature="e#28944#28986#0" expanded="false" />
-                        <element signature="e#29015#29054#0" expanded="false" />
+                        <element signature="e#28651#29018#0" expanded="false" />
+                        <element signature="e#28782#28867#0" expanded="false" />
+                        <element signature="e#28902#28944#0" expanded="false" />
+                        <element signature="e#28973#29012#0" expanded="false" />
+                        <element signature="n#!!block;n#AjaxGetList#0" expanded="false" />
+                        <element signature="e#29121#29461#0" expanded="false" />
+                        <element signature="e#29228#29313#0" expanded="false" />
+                        <element signature="e#29348#29387#0" expanded="false" />
+                        <element signature="e#29416#29455#0" expanded="false" />
+                        <element signature="n#!!block;n#AjaxCreateGroups#0" expanded="false" />
+                        <element signature="e#29582#30704#0" expanded="false" />
+                        <element signature="e#29729#29814#0" expanded="false" />
+                        <element signature="e#29849#30630#0" expanded="false" />
+                        <element signature="e#29976#30238#0" expanded="false" />
+                        <element signature="e#30244#30452#0" expanded="false" />
+                        <element signature="e#30550#30612#0" expanded="false" />
+                        <element signature="e#30659#30698#0" expanded="false" />
                       </folding>
                     </state>
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="kpimanagement.js" pinned="false" current-in-tab="true">
+              <file leaf-file-name="kpimanagement.js" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/js/kpimanagement.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.79976445">
-                      <caret line="788" column="21" selection-start-line="788" selection-start-column="21" selection-end-line="788" selection-end-column="21" />
+                    <state vertical-scroll-proportion="0.0">
+                      <caret line="706" column="30" selection-start-line="706" selection-start-column="30" selection-end-line="706" selection-end-column="30" />
                       <folding>
                         <element signature="e#0#41#0" expanded="false" />
                         <element signature="e#71#13107#0" expanded="false" />
@@ -553,8 +588,8 @@
               <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/index.html">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.0">
-                      <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+                    <state vertical-scroll-proportion="0.38636363">
+                      <caret line="31" column="89" selection-start-line="31" selection-start-column="89" selection-end-line="31" selection-end-column="89" />
                       <folding />
                     </state>
                   </provider>
@@ -631,8 +666,8 @@
         <option value="$PROJECT_DIR$/js/basic/jquery.tag-editor3parments.js" />
         <option value="$PROJECT_DIR$/css/KPIManagement.css" />
         <option value="$PROJECT_DIR$/Html/KPIManagement.html" />
-        <option value="$PROJECT_DIR$/js/basic/ajax.js" />
         <option value="$PROJECT_DIR$/js/kpimanagement.js" />
+        <option value="$PROJECT_DIR$/js/basic/ajax.js" />
       </list>
     </option>
   </component>
@@ -897,7 +932,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1186" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1186" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18335089" sideWeight="0.49271137" order="0" side_tool="false" content_ui="combo" />
@@ -905,18 +940,18 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328125" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917318" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32917318" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18440464" sideWeight="0.50728863" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3819242" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1324,7 +1359,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="30" selection-start-line="42" selection-start-column="0" selection-end-line="43" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1355,8 +1389,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.38636363">
+          <caret line="31" column="89" selection-start-line="31" selection-start-column="89" selection-end-line="31" selection-end-column="89" />
           <folding />
         </state>
       </provider>
@@ -1485,154 +1519,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/basic/ajax.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="769" column="0" selection-start-line="769" selection-start-column="0" selection-end-line="769" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxSignIn#0" expanded="false" />
-            <element signature="e#293#3433#0" expanded="false" />
-            <element signature="e#310#3426#0" expanded="false" />
-            <element signature="e#516#3025#0" expanded="false" />
-            <element signature="e#716#2571#0" expanded="false" />
-            <element signature="e#1072#1656#0" expanded="false" />
-            <element signature="e#1677#2267#0" expanded="false" />
-            <element signature="e#2312#2392#0" expanded="false" />
-            <element signature="e#2577#2797#0" expanded="false" />
-            <element signature="e#2933#3003#0" expanded="false" />
-            <element signature="e#3058#3416#0" expanded="false" />
-            <element signature="e#3263#3311#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxRegister#0" expanded="false" />
-            <element signature="e#3535#4907#0" expanded="false" />
-            <element signature="e#3552#4900#0" expanded="false" />
-            <element signature="e#3779#4499#0" expanded="false" />
-            <element signature="e#3980#4120#0" expanded="false" />
-            <element signature="e#4407#4477#0" expanded="false" />
-            <element signature="e#4532#4890#0" expanded="false" />
-            <element signature="e#4827#4875#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxResetPassword#0" expanded="false" />
-            <element signature="e#4999#6474#0" expanded="false" />
-            <element signature="e#5016#6467#0" expanded="false" />
-            <element signature="e#5202#6066#0" expanded="false" />
-            <element signature="e#5401#5677#0" expanded="false" />
-            <element signature="e#5683#5867#0" expanded="false" />
-            <element signature="e#5973#6043#0" expanded="false" />
-            <element signature="e#6099#6457#0" expanded="false" />
-            <element signature="e#6304#6352#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxSetPassword#0" expanded="false" />
-            <element signature="e#6793#6886#0" expanded="false" />
-            <element signature="e#7149#7283#0" expanded="false" />
-            <element signature="e#7872#8042#0" expanded="false" />
-            <element signature="e#8921#9014#0" expanded="false" />
-            <element signature="e#9211#9651#0" expanded="false" />
-            <element signature="e#9277#9411#0" expanded="false" />
-            <element signature="e#9657#9986#0" expanded="false" />
-            <element signature="e#10004#10175#0" expanded="false" />
-            <element signature="e#10519#10567#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxGetUsersInfos#0" expanded="false" />
-            <element signature="e#10927#11020#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxGetTopNavHtml#0" expanded="false" />
-            <element signature="e#11895#12195#0" expanded="false" />
-            <element signature="e#11994#12121#0" expanded="false" />
-            <element signature="e#12150#12189#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxGetRootDepartment#0" expanded="false" />
-            <element signature="e#12320#13594#0" expanded="false" />
-            <element signature="e#12431#12516#0" expanded="false" />
-            <element signature="e#12573#13483#0" expanded="false" />
-            <element signature="e#12625#13436#0" expanded="false" />
-            <element signature="e#13183#13202#0" expanded="false" />
-            <element signature="e#13512#13588#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxGetChildDepartment#0" expanded="false" />
-            <element signature="e#13721#15217#0" expanded="false" />
-            <element signature="e#13868#13953#0" expanded="false" />
-            <element signature="e#14010#15143#0" expanded="false" />
-            <element signature="e#14062#15133#0" expanded="false" />
-            <element signature="e#14154#14675#0" expanded="false" />
-            <element signature="e#14497#14520#0" expanded="false" />
-            <element signature="e#14681#15119#0" expanded="false" />
-            <element signature="e#15018#15041#0" expanded="false" />
-            <element signature="e#15172#15211#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxAddDepartment#0" expanded="false" />
-            <element signature="e#15330#17451#0" expanded="false" />
-            <element signature="e#15506#15591#0" expanded="false" />
-            <element signature="e#15626#17377#0" expanded="false" />
-            <element signature="e#15720#16867#0" expanded="false" />
-            <element signature="e#15776#16631#0" expanded="false" />
-            <element signature="e#16588#16611#0" expanded="false" />
-            <element signature="e#16637#16704#0" expanded="false" />
-            <element signature="e#16873#17081#0" expanded="false" />
-            <element signature="e#17297#17359#0" expanded="false" />
-            <element signature="e#17406#17445#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxChangeDepartment#0" expanded="false" />
-            <element signature="e#17544#18959#0" expanded="false" />
-            <element signature="e#17713#17798#0" expanded="false" />
-            <element signature="e#17833#18885#0" expanded="false" />
-            <element signature="e#17927#18383#0" expanded="false" />
-            <element signature="e#18389#18597#0" expanded="false" />
-            <element signature="e#18805#18867#0" expanded="false" />
-            <element signature="e#18914#18953#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxDeleteDepartment#0" expanded="false" />
-            <element signature="e#19033#20342#0" expanded="false" />
-            <element signature="e#19164#19249#0" expanded="false" />
-            <element signature="e#19284#20268#0" expanded="false" />
-            <element signature="e#19378#19758#0" expanded="false" />
-            <element signature="e#19764#19972#0" expanded="false" />
-            <element signature="e#20188#20250#0" expanded="false" />
-            <element signature="e#20297#20336#0" expanded="false" />
-            <element signature="e#20585#20670#0" expanded="false" />
-            <element signature="e#20779#21596#0" expanded="false" />
-            <element signature="e#21337#21356#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxRemoveUsers#0" expanded="false" />
-            <element signature="e#21861#23021#0" expanded="false" />
-            <element signature="e#22009#22094#0" expanded="false" />
-            <element signature="e#22129#22947#0" expanded="false" />
-            <element signature="e#22223#22528#0" expanded="false" />
-            <element signature="e#22534#22742#0" expanded="false" />
-            <element signature="e#22867#22929#0" expanded="false" />
-            <element signature="e#22976#23015#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxAddUsers#0" expanded="false" />
-            <element signature="e#23129#24541#0" expanded="false" />
-            <element signature="e#23287#23372#0" expanded="false" />
-            <element signature="e#23407#24117#0" expanded="false" />
-            <element signature="e#24150#24535#0" expanded="false" />
-            <element signature="e#24455#24517#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxUserSingUp#0" expanded="false" />
-            <element signature="e#24664#25042#0" expanded="false" />
-            <element signature="e#24801#24886#0" expanded="false" />
-            <element signature="e#24921#24968#0" expanded="false" />
-            <element signature="e#24997#25036#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxSetManager#0" expanded="false" />
-            <element signature="e#25172#26270#0" expanded="false" />
-            <element signature="e#25321#25406#0" expanded="false" />
-            <element signature="e#25441#26196#0" expanded="false" />
-            <element signature="e#25535#25735#0" expanded="false" />
-            <element signature="e#25741#25949#0" expanded="false" />
-            <element signature="e#26023#26052#0" expanded="false" />
-            <element signature="e#26116#26178#0" expanded="false" />
-            <element signature="e#26225#26264#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxRemoveManager#0" expanded="false" />
-            <element signature="e#26378#27440#0" expanded="false" />
-            <element signature="e#26527#26612#0" expanded="false" />
-            <element signature="e#26647#27366#0" expanded="false" />
-            <element signature="e#26741#26905#0" expanded="false" />
-            <element signature="e#26911#27119#0" expanded="false" />
-            <element signature="e#27193#27222#0" expanded="false" />
-            <element signature="e#27286#27348#0" expanded="false" />
-            <element signature="e#27395#27434#0" expanded="false" />
-            <element signature="n#!!block;n#AjaxGetAllMembers#0" expanded="false" />
-            <element signature="e#28693#29060#0" expanded="false" />
-            <element signature="e#28824#28909#0" expanded="false" />
-            <element signature="e#28944#28986#0" expanded="false" />
-            <element signature="e#29015#29054#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/kpimanagement.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79976445">
-          <caret line="788" column="21" selection-start-line="788" selection-start-column="21" selection-end-line="788" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="706" column="30" selection-start-line="706" selection-start-column="30" selection-end-line="706" selection-end-column="30" />
           <folding>
             <element signature="e#0#41#0" expanded="false" />
             <element signature="e#71#13107#0" expanded="false" />
@@ -1844,6 +1734,186 @@
             <marker date="1453455508884" expanded="false" signature="29188:29206" placeholder="..." />
             <marker date="1453455508884" expanded="false" signature="32259:32277" placeholder="..." />
             <marker date="1453455508884" expanded="false" signature="37873:37891" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/basic/ajax.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.73969376">
+          <caret line="686" column="26" selection-start-line="686" selection-start-column="26" selection-end-line="686" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxSignIn#0" expanded="false" />
+            <element signature="e#293#3433#0" expanded="false" />
+            <element signature="e#310#3426#0" expanded="false" />
+            <element signature="e#516#3025#0" expanded="false" />
+            <element signature="e#716#2571#0" expanded="false" />
+            <element signature="e#1072#1656#0" expanded="false" />
+            <element signature="e#1677#2267#0" expanded="false" />
+            <element signature="e#2312#2392#0" expanded="false" />
+            <element signature="e#2577#2797#0" expanded="false" />
+            <element signature="e#2933#3003#0" expanded="false" />
+            <element signature="e#3058#3416#0" expanded="false" />
+            <element signature="e#3263#3311#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxRegister#0" expanded="false" />
+            <element signature="e#3535#4907#0" expanded="false" />
+            <element signature="e#3552#4900#0" expanded="false" />
+            <element signature="e#3779#4499#0" expanded="false" />
+            <element signature="e#3980#4120#0" expanded="false" />
+            <element signature="e#4407#4477#0" expanded="false" />
+            <element signature="e#4532#4890#0" expanded="false" />
+            <element signature="e#4827#4875#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxResetPassword#0" expanded="false" />
+            <element signature="e#4999#6474#0" expanded="false" />
+            <element signature="e#5016#6467#0" expanded="false" />
+            <element signature="e#5202#6066#0" expanded="false" />
+            <element signature="e#5401#5677#0" expanded="false" />
+            <element signature="e#5683#5867#0" expanded="false" />
+            <element signature="e#5973#6043#0" expanded="false" />
+            <element signature="e#6099#6457#0" expanded="false" />
+            <element signature="e#6304#6352#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxSetPassword#0" expanded="false" />
+            <element signature="e#6605#8557#0" expanded="false" />
+            <element signature="e#6622#8549#0" expanded="false" />
+            <element signature="e#6793#6886#0" expanded="false" />
+            <element signature="e#6981#8148#0" expanded="false" />
+            <element signature="e#7083#7529#0" expanded="false" />
+            <element signature="e#7149#7283#0" expanded="false" />
+            <element signature="e#7535#7855#0" expanded="false" />
+            <element signature="e#7872#8042#0" expanded="false" />
+            <element signature="e#8181#8539#0" expanded="false" />
+            <element signature="e#8386#8434#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxPutUserInfos#0" expanded="false" />
+            <element signature="e#8725#10690#0" expanded="false" />
+            <element signature="e#8742#10682#0" expanded="false" />
+            <element signature="e#8921#9014#0" expanded="false" />
+            <element signature="e#9109#10281#0" expanded="false" />
+            <element signature="e#9211#9651#0" expanded="false" />
+            <element signature="e#9277#9411#0" expanded="false" />
+            <element signature="e#9657#9986#0" expanded="false" />
+            <element signature="e#10004#10175#0" expanded="false" />
+            <element signature="e#10314#10672#0" expanded="false" />
+            <element signature="e#10519#10567#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxGetUsersInfos#0" expanded="false" />
+            <element signature="e#10813#11839#0" expanded="false" />
+            <element signature="e#10830#11832#0" expanded="false" />
+            <element signature="e#10927#11020#0" expanded="false" />
+            <element signature="e#11089#11684#0" expanded="false" />
+            <element signature="e#11717#11822#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxGetTopNavHtml#0" expanded="false" />
+            <element signature="e#11895#12195#0" expanded="false" />
+            <element signature="e#11994#12121#0" expanded="false" />
+            <element signature="e#12150#12189#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxGetRootDepartment#0" expanded="false" />
+            <element signature="e#12320#13594#0" expanded="false" />
+            <element signature="e#12431#12516#0" expanded="false" />
+            <element signature="e#12573#13483#0" expanded="false" />
+            <element signature="e#12625#13436#0" expanded="false" />
+            <element signature="e#13183#13202#0" expanded="false" />
+            <element signature="e#13512#13588#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxGetChildDepartment#0" expanded="false" />
+            <element signature="e#13721#15217#0" expanded="false" />
+            <element signature="e#13868#13953#0" expanded="false" />
+            <element signature="e#14010#15143#0" expanded="false" />
+            <element signature="e#14062#15133#0" expanded="false" />
+            <element signature="e#14154#14675#0" expanded="false" />
+            <element signature="e#14497#14520#0" expanded="false" />
+            <element signature="e#14681#15119#0" expanded="false" />
+            <element signature="e#15018#15041#0" expanded="false" />
+            <element signature="e#15172#15211#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxAddDepartment#0" expanded="false" />
+            <element signature="e#15330#17451#0" expanded="false" />
+            <element signature="e#15506#15591#0" expanded="false" />
+            <element signature="e#15626#17377#0" expanded="false" />
+            <element signature="e#15720#16867#0" expanded="false" />
+            <element signature="e#15776#16631#0" expanded="false" />
+            <element signature="e#16588#16611#0" expanded="false" />
+            <element signature="e#16637#16704#0" expanded="false" />
+            <element signature="e#16873#17081#0" expanded="false" />
+            <element signature="e#17297#17359#0" expanded="false" />
+            <element signature="e#17406#17445#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxChangeDepartment#0" expanded="false" />
+            <element signature="e#17544#18959#0" expanded="false" />
+            <element signature="e#17713#17798#0" expanded="false" />
+            <element signature="e#17833#18885#0" expanded="false" />
+            <element signature="e#17927#18383#0" expanded="false" />
+            <element signature="e#18389#18597#0" expanded="false" />
+            <element signature="e#18805#18867#0" expanded="false" />
+            <element signature="e#18914#18953#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxDeleteDepartment#0" expanded="false" />
+            <element signature="e#19033#20342#0" expanded="false" />
+            <element signature="e#19164#19249#0" expanded="false" />
+            <element signature="e#19284#20268#0" expanded="false" />
+            <element signature="e#19378#19758#0" expanded="false" />
+            <element signature="e#19764#19972#0" expanded="false" />
+            <element signature="e#20188#20250#0" expanded="false" />
+            <element signature="e#20297#20336#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxGetAllDepartment#0" expanded="false" />
+            <element signature="e#20474#21754#0" expanded="false" />
+            <element signature="e#20585#20670#0" expanded="false" />
+            <element signature="e#20727#21643#0" expanded="false" />
+            <element signature="e#20779#21596#0" expanded="false" />
+            <element signature="e#21337#21356#0" expanded="false" />
+            <element signature="e#21672#21748#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxRemoveUsers#0" expanded="false" />
+            <element signature="e#21861#23021#0" expanded="false" />
+            <element signature="e#22009#22094#0" expanded="false" />
+            <element signature="e#22129#22947#0" expanded="false" />
+            <element signature="e#22223#22528#0" expanded="false" />
+            <element signature="e#22534#22742#0" expanded="false" />
+            <element signature="e#22867#22929#0" expanded="false" />
+            <element signature="e#22976#23015#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxAddUsers#0" expanded="false" />
+            <element signature="e#23129#24541#0" expanded="false" />
+            <element signature="e#23287#23372#0" expanded="false" />
+            <element signature="e#23407#24117#0" expanded="false" />
+            <element signature="e#23501#23699#0" expanded="false" />
+            <element signature="e#23705#23913#0" expanded="false" />
+            <element signature="e#24037#24099#0" expanded="false" />
+            <element signature="e#24150#24535#0" expanded="false" />
+            <element signature="e#24455#24517#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxUserSingUp#0" expanded="false" />
+            <element signature="e#24664#25042#0" expanded="false" />
+            <element signature="e#24801#24886#0" expanded="false" />
+            <element signature="e#24921#24968#0" expanded="false" />
+            <element signature="e#24997#25036#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxSetManager#0" expanded="false" />
+            <element signature="e#25172#26270#0" expanded="false" />
+            <element signature="e#25321#25406#0" expanded="false" />
+            <element signature="e#25441#26196#0" expanded="false" />
+            <element signature="e#25535#25735#0" expanded="false" />
+            <element signature="e#25741#25949#0" expanded="false" />
+            <element signature="e#26023#26052#0" expanded="false" />
+            <element signature="e#26116#26178#0" expanded="false" />
+            <element signature="e#26225#26264#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxRemoveManager#0" expanded="false" />
+            <element signature="e#26378#27440#0" expanded="false" />
+            <element signature="e#26527#26612#0" expanded="false" />
+            <element signature="e#26647#27366#0" expanded="false" />
+            <element signature="e#26741#26905#0" expanded="false" />
+            <element signature="e#26911#27119#0" expanded="false" />
+            <element signature="e#27193#27222#0" expanded="false" />
+            <element signature="e#27286#27348#0" expanded="false" />
+            <element signature="e#27395#27434#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxGetAllMembers#0" expanded="false" />
+            <element signature="e#28651#29018#0" expanded="false" />
+            <element signature="e#28782#28867#0" expanded="false" />
+            <element signature="e#28902#28944#0" expanded="false" />
+            <element signature="e#28973#29012#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxGetList#0" expanded="false" />
+            <element signature="e#29121#29461#0" expanded="false" />
+            <element signature="e#29228#29313#0" expanded="false" />
+            <element signature="e#29348#29387#0" expanded="false" />
+            <element signature="e#29416#29455#0" expanded="false" />
+            <element signature="n#!!block;n#AjaxCreateGroups#0" expanded="false" />
+            <element signature="e#29582#30704#0" expanded="false" />
+            <element signature="e#29729#29814#0" expanded="false" />
+            <element signature="e#29849#30630#0" expanded="false" />
+            <element signature="e#29976#30238#0" expanded="false" />
+            <element signature="e#30244#30452#0" expanded="false" />
+            <element signature="e#30550#30612#0" expanded="false" />
+            <element signature="e#30659#30698#0" expanded="false" />
           </folding>
         </state>
       </provider>
