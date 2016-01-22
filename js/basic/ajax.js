@@ -2,7 +2,8 @@
  * Created by zero on 2015/12/22.
  */
 //var urlhead = 'http://112.124.28.10:8001/api/v2/';
-var urlhead = 'http://192.168.1.70:3000/api/v2/';
+//var urlhead = 'http://192.168.1.70:3000/api/v2/';
+var urlhead = 'http://192.168.0.104:3000/api/v2/';
 
 function AjaxSignIn(url, type, email, password, LoadHref) {
     $(document).ready(function () {
@@ -750,6 +751,7 @@ function AjaxCreateGroups(url, type, usergroup, AuthToken) {
             var background = '#71C671';
             if (data.result_code.toString() == '1') {
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+                $('#CreateGroup').modal('hide');
             } else {
                 var background = '#DC143C';
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);

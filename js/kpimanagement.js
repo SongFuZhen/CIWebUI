@@ -304,10 +304,10 @@ window.onload = function () {
         $('.AssignUserList').fadeOut(400);
     };
 
-    var CloseGroupUserList = document.getElementsByClassName('CloseGroupUserList')[0].getElementsByTagName('i')[0];
-    CloseGroupUserList.onclick = function () {
-        $('.GroupUserList').fadeOut(400);
-    };
+    /* var CloseGroupUserList = document.getElementsByClassName('CloseGroupUserList')[0].getElementsByTagName('i')[0];
+     CloseGroupUserList.onclick = function () {
+     $('.GroupUserList').fadeOut(400);
+     };*/
 
 };
 
@@ -461,7 +461,7 @@ function InitParams() {
             $('li', editor).each(function (index) {
                 var li = $(this);
                 if (li.find('.tag-editor-tag').html() == val) {
-                    console.log(li.find('.tag-editor-tag')[0].attributes);
+                    //console.log(li.find('.tag-editor-tag')[0].attributes);
                     var title = li.find('.tag-editor-tag')[0].attributes[1].value;
                     var id = li.find('.tag-editor-tag')[0].attributes[4].value;
                     var value = li.find('.tag-editor-tag')[0].attributes[5].value;
@@ -555,39 +555,36 @@ function LeftNavFun() {
         RightContent.style.width = (ClientWidth - 200) + 'px';
         RightContent.getElementsByTagName('ul')[0].style.marginTop = '65px';
 
-        $('<div style="position: absolute;top: 0;left: 60px; display: flex;height: 65px;border-bottom: 1px solid #f2f2f2;">' +
+        $('<div class="NewGroupBtn" style="position: absolute;top: 0;left: 60px;height: 65px;">' +
             '<button class="BtnSubmit"  data-toggle="modal" data-target="#CreateGroup" style="width: 200px;"><i class="glyphicon glyphicon-plus" style="margin-right: 20px;"></i>' +
             '<span>New Group</span></button></div>').appendTo('.RightContent').ready(function () {
         });
 
-        GetAllGroupUserList();
-
-        $('.GroupUserList').fadeIn(400);
-        $('.GroupUserList').animate({right: ((ClientWidth - 600) / 2) - 200 + 'px'});
-
-        ChooseGroupUserList();
-
         var url = 'user_groups/for_kpis';
         var Token = $.cookie('token');
         var Groups = AjaxGetList(url, 'GET', Token);
-        console.log(Groups);
         for (var i = 0; i < Groups.length; i++) {
             var GroupName = Groups[i].user_group.name;
             var GroupId = Groups[i].user_group.id;
             var GroupMember = Groups[i].user_group.members;
 
             $('<div class="col-md-5 GroupListStyle"><div class="col-md-2 GroupNameStyle" id="' + GroupId + '"><h2>' + GroupName + '</h2></div>' +
-                '<div class="col-md-8 GroupMembersStyle" data-toggle="tooltip" data-placement="bottom" title="' + GroupMember + '">' + GroupMember + '</div>' +
+                '<div class="col-md-7 GroupMembersStyle" data-toggle="tooltip" data-placement="bottom" title="' + GroupMember + '">' + GroupMember + '</div>' +
                 '<div class="col-md-2"><button class="BtnSubmit ChangeBtn"><i class="glyphicon glyphicon-edit"></i><span>Edit</span> </button></div></div>').appendTo('.RightContent>ul').ready(function () {
             });
         }
         $('[data-toggle="tooltip"]').tooltip();
+
+        CreateGroup();
+
+        EditGroup();
     };
 }
 
 function RemoveLi() {
     $('.RightContent ul').empty();
     $('.LeftNav li').removeClass('IsClick');
+    $('.NewGroupBtn').remove();
 }
 
 function GetListWithFor(data, id) {
@@ -719,6 +716,7 @@ function GetAllGroupUserList() {
     var url = 'users/brief_infos';
     var Token = $.cookie('token');
     var AllDepartmentJSON = AjaxGetList(url, 'GET', Token);
+
     for (var i = 0; i < AllDepartmentJSON.length; i++) {
         $('<li><div class="CheckBox" groupuserlist style="margin-left: -20px"><input type="checkbox" name="AllGroupUsersList" title="' + AllDepartmentJSON[i].email + '" value="' + AllDepartmentJSON[i].nick_name + '" id="' + AllDepartmentJSON[i].id + '"/>' +
             '<label for="' + AllDepartmentJSON[i].id + '"></label>' +
@@ -729,15 +727,95 @@ function GetAllGroupUserList() {
 }
 
 function ChooseGroupUserList() {
-    $("[name=AllGroupUsersList]").click(function () {
-        var title = $(this).attr("title");
-        var id = $(this).attr("id");
-        var value = $(this).val();
+    $("[groupuserlist]").click(function () {
+        console.log(12);
+        var title = $(this).children('input').attr("title");
+        var id = $(this).children('input').attr("id");
+        var value = $(this).children('input').val();
 
-        console.log(title + '...' + id + '...' + value);
         $('#ChoosedGroupUsers').tagEditor3parments('addTag', value, title, id);
 
         $('[data-toggle="tooltip"]').tooltip();
-        $(this).parent().parent().remove();
+        $(this).parent().remove();
     });
+}
+
+function CreateGroup() {
+    $('.GroupUserList').fadeIn(400);
+    setTimeout(function () {
+        $('.GroupUserList').animate({right: ((ClientWidth - 600) / 2) - 180 + 'px'});
+    }, 1400);
+
+    GetAllGroupUserList();
+    ChooseGroupUserList();
+
+    RemoveAllTags('ChoosedGroupUsers');
+    var CreateGroupBtn = document.getElementsByClassName('CreateGroupBtn')[0];
+    CreateGroupBtn.onclick = function () {
+        var CreateGroupName = document.getElementsByClassName('CreateGroupName')[0];
+        if (CreateGroupName.value == "") {
+            CreateGroupName.style.border = '2px solid darkred';
+        } else {
+            CreateGroupName.style.border = '1px solid #ccc';
+            var GroupUsersID = new Array();
+            var ChoosedGroupEditor = $('#ChoosedGroupUsers').tagEditor3parments('getTags')[0].editor;
+            $('li', ChoosedGroupEditor).each(function (index) {
+                var li = $(this);
+                var Length = (li.find('.tag-editor-tag')).length;
+                if (Length > 0) {
+                    var id = (li.find('.tag-editor-tag'))[0].getAttribute('id');
+                    var title = (li.find('.tag-editor-tag'))[0].getAttribute('data-original-title');
+                    var value = (li.find('.tag-editor-tag'))[0].getAttribute('value');
+                    GroupUsersID.push(id);
+                }
+            });
+            if (GroupUsersID.length == 0) {
+                /*没有填写用户列表怎么处理*/
+
+            } else {
+                var url = 'user_groups';
+                var Token = $.cookie('token');
+                var CreateUsersGroups = {
+                    name: CreateGroupName.value,
+                    users: GroupUsersID
+                };
+                console.log(CreateUsersGroups);
+                AjaxCreateGroups(url, 'POST', CreateUsersGroups, Token);
+            }
+        }
+    }
+}
+function EditGroup() {
+    var GroupListStyle = document.getElementsByClassName('GroupListStyle');
+    $('.GroupListStyle').each(function (index) {
+        $(this).children('div').children('button').click(function () {
+            RemoveAllTags('ChoosedGroupUsers');
+            var ID = GroupListStyle[index].getElementsByClassName('GroupNameStyle')[0].getAttribute('id');
+            var Name = GroupListStyle[index].getElementsByClassName('GroupNameStyle')[0].getElementsByTagName('h2')[0].innerHTML;
+            var Members = GroupListStyle[index].getElementsByClassName('GroupMembersStyle')[0].innerHTML;
+            /* console.log(ID);
+             console.log(Name);
+             console.log(Members);*/
+
+            $('#CreateGroup').modal('show');
+            $('.CreateGroupName').val(Name);
+            $('#ChoosedGroupUsers').tagEditor('addTag', Members, Members, ID);
+
+            /*Change Title and Button Text*/
+            var Modal_Header = document.getElementsByClassName('modal-header')[0].getElementsByTagName('h2')[0];
+            Modal_Header.innerHTML = "Update Group";
+            var UpdateGroupBtn = document.getElementsByClassName('CreateGroupBtn')[0];
+            UpdateGroupBtn.innerHTML = 'Update';
+
+            UpdateGroupBtn.onclick = function () {
+            }
+        });
+    });
+}
+
+function RemoveAllTags(ID) {
+    var tags = $('#' + ID).tagEditor('getTags')[0].tags;
+    for (i = 0; i < tags.length; i++) {
+        $('#' + ID).tagEditor('removeTag', tags[i]);
+    }
 }

@@ -448,3 +448,8 @@
     font-size: 12px;
     font-weight: bold;
 }
+
+/*
+.NewGroupBtn > button:active {
+    font-size: 1.1em;
+}*/
