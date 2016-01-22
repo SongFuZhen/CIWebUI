@@ -2,8 +2,8 @@
  * Created by zero on 2015/12/22.
  */
 //var urlhead = 'http://112.124.28.10:8001/api/v2/';
-//var urlhead = 'http://192.168.1.70:3000/api/v2/';
-var urlhead = 'http://192.168.0.104:3000/api/v2/';
+var urlhead = 'http://192.168.1.70:3000/api/v2/';
+//var urlhead = 'http://192.168.0.104:3000/api/v2/';
 
 function AjaxSignIn(url, type, email, password, LoadHref) {
     $(document).ready(function () {
@@ -671,7 +671,6 @@ function AjaxCreateKpis(url, type, kpis, assignments, AuthToken) {
         url: urlhead + url,
         type: type,
         async: false,
-        traditional: true,
         data: {kpi: kpis, assignments: assignments},
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
@@ -692,7 +691,7 @@ function AjaxCreateKpis(url, type, kpis, assignments, AuthToken) {
             }, 3000);
         },
         error: function () {
-            alert('error');
+            alert("error");
         }
     });
 }

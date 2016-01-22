@@ -307,7 +307,6 @@
 
         <div class="ShowGroup">
         </div>
-        <!--<button class="BtnSubmit NewGroupBtn"><i class="glyphicon glyphicon-plus"></i>New Group.txt</button>-->
     </div>
 </div>
 <div class="RightContent">
@@ -340,6 +339,48 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="BtnSubmit CreateGroupBtn">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="GroupUserList">
+        <div class="CloseGroupUserList">
+            <h4>GroupUserList</h4>
+            <!--<i class="glyphicon glyphicon-remove"></i>-->
+        </div>
+
+        <div class="GroupList">
+            <ul>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="UpdateGroup" tabindex="-1" role="dialog" aria-labelledby="CreateGroupLabel"
+     data-backdrop="static" data-keyboard="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h2>Update Group</h2>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <input class="form-control UpdateGroupName" placeholder="* Group Name">
+                    </div>
+                </div>
+                <hr style="margin:25px 0 0 0">
+                <div class="row col-md-12 ChoosedGroupUsers">
+                    <h4>Choosed Users:</h4>
+                    <textarea id="UpdateGroupUsers" style="display: none;"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="BtnSubmit UpdateGroupBtn">Update</button>
             </div>
         </div>
     </div>

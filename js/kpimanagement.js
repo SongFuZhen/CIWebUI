@@ -143,9 +143,9 @@ window.onload = function () {
             ViewableHeaderFont.style.color = '#000';
 
             $('.AssignUserList').fadeOut(400);
+            $('.ChooseNav').fadeOut(400);
         }
     };
-
 
     /*此处为点击user 图标*/
     var AssignToWhoIcon = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-1')[0].getElementsByTagName('i')[0];
@@ -190,15 +190,15 @@ window.onload = function () {
             for (var i = 1; i < GetDimensions.length; i++) {
                 var AttributeName = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].innerHTML;
                 var AttributeType = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].getAttribute('data-original-title');
-                Attributes.push({attribute_name: AttributeName, attribute_type: AttributeType});
+                var AttributesDate = {
+                    attribute_name: AttributeName,
+                    attribute_type: AttributeType
+                };
+                Attributes = Attributes.concat(AttributesDate);
             }
         } else {
             Attributes = [];
         }
-
-        console.log('Attributes======');
-        console.log(Attributes);
-        console.log('Attributes======');
 
         var viewable_code = 0;
         var ViewType = document.getElementsByName('ViewType');
@@ -222,34 +222,39 @@ window.onload = function () {
             AutoNotification = true;
         }
 
+        /*分配给一个人*/
         var assignments = new Array();
-
         if (!AssignToWho.getAttribute('data-original-title') == "") {
-            assignments.push({
-                user: AssignToWho.getAttribute('data-original-title'),
-                department_id: AssignDepartment,
-                time: InputTime,
-                frequency: Frequency,
-                auto_notification: AutoNotification
-            });
+            var usersdate = AssignToWho.getAttribute('data-original-title');
+            Frequency = parseInt(Frequency);
+            var AssignmentsDate = {
+                "user": usersdate,
+                "department_id": AssignDepartment,
+                "time": InputTime,
+                "frequency": Frequency,
+                "auto_notification": AutoNotification
+            };
+            assignments = assignments.concat(AssignmentsDate);
         } else {
             assignments = [];
         }
 
+        Default_Frequency = parseInt(Default_Frequency);
+        CalculateMethod = parseInt(CalculateMethod);
         var kpis = {
-            kpi_name: Kpi_Name,
-            description: Kpi_Description,
-            target_min: TargetMin,
-            target_max: TargetMax,
-            uom: uom,
-            frequency: parseInt(Default_Frequency),
-            calculate_method: parseInt(CalculateMethod),
-            viewable: Viewable,
-            attributes: Attributes
+            "kpi_name": Kpi_Name,
+            "description": Kpi_Description,
+            "target_min": TargetMin,
+            "target_max": TargetMax,
+            "uom": uom,
+            "frequency": Default_Frequency,
+            "calculate_method": CalculateMethod,
+            "viewable": Viewable,
+            "attributes": Attributes
         };
 
         console.log(kpis);
-        console.log(JSON.stringify(assignments));
+        console.log(assignments);
 
         AjaxCreateKpis(url, 'POST', kpis, assignments, Token);
     };
@@ -455,6 +460,28 @@ function InitParams() {
         forceLowercase: false
     });
 
+    $('#UpdateGroupUsers').tagEditor3parments({
+        forceLowercase: false,
+        beforeTagDelete: function (field, editor, tags, val) {
+            $('li', editor).each(function (index) {
+                var li = $(this);
+                if (li.find('.tag-editor-tag').html() == val) {
+                    //console.log(li.find('.tag-editor-tag')[0].attributes);
+                    var title = li.find('.tag-editor-tag')[0].attributes[1].value;
+                    var id = li.find('.tag-editor-tag')[0].attributes[4].value;
+                    var value = li.find('.tag-editor-tag')[0].attributes[5].value;
+
+                    $('<li><div class="CheckBox" groupuserlist style="margin-left: -20px"><input type="checkbox" name="AllGroupUsersList" title="' + title + '" value="' + value + '" id="' + id + '"/>' +
+                        '<label for="' + id + '"></label>' +
+                        '<p data-toggle="tooltip" data-original-title="' + title + '" data-placement="bottom" title="' + title + '">' + value + '</p></div></li>').appendTo('.GroupList>ul').ready(function () {
+                    });
+
+                    $('[data-toggle="tooltip"]').tooltip();
+                    ChooseGroupUserList('UpdateGroupUsers');
+                }
+            });
+        }
+    });
     $('#ChoosedGroupUsers').tagEditor3parments({
         forceLowercase: false,
         beforeTagDelete: function (field, editor, tags, val) {
@@ -472,7 +499,7 @@ function InitParams() {
                     });
 
                     $('[data-toggle="tooltip"]').tooltip();
-                    ChooseGroupUserList();
+                    ChooseGroupUserList('ChoosedGroupUsers');
                 }
             });
         }
@@ -503,6 +530,9 @@ function SetPosition() {
     var CreateGroupModal = document.getElementById('CreateGroup');
     CreateGroupModal.style.top = (ClientHeight - 600) / 2 + 'px';
 
+    var UpdateGroupModal = document.getElementById('UpdateGroup');
+    UpdateGroupModal.style.top = (ClientHeight - 600) / 2 + 'px';
+
     var CreateKpiModal = document.getElementById('CreateKpi');
     CreateKpiModal.style.top = (ClientHeight - 600) / 2 + 'px';
 
@@ -517,9 +547,6 @@ function SetPosition() {
 
     var AssignUserListPosition = document.getElementsByClassName('AssignUserList')[0];
     AssignUserListPosition.style.right = ((ClientWidth - 600) / 2 - 405) + 'px';
-
-    var GroupUserListPosition = document.getElementsByClassName('GroupUserList')[0];
-    GroupUserListPosition.style.right = ((ClientWidth - 600) / 2 - 405) + 'px';
     /*Position End*/
 }
 
@@ -556,13 +583,14 @@ function LeftNavFun() {
         RightContent.getElementsByTagName('ul')[0].style.marginTop = '65px';
 
         $('<div class="NewGroupBtn" style="position: absolute;top: 0;left: 60px;height: 65px;">' +
-            '<button class="BtnSubmit"  data-toggle="modal" data-target="#CreateGroup" style="width: 200px;"><i class="glyphicon glyphicon-plus" style="margin-right: 20px;"></i>' +
+            '<button class="BtnSubmit" style="width: 200px;"><i class="glyphicon glyphicon-plus" style="margin-right: 20px;"></i>' +
             '<span>New Group</span></button></div>').appendTo('.RightContent').ready(function () {
         });
 
         var url = 'user_groups/for_kpis';
         var Token = $.cookie('token');
         var Groups = AjaxGetList(url, 'GET', Token);
+
         for (var i = 0; i < Groups.length; i++) {
             var GroupName = Groups[i].user_group.name;
             var GroupId = Groups[i].user_group.id;
@@ -570,7 +598,7 @@ function LeftNavFun() {
 
             $('<div class="col-md-5 GroupListStyle"><div class="col-md-2 GroupNameStyle" id="' + GroupId + '"><h2>' + GroupName + '</h2></div>' +
                 '<div class="col-md-7 GroupMembersStyle" data-toggle="tooltip" data-placement="bottom" title="' + GroupMember + '">' + GroupMember + '</div>' +
-                '<div class="col-md-2"><button class="BtnSubmit ChangeBtn"><i class="glyphicon glyphicon-edit"></i><span>Edit</span> </button></div></div>').appendTo('.RightContent>ul').ready(function () {
+                '<div class="col-md-3"><button class="BtnSubmit ChangeBtn"><i class="glyphicon glyphicon-edit"></i><span>Edit</span> </button></div></div>').appendTo('.RightContent>ul').ready(function () {
             });
         }
         $('[data-toggle="tooltip"]').tooltip();
@@ -709,7 +737,6 @@ function RemoveAttr() {
 
 }
 
-
 function GetAllGroupUserList() {
     $('.GroupList>ul>li').remove();
     /*获取所有的用户列表*/
@@ -726,14 +753,13 @@ function GetAllGroupUserList() {
     $('[data-toggle="tooltip"]').tooltip();
 }
 
-function ChooseGroupUserList() {
+function ChooseGroupUserList(ID) {
     $("[groupuserlist]").click(function () {
-        console.log(12);
         var title = $(this).children('input').attr("title");
         var id = $(this).children('input').attr("id");
         var value = $(this).children('input').val();
 
-        $('#ChoosedGroupUsers').tagEditor3parments('addTag', value, title, id);
+        $('#' + ID).tagEditor3parments('addTag', value, title, id);
 
         $('[data-toggle="tooltip"]').tooltip();
         $(this).parent().remove();
@@ -746,76 +772,145 @@ function CreateGroup() {
         $('.GroupUserList').animate({right: ((ClientWidth - 600) / 2) - 180 + 'px'});
     }, 1400);
 
-    GetAllGroupUserList();
-    ChooseGroupUserList();
+    $('.NewGroupBtn').children('button').click(function () {
+        $('#CreateGroup').modal('show');
+        $('#CreateGroup').on('shown.bs.modal', function () {
+            GetAllGroupUserList();
+            ChooseGroupUserList('ChoosedGroupUsers');
 
-    RemoveAllTags('ChoosedGroupUsers');
-    var CreateGroupBtn = document.getElementsByClassName('CreateGroupBtn')[0];
-    CreateGroupBtn.onclick = function () {
-        var CreateGroupName = document.getElementsByClassName('CreateGroupName')[0];
-        if (CreateGroupName.value == "") {
-            CreateGroupName.style.border = '2px solid darkred';
-        } else {
-            CreateGroupName.style.border = '1px solid #ccc';
-            var GroupUsersID = new Array();
-            var ChoosedGroupEditor = $('#ChoosedGroupUsers').tagEditor3parments('getTags')[0].editor;
-            $('li', ChoosedGroupEditor).each(function (index) {
-                var li = $(this);
-                var Length = (li.find('.tag-editor-tag')).length;
-                if (Length > 0) {
-                    var id = (li.find('.tag-editor-tag'))[0].getAttribute('id');
-                    var title = (li.find('.tag-editor-tag'))[0].getAttribute('data-original-title');
-                    var value = (li.find('.tag-editor-tag'))[0].getAttribute('value');
-                    GroupUsersID.push(id);
-                }
-            });
-            if (GroupUsersID.length == 0) {
-                /*没有填写用户列表怎么处理*/
-
-            } else {
-                var url = 'user_groups';
-                var Token = $.cookie('token');
-                var CreateUsersGroups = {
-                    name: CreateGroupName.value,
-                    users: GroupUsersID
-                };
-                console.log(CreateUsersGroups);
-                AjaxCreateGroups(url, 'POST', CreateUsersGroups, Token);
-            }
-        }
-    }
+            var CreateGroupBtn = document.getElementsByClassName('CreateGroupBtn')[0];
+            CreateGroupBtn.onclick = function () {
+                ChangeGroup('ChoosedGroupUsers', 'CreateGroupName', 'POST');
+            };
+        });
+    });
 }
+
 function EditGroup() {
     var GroupListStyle = document.getElementsByClassName('GroupListStyle');
     $('.GroupListStyle').each(function (index) {
         $(this).children('div').children('button').click(function () {
-            RemoveAllTags('ChoosedGroupUsers');
-            var ID = GroupListStyle[index].getElementsByClassName('GroupNameStyle')[0].getAttribute('id');
-            var Name = GroupListStyle[index].getElementsByClassName('GroupNameStyle')[0].getElementsByTagName('h2')[0].innerHTML;
-            var Members = GroupListStyle[index].getElementsByClassName('GroupMembersStyle')[0].innerHTML;
-            /* console.log(ID);
-             console.log(Name);
-             console.log(Members);*/
+            /*Request All Data*/
+            var url = 'users/brief_infos';
+            var Token = $.cookie('token');
+            var AllUserListDate = AjaxGetList(url, 'GET', Token);
+            var MembersArray = new Array();
 
-            $('#CreateGroup').modal('show');
-            $('.CreateGroupName').val(Name);
-            $('#ChoosedGroupUsers').tagEditor('addTag', Members, Members, ID);
+            /*显示modal*/
+            $('#UpdateGroup').modal('show');
+            $('#UpdateGroup').on('shown.bs.modal', function () {
+                GetEditUserList();
+                $('.UpdateGroupBtn').click(function () {
+                    var GroupUsersID = new Array();
+                    var ChoosedGroupEditor = $('#UpdateGroupUsers').tagEditor3parments('getTags')[0].editor;
+                    var GroupName = document.getElementsByClassName('UpdateGroupName')[0];
+                    if (GroupName.value == "") {
+                        GroupName.style.border = '2px solid darkred';
+                        console.log("Group Name is Null");
+                    } else {
+                        GroupName.style.border = '1px solid #ccc';
+                        $('li', ChoosedGroupEditor).each(function (index) {
+                            var li = $(this);
+                            var Length = (li.find('.tag-editor-tag')).length;
+                            if (Length > 0) {
+                                var id = (li.find('.tag-editor-tag'))[0].getAttribute('id');
+                                var title = (li.find('.tag-editor-tag'))[0].getAttribute('data-original-title');
+                                var value = (li.find('.tag-editor-tag'))[0].getAttribute('value');
+                                GroupUsersID.push(id);
+                            }
+                        });
 
-            /*Change Title and Button Text*/
-            var Modal_Header = document.getElementsByClassName('modal-header')[0].getElementsByTagName('h2')[0];
-            Modal_Header.innerHTML = "Update Group";
-            var UpdateGroupBtn = document.getElementsByClassName('CreateGroupBtn')[0];
-            UpdateGroupBtn.innerHTML = 'Update';
+                        if (GroupUsersID.length == 0) {
+                            /*没有填写用户列表怎么处理*/
+                            console.log("Group Users ID is Null");
+                        } else {
+                            var url = 'user_groups';
+                            var Token = $.cookie('token');
+                            var ID = $('.UpdateGroupName').attr('id');
+                            var CreateUsersGroups = {
+                                id: ID,
+                                name: GroupName.value,
+                                users: GroupUsersID
+                            };
 
-            UpdateGroupBtn.onclick = function () {
+                            console.log(CreateUsersGroups);
+                            AjaxCreateGroups(url, 'PUT', CreateUsersGroups, Token);
+                        }
+                    }
+                });
+            });
+
+            function GetEditUserList() {
+                var ID = GroupListStyle[index].getElementsByClassName('GroupNameStyle')[0].getAttribute('id');
+                var Name = GroupListStyle[index].getElementsByClassName('GroupNameStyle')[0].getElementsByTagName('h2')[0].innerHTML;
+                var Members = GroupListStyle[index].getElementsByClassName('GroupMembersStyle')[0].innerHTML;
+
+                MembersArray = Members.split(',');
+                $('.UpdateGroupName').val(Name);
+                $('.UpdateGroupName').attr('id', ID);
+
+                RemoveAllTags('UpdateGroupUsers');
+
+                /*如果相同，删除*/
+                for (var i = 0; i < MembersArray.length; i++) {
+                    for (var j = 0; j < AllUserListDate.length; j++) {
+                        if (MembersArray[i] == AllUserListDate[j].nick_name) {
+                            $('#UpdateGroupUsers').tagEditor3parments('addTag', AllUserListDate[j].nick_name, AllUserListDate[j].email, AllUserListDate[j].id);
+                            /*去掉相同的。*/
+                            AllUserListDate.splice(j, 1);
+                            break;
+                        } else {
+                            $('.GroupList ul li').remove();
+
+                            $('<li><div class="CheckBox" groupuserlist style="margin-left: -20px"><input type="checkbox" name="AllGroupUsersList" title="' + AllUserListDate[j].email + '" value="' + AllUserListDate[j].nick_name + '" id="' + AllUserListDate[j].id + '"/>' +
+                                '<label for="' + AllUserListDate[j].id + '"></label>' +
+                                '<p data-toggle="tooltip" data-placement="bottom" title="' + AllUserListDate[j].email + '">' + AllUserListDate[j].nick_name + '</p></div></li>').appendTo('.GroupList>ul').ready(function () {
+                            });
+                        }
+                        ChooseGroupUserList('UpdateGroupUsers');
+                    }
+                }
             }
         });
     });
 }
 
 function RemoveAllTags(ID) {
-    var tags = $('#' + ID).tagEditor('getTags')[0].tags;
-    for (i = 0; i < tags.length; i++) {
-        $('#' + ID).tagEditor('removeTag', tags[i]);
+    var tags = $('#' + ID).tagEditor3parments('getTags')[0].tags;
+    for (var i = 0; i < tags.length; i++) {
+        $('#' + ID).tagEditor3parments('removeTag', tags[i]);
+    }
+}
+
+function ChangeGroup(ID, NameClass, type) {
+    var GroupUsersID = new Array();
+    var ChoosedGroupEditor = $('#' + ID).tagEditor3parments('getTags')[0].editor;
+    var GroupName = document.getElementsByClassName(NameClass)[0];
+    if (GroupName.value == "") {
+        GroupName.style.border = '2px solid darkred';
+    } else {
+        GroupName.style.border = '1px solid #ccc';
+        $('li', ChoosedGroupEditor).each(function (index) {
+            var li = $(this);
+            var Length = (li.find('.tag-editor-tag')).length;
+            if (Length > 0) {
+                var id = (li.find('.tag-editor-tag'))[0].getAttribute('id');
+                var title = (li.find('.tag-editor-tag'))[0].getAttribute('data-original-title');
+                var value = (li.find('.tag-editor-tag'))[0].getAttribute('value');
+                GroupUsersID.push(id);
+            }
+        });
+        if (GroupUsersID.length == 0) {
+            /*没有填写用户列表怎么处理*/
+
+        } else {
+            var url = 'user_groups';
+            var Token = $.cookie('token');
+            var CreateUsersGroups = {
+                name: GroupName.value,
+                users: GroupUsersID
+            };
+            AjaxCreateGroups(url, type, CreateUsersGroups, Token);
+        }
     }
 }

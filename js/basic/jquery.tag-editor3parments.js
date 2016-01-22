@@ -190,6 +190,7 @@
                     set_placeholder();
                 });
                 update_globals();
+                //console.log(tag[0].attributes);
                 return false;
             });
 
