@@ -666,12 +666,66 @@ function AjaxRemoveManager(url, type, id, user_id, AuthToken) {
     });
 }
 
-function AjaxCreateKpis(url, type, kpis, assignments, AuthToken) {
+/*function AjaxCreateKpis(url, type, kpis, assignments, AuthToken) {
+ $.ajax({
+ url: urlhead + url,
+ type: type,
+ async: false,
+ data: {kpi: kpis, assignments: assignments},
+ beforeSend: function (xhr) {
+ xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+ },
+ success: function (data) {
+ var background = '#71C671';
+ if (data.result_code.toString() == '1') {
+ ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+ } else {
+ var background = '#DC143C';
+ ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+ }
+ SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+ //Delete AddDepartment Dialog
+ //删除掉MsgDialog
+ setTimeout(function () {
+ RemoveDialog('ShowMsgDialog');
+ }, 3000);
+ },
+ error: function () {
+ alert("error");
+ }
+ });
+ }*/
+
+
+function AjaxCreateKpis(url, type, kpis, AuthToken) {
     $.ajax({
         url: urlhead + url,
         type: type,
         async: false,
-        data: {kpi: kpis, assignments: assignments},
+        data: {
+            "kpi": {
+                kpi_name: kpis.kpi_name,
+                "description": kpis.description,
+                "target_min": kpis.target_min,
+                "target_max": kpis.target_max,
+                "uom": kpis.uom,
+                "frequency": kpis.frequency,
+                "calculate_method": kpis.calculate_method,
+                "viewable": kpis.viewable,
+                "attributes": [{
+                    "attribute_name": "project",
+                    "attribute_type": "text"
+                }]
+            },
+            "assignments": [{
+                "user": "admin@ui.com",
+                "department_id": "3",
+                "time": "18:00",
+                "frequency": 300,
+                "auto_notification": false
+            }]
+        },
+        dataType: 'json',
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
         },

@@ -169,9 +169,6 @@ window.onload = function () {
         });
     };
     FinishBtn.onclick = function () {
-        var url = 'kpis';
-        var Token = $.cookie('token');
-
         var Basic_Info = document.getElementsByClassName('basic-info')[0];
         var Row = Basic_Info.getElementsByClassName('row');
         var Kpi_Name = Row[0].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0].value;
@@ -256,7 +253,23 @@ window.onload = function () {
         console.log(kpis);
         console.log(assignments);
 
-        AjaxCreateKpis(url, 'POST', kpis, assignments, Token);
+        var url = 'kpis';
+        var Token = $.cookie('token');
+
+        var mykpi = {
+            "kpi_name": Kpi_Name,
+            "description": Kpi_Description,
+            "target_min": TargetMin,
+            "target_max": TargetMax,
+            "uom": uom,
+            "frequency": Default_Frequency,
+            "calculate_method": CalculateMethod,
+            "viewable": Viewable,
+            "attributes": Attributes
+        };
+        console.log(mykpi);
+        //AjaxCreateKpis(url, 'POST', kpis, assignments, Token);
+        AjaxCreateKpis(url, 'POST', mykpi, Token);
     };
 
     /*four viewable style*/
