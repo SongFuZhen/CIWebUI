@@ -832,8 +832,6 @@ function EditGroup() {
                                 name: GroupName.value,
                                 users: GroupUsersID
                             };
-
-                            console.log(CreateUsersGroups);
                             AjaxCreateGroups(url, 'PUT', CreateUsersGroups, Token);
                         }
                     }

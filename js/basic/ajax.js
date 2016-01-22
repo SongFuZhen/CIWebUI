@@ -751,6 +751,7 @@ function AjaxCreateGroups(url, type, usergroup, AuthToken) {
             if (data.result_code.toString() == '1') {
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
                 $('#CreateGroup').modal('hide');
+                $('#UpdateGroup').modal('hide');
             } else {
                 var background = '#DC143C';
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
