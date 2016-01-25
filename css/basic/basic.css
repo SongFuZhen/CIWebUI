@@ -103,11 +103,14 @@
 }
 
 .CheckBox p {
-    width: 50px;
+    width: 80px;
     position: absolute;
     top: 0;
     left: 30px;
     margin: 0 0 0 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 /* end .CheckBox */

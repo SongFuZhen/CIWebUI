@@ -132,8 +132,8 @@
 
 .SelectCls {
     outline: none;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    border: 3px solid #F2F2F2;
+    border-radius: 8px;
     width: 100%;
     height: 34px;
     padding: 0 14px 0 6px;
@@ -143,11 +143,16 @@
     background: url(../images/selectarrow.png) no-repeat scroll right center transparent;
 }
 
-.SelectCls option {
+.SelectCls > option {
     height: 34px;
     line-height: 34px;
     padding-top: 8px;
     border-radius: 3px;
+    /*background: #000;*/
+}
+
+.SelectCls option::choices {
+    background: brown;
 }
 
 .tag-editor {
@@ -399,6 +404,9 @@
 
 .ShowChoosedGroup, .ShowNotChoosedGroup {
     width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .List, .GroupList {
@@ -419,8 +427,14 @@
 }
 
 .GroupNameStyle {
-    margin-top: -7px;
+    margin-top: 9px;
     margin-left: -10px;
+}
+
+.GroupNameStyle > h4 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .GroupMembersStyle {

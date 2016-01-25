@@ -2,8 +2,8 @@
  * Created by zero on 2015/12/22.
  */
 //var urlhead = 'http://112.124.28.10:8001/api/v2/';
-var urlhead = 'http://192.168.1.70:3000/api/v2/';
-//var urlhead = 'http://192.168.0.104:3000/api/v2/';
+//var urlhead = 'http://192.168.1.70:3000/api/v2/';
+var urlhead = 'http://192.168.0.104:3000/api/v2/';
 
 function AjaxSignIn(url, type, email, password, LoadHref) {
     $(document).ready(function () {
@@ -258,7 +258,7 @@ function AjaxGetUsersInfos(url, type, AuthToken) {
                 var NickName = document.getElementsByClassName('LockContentText')[0].getElementsByTagName('h3')[0];
                 NickName.innerHTML = data.brief_user_info.nick_name;
 
-                var NotNickName = document.getElementsByClassName('LockContentText')[0].getElementsByTagName('a')[0];
+                var NotNickName = document.getElementsByClassName('LockContentText')[0].getElementsByTagName('`')[0];
                 NotNickName.innerHTML = "Not " + data.brief_user_info.nick_name + " ?";
             },
             error: function () {
@@ -477,7 +477,7 @@ function AjaxDeleteDepartment(url, type, id, AuthToken) {
 
 var AllDepartmentJSON = '';
 function AjaxGetAllDepartment(url, type, AuthToken) {
-    Loading(0, 0, 0, 0, 'block');
+    //Loading(0, 0, 0, 0, 'block');
     $.ajax({
         url: urlhead + url,
         type: type,
@@ -501,7 +501,7 @@ function AjaxGetAllDepartment(url, type, AuthToken) {
                 ChildJSON.push(JSON.stringify(data));
                 AllDepartmentJSON = ChildJSON;
             }
-            RemoveDialog('Loading');
+            //RemoveDialog('Loading');
         },
         error: function () {
             RemoveDialog('Loading');
@@ -510,6 +510,7 @@ function AjaxGetAllDepartment(url, type, AuthToken) {
     });
     return AllDepartmentJSON;
 }
+
 function AjaxRemoveUsers(url, type, id, userid, AuthToken) {
     $.ajax({
         url: urlhead + url,
@@ -748,9 +749,12 @@ function AjaxCreateGroups(url, type, usergroup, AuthToken) {
             creategroups = data;
             var background = '#71C671';
             if (data.result_code.toString() == '1') {
+                $('.RightContent ul').empty();
+                ShowGroupList();
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
                 $('#CreateGroup').modal('hide');
                 $('#UpdateGroup').modal('hide');
+
             } else {
                 var background = '#DC143C';
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);

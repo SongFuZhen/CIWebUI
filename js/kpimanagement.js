@@ -504,22 +504,6 @@ function InitParams() {
             });
         }
     });
-    /*Set UOM Calculate_Method  timing_frequencies*/
-    var uomurl = 'kpis/unit_of_measurements';
-    var calculateurl = 'kpis/calculate_methods';
-    var frequencyurl = 'kpis/timing_frequencies';
-    var Token = $.cookie('token');
-
-    var UOMList = AjaxGetList(uomurl, 'GET', Token);
-    var CalculateList = AjaxGetList(calculateurl, 'GET', Token);
-    var FrequencyList = AjaxGetList(frequencyurl, 'GET', Token);
-
-    GetListWithFor(UOMList, 'uom');
-    GetListWithFor(CalculateList, 'calculatemethod');
-    GetListWithFor(FrequencyList, 'DefaultFrequency');
-    GetListWithFor(FrequencyList, 'Frequency');
-
-    GetAllDepartmentList();
 }
 
 function SetPosition() {
@@ -587,26 +571,34 @@ function LeftNavFun() {
             '<span>New Group</span></button></div>').appendTo('.RightContent').ready(function () {
         });
 
-        var url = 'user_groups/for_kpis';
-        var Token = $.cookie('token');
-        var Groups = AjaxGetList(url, 'GET', Token);
-
-        for (var i = 0; i < Groups.length; i++) {
-            var GroupName = Groups[i].user_group.name;
-            var GroupId = Groups[i].user_group.id;
-            var GroupMember = Groups[i].user_group.members;
-
-            $('<div class="col-md-5 GroupListStyle"><div class="col-md-2 GroupNameStyle" id="' + GroupId + '"><h2>' + GroupName + '</h2></div>' +
-                '<div class="col-md-7 GroupMembersStyle" data-toggle="tooltip" data-placement="bottom" title="' + GroupMember + '">' + GroupMember + '</div>' +
-                '<div class="col-md-3"><button class="BtnSubmit ChangeBtn"><i class="glyphicon glyphicon-edit"></i><span>Edit</span> </button></div></div>').appendTo('.RightContent>ul').ready(function () {
-            });
-        }
-        $('[data-toggle="tooltip"]').tooltip();
+        ShowGroupList();
 
         CreateGroup();
 
         EditGroup();
     };
+
+    $('.Create').click(function () {
+        $('#CreateKpi').modal('show');
+        $('#CreateKpi').on('shown.bs.modal', function () {
+            /*Set UOM Calculate_Method  timing_frequencies*/
+            var uomurl = 'kpis/unit_of_measurements';
+            var calculateurl = 'kpis/calculate_methods';
+            var frequencyurl = 'kpis/timing_frequencies';
+            var Token = $.cookie('token');
+
+            var UOMList = AjaxGetList(uomurl, 'GET', Token);
+            var CalculateList = AjaxGetList(calculateurl, 'GET', Token);
+            var FrequencyList = AjaxGetList(frequencyurl, 'GET', Token);
+
+            GetListWithFor(UOMList, 'uom');
+            GetListWithFor(CalculateList, 'calculatemethod');
+            GetListWithFor(FrequencyList, 'DefaultFrequency');
+            GetListWithFor(FrequencyList, 'Frequency');
+
+            GetAllDepartmentList();
+        })
+    })
 }
 
 function RemoveLi() {
@@ -620,7 +612,6 @@ function GetListWithFor(data, id) {
         $('<option value="' + data[i].id + '">' + data[i].name + '</option>').appendTo('#' + id).ready(function () {
         });
     }
-    /* console.log(data)*/
 }
 
 /*Get All Department*/
@@ -911,4 +902,24 @@ function ChangeGroup(ID, NameClass, type) {
             AjaxCreateGroups(url, type, CreateUsersGroups, Token);
         }
     }
+}
+
+function ShowGroupList() {
+    var url = 'user_groups/for_kpis';
+    var Token = $.cookie('token');
+    var Groups = AjaxGetList(url, 'GET', Token);
+
+    for (var i = 0; i < Groups.length; i++) {
+        var GroupName = Groups[i].user_group.name;
+        var GroupId = Groups[i].user_group.id;
+        var GroupMember = Groups[i].user_group.members;
+
+        //if (GroupName.length >)
+
+        $('<div class="col-md-5 GroupListStyle"><div class="col-md-3 GroupNameStyle" data-toggle="tooltip" data-placement="bottom" title="' + GroupName + '" id="' + GroupId + '"><h4>' + GroupName + '</h4></div>' +
+            '<div class="col-md-6 GroupMembersStyle" data-toggle="tooltip" data-placement="bottom" title="' + GroupMember + '">' + GroupMember + '</div>' +
+            '<div class="col-md-3"><button class="BtnSubmit ChangeBtn"><i class="glyphicon glyphicon-edit"></i><span>Edit</span> </button></div></div>').appendTo('.RightContent>ul').ready(function () {
+        });
+    }
+    $('[data-toggle="tooltip"]').tooltip();
 }
