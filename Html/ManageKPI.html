@@ -3,24 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>ManageKPI</title>
-    <!-- link start -->
-    <link rel="stylesheet" href="../bootstrap-3.3.5-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="../css/basic/basic.css">
-    <link rel="stylesheet" href="../css/nav.css">
-
-    <script src="../js/basic/jquery-latest.js"></script>
-    <script src="../js/basic/jquery.cookie.js"></script>
-    <script src="../js/basic/basic.js"></script>
-    <script src="../js/basic/ajax.js"></script>
-    <script src="../js/nav.js"></script>
-    <!-- link end -->
-
-    <style>
-
-    </style>
 </head>
 <body>
+<div class="manual">
+    <div class="panel panel-primary manualpanel">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+            <div class="manualbasicinfo">
+                <h4>Basic Information (* is required)</h4>
 
+                <div class="manualbasicinfocontent">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <h4>Name:</h4>
+                            <input type="text" class="form-control"/>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h4>Description:</h4>
+                            <input type="text" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <h4>unit of measurement:</h4>
+                            <select class="SelectCls" name="" id="uom">
+                                <option value="0">1234</option>
+                                <option value="0">12.34</option>
+                                <option value="0">12%</option>
+                                <option value="0">12.34%</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h4>Calculate Method:</h4>
+                            <select class="SelectCls" name="" id="calculatemethod">
+                                <option value="0">1234</option>
+                                <option value="0">12.34</option>
+                                <option value="0">12%</option>
+                                <option value="0">12.34%</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
 

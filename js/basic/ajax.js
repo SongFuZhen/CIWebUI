@@ -771,3 +771,40 @@ function AjaxCreateGroups(url, type, usergroup, AuthToken) {
     });
     return creategroups;
 }
+
+var GetKPIDate = "";
+function AjaxGetKPIDate(url, type, kpi_id, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        data: {kpi_id: kpi_id},
+        async: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            GetKPIDate = data;
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    return GetKPIDate;
+}
+
+var HtmlDate = "";
+function AjaxGetHtml(url, type) {
+    $.ajax({
+        url: url,
+        type: type,
+        dataType: 'html',
+        async: false,
+        success: function (data) {
+            HtmlDate = data;
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    return HtmlDate;
+}

@@ -1,0 +1,51 @@
+.manual {
+    position: absolute;
+    min-width: 800px;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+}
+
+.manualpanel {
+    margin-right: 20px;
+}
+
+.manualbasicinfo > h4 {
+    background: lightblue;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 0 0 10px;
+    width: 270px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.manualbasicinfocontent {
+    border: 2px solid lightblue;
+    margin-top: -30px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    text-align: center;
+}
+
+.manualbasicinfocontent > div > div:first-child, .manualbasicinfocontent > div > div:first-child + div {
+    margin-top: 30px;
+}
+
+.manualbasicinfocontent > div > div {
+    display: flex;
+}
+
+.manualbasicinfocontent > div div > input {
+    max-width: 400px;
+}
+
+.manualbasicinfocontent > div > div > h4 {
+    width: 200px;
+    text-align: right;
+    margin-right: 20px;
+}
+
+.SelectCls {
+    max-width: 400px;
+}

@@ -12,7 +12,34 @@ window.onload = function () {
     LeftNavFun();
     /*Get All List Value*/
     GetListFunc();
+
+    ManageKPI();
 };
+
+function ManageKPI() {
+    $('.Manage').unbind().on('click', function () {
+        RemoveLi();
+        var KPIID = $(this).parent().prevAll('td')[4].getElementsByTagName('h3')[0].getAttribute('id');
+
+        var url = 'kpis';
+        var Token = $.cookie('token');
+        var KPIDate = AjaxGetKPIDate(url, 'GET', KPIID, Token);
+        console.log(KPIDate);
+
+        var RightContent = document.getElementsByClassName('RightContent')[0];
+        var HtmlDate = AjaxGetHtml('ManageKPI.html', 'GET');
+        RightContent.innerHTML = HtmlDate;
+
+        $('.manual').css({
+            //width: (ClientWidth - 220) + 'px',
+            //marginTop: '10px',
+            //marginLeft: '20px',
+            //marginRight: '20px'
+        });
+
+        $('.panel-heading').html("<h4>" + KPIDate.kpi.kpi_name + "</h4>");
+    })
+}
 
 function LoadAllKpis() {
     var accessesurl = 'kpis/users/accesses';
@@ -47,6 +74,7 @@ function LoadKpis(LoadKpis, Token) {
         var is_created = LoadKpis[i].is_created;
         var is_managable = LoadKpis[i].is_managable;
 
+        /*Here only can get UserEmail,use signup ajax can get all.*/
         var signupurl = 'users/signuped';
         var SignedUsersInfo = AjaxUserSingUp(signupurl, 'POST', users.email, Token);
 
@@ -134,6 +162,8 @@ function LoadKpis(LoadKpis, Token) {
             KpiDescriptionFont.style.fontSize = '.9em';
             KpiDescriptionFont.style.fontWeight = 'bold';
         }
+
+        /*Here also can judge TargetMax and TargetMin*/
     }
 }
 
