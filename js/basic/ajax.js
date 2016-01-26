@@ -679,10 +679,11 @@ function AjaxCreateKpis(url, type, kpis, assignments, AuthToken) {
         success: function (data) {
             var background = '#71C671';
             if (data.result_code.toString() == '1') {
+                $('#CreateKpi').modal('hide');
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
             } else {
                 var background = '#DC143C';
-                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', "KPI Name Exist.", background);
             }
             SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
             //删除掉MsgDialog
