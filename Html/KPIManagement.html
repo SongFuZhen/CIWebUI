@@ -48,8 +48,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close"><span
+                <button type="button" class="close"><span
                         aria-hidden="true">&times;</span></button>
                 <h2>Create KPI</h2>
             </div>
@@ -189,7 +188,8 @@
                             <h4>Assign To Who?</h4>
                         </div>
                         <div class="col-md-7" style="display: flex">
-                            <input type="text" class="form-control" readonly placeholder="Only One User's Email">
+                            <input type="text" class="form-control" autocomplete="off" readonly
+                                   placeholder="Only One User's Email">
                         </div>
                         <div class="col-md-1">
                             <i class="glyphicon glyphicon-user UsersIcon"></i>
@@ -214,9 +214,6 @@
                         </div>
                         <div class="col-md-7">
                             <select id="Frequency" class="SelectCls">
-                                <!-- <option disabled="disabled" value="" selected="selected" style="text-align: center">
-                                     Frequency
-                                 </option>-->
                             </select>
                         </div>
                     </div>
@@ -226,7 +223,7 @@
                             <h4>What's Time?</h4>
                         </div>
                         <div class="col-md-5">
-                            <input type="text" class="InputTime form-control" placeholder="* time">
+                            <input type="text" class="InputTime form-control" autocomplete="off" placeholder="* time">
                         </div>
 
                         <div class="col-md-3">
@@ -312,6 +309,7 @@
         </div>
     </div>
 </div>
+
 <div class="RightContent">
     <ul>
     </ul>
@@ -360,12 +358,11 @@
 </div>
 
 <div class="modal fade" id="UpdateGroup" tabindex="-1" role="dialog" aria-labelledby="CreateGroupLabel"
-     data-backdrop="static" data-keyboard="true">
+     data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close"><span
+                <button type="button" class="close"><span
                         aria-hidden="true">&times;</span></button>
                 <h2>Update Group</h2>
             </div>

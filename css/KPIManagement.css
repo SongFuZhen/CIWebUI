@@ -446,12 +446,12 @@
     border-right: 1px solid #f2f2f2;
 }
 
-.ChangeBtn {
+.EditBtn {
     margin: 12px 0 0 10px;
     line-height: 30px;
 }
 
-.ChangeBtn > span {
+.EditBtn > span {
     margin-left: 10px;
 }
 
@@ -463,8 +463,3 @@
     font-size: 12px;
     font-weight: bold;
 }
-
-/*
-.NewGroupBtn > button:active {
-    font-size: 1.1em;
-}*/
