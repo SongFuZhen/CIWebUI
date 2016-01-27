@@ -1,51 +1,85 @@
 .manual {
-    position: absolute;
-    min-width: 800px;
-    top: 20px;
-    left: 20px;
-    right: 20px;
+    min-width: 980px;
 }
 
 .manualpanel {
     margin-right: 20px;
 }
 
-.manualbasicinfo > h4 {
+.manualcontent {
+    border: 2px solid lightblue;
+    margin-top: -30px;
+}
+
+.manualbasicinfo > h4, .manualdimensions > h4, .manualassign > h4, .manualviewable > h4 {
     background: lightblue;
     height: 40px;
     line-height: 40px;
     padding: 0 0 0 10px;
     width: 270px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-radius: 3px;
 }
 
-.manualbasicinfocontent {
-    border: 2px solid lightblue;
-    margin-top: -30px;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    text-align: center;
+.NameAndInput {
+    display: flex;
+    margin-bottom: 20px;
 }
 
-.manualbasicinfocontent > div > div:first-child, .manualbasicinfocontent > div > div:first-child + div {
+.NameAndInput:first-child, .NameAndInput:first-child + div {
     margin-top: 30px;
 }
 
-.manualbasicinfocontent > div > div {
-    display: flex;
-}
-
-.manualbasicinfocontent > div div > input {
-    max-width: 400px;
-}
-
-.manualbasicinfocontent > div > div > h4 {
+.NameAndInput > h4 {
     width: 200px;
     text-align: right;
     margin-right: 20px;
 }
 
-.SelectCls {
+.NameAndInput > input, .SelectCls {
     max-width: 400px;
+}
+
+.manualdimensions {
+    padding: 15px;
+}
+
+.manualdimensions > hr, .manualassign > hr, .manualviewable > hr {
+    background: lightblue;
+    height: 4px;
+    margin-top: -30px;
+    margin-left: 270px;
+}
+
+.AssignToWho {
+    min-width: 300px;
+    border-radius: 3px;
+    border: 1px solid lightblue;
+    height: 100px;
+    display: flex;
+    padding-right: 0;
+    margin: 20px 30px 0 30px;
+}
+
+.AssignInfo > hr {
+    margin: 0;
+}
+
+.AssignInfo > h4 {
+    margin-right: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.DeleteBtn {
+    background: #CD3333;
+    border: medium none;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    color: white;
+    margin: -1px;
+}
+
+.DeleteBtn:hover {
+    background: darkred;
 }

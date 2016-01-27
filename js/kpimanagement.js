@@ -18,27 +18,52 @@ window.onload = function () {
 
 function ManageKPI() {
     $('.Manage').unbind().on('click', function () {
-        RemoveLi();
-        var KPIID = $(this).parent().prevAll('td')[4].getElementsByTagName('h3')[0].getAttribute('id');
+            RemoveLi();
 
-        var url = 'kpis';
-        var Token = $.cookie('token');
-        var KPIDate = AjaxGetKPIDate(url, 'GET', KPIID, Token);
-        console.log(KPIDate);
+            var RightContent = document.getElementsByClassName('RightContent')[0];
+            var HtmlDate = AjaxGetHtml('ManageKPI.html', 'GET');
+            RightContent.innerHTML = HtmlDate;
 
-        var RightContent = document.getElementsByClassName('RightContent')[0];
-        var HtmlDate = AjaxGetHtml('ManageKPI.html', 'GET');
-        RightContent.innerHTML = HtmlDate;
+            $('.manual').css({
+                width: (ClientWidth - 220) + 'px',
+                marginTop: '10px',
+                marginLeft: '20px'
+            });
 
-        $('.manual').css({
-            //width: (ClientWidth - 220) + 'px',
-            //marginTop: '10px',
-            //marginLeft: '20px',
-            //marginRight: '20px'
-        });
+            $('#manualdimensions').tagEditor({
+                forceLowercase: false
+            });
 
-        $('.panel-heading').html("<h4>" + KPIDate.kpi.kpi_name + "</h4>");
-    })
+            $('.tag-editor').css({
+                height: '100px',
+                marginLeft: '200px',
+                marginRight: '200px',
+                marginTop: '30px',
+                marginBottom: '-25px'
+            });
+
+            /*Resize the window Operate*/
+            $(window).resize(function () {
+                $('.manual').css({width: (document.documentElement.clientWidth - 220) + 'px'});
+            });
+
+            var KPIID = $(this).parent().prevAll('td')[4].getElementsByTagName('h3')[0].getAttribute('id');
+            var url = 'kpis';
+            var Token = $.cookie('token');
+            var KPIDate = AjaxGetKPIDate(url, 'GET', KPIID, Token);
+
+            /*Write Date*/
+
+            $('.panel-heading').html("<h4>" + KPIDate.kpi.kpi_name + "</h4>");
+            //$('.panel-heading').html("<h4>AdminUI</h4>");
+
+            //$('.panel-heading').attr('id', KPIID);
+            $('.panel-heading').attr('id', KPIDate.kpi.kpi_id);
+
+
+
+        }
+    )
 }
 
 function LoadAllKpis() {
@@ -270,24 +295,28 @@ function LeftNavFun() {
     LeftNavLi[0].onclick = function () {
         /*Remove All Li*/
         RemoveLi();
+        $('.RightContent').append('<ul></ul>');
         $(this).addClass('IsClick');
         LoadAllKpis();
     };
 
     LeftNavLi[1].onclick = function () {
         RemoveLi();
+        $('.RightContent').append('<ul></ul>');
         $(this).addClass('IsClick');
         LoadCreatedKpis();
     };
 
     LeftNavLi[2].onclick = function () {
         RemoveLi();
+        $('.RightContent').append('<ul></ul>');
         $(this).addClass('IsClick');
         LoadFollowedKpis();
     };
 
     LeftNavLi[3].onclick = function () {
         RemoveLi();
+        $('.RightContent').append('<ul></ul>');
         $(this).addClass('IsClick');
 
         var RightContent = document.getElementsByClassName('RightContent')[0];
@@ -666,9 +695,10 @@ function LeftNavFun() {
 }
 
 function RemoveLi() {
-    $('.RightContent ul').empty();
+    //$('.RightContent ul').empty();
     $('.LeftNav li').removeClass('IsClick');
     $('.NewGroupBtn').remove();
+    $('.RightContent').empty();
 }
 
 function GetListFunc() {
