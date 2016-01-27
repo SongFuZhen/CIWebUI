@@ -42,14 +42,6 @@ function ManageKPI() {
                 marginBottom: '-25px'
             });
 
-            /*   $('.tag-editor').css({
-             height: '100px',
-             marginLeft: '200px',
-             marginRight: '200px',
-             marginTop: '30px',
-             marginBottom: '-25px'
-             });*/
-
             /*Resize the window Operate*/
             $(window).resize(function () {
                 $('.manual').css({width: (document.documentElement.clientWidth - 220) + 'px'});
@@ -67,7 +59,6 @@ function ManageKPI() {
 
             //$('.panel-heading').attr('id', KPIID);
             $('.panel-heading').attr('id', KPIDate.kpi.kpi_id);
-
 
 
         }
