@@ -6,6 +6,10 @@ window.onload = function () {
     AjaxGetTopNavHtml('NavDemo.html', 'GET');
     SetPosition();
     InitParams();
+    var UOMList = "";
+    var CalculateList = "";
+    var FrequencyList = "";
+
     var RightContent = document.getElementsByClassName('RightContent')[0];
     /*When Load Show All KPI*/
     LoadAllKpis();
@@ -30,7 +34,7 @@ function ManageKPI() {
                 marginLeft: '20px'
             });
 
-            $('#manualdimensions').tagEditor({
+            $('#manualdimensions').tagEditor3parments({
                 forceLowercase: false
             });
 
@@ -55,12 +59,51 @@ function ManageKPI() {
             /*Write Date*/
 
             $('.panel-heading').html("<h4>" + KPIDate.kpi.kpi_name + "</h4>");
-            //$('.panel-heading').html("<h4>AdminUI</h4>");
 
-            //$('.panel-heading').attr('id', KPIID);
             $('.panel-heading').attr('id', KPIDate.kpi.kpi_id);
 
+            ManualBasicInformationWirte(KPIDate);
 
+            var ManualKPIAttributes = KPIDate.kpi.attributes;
+            for (var i = 0; i < ManualKPIAttributes.length; i++) {
+                //$('#manualdimensions').tagEditor3parments('addTag', value, title, id);
+            }
+
+
+            var ManualKPIAssign = KPIDate.assignments;
+            if (KPIDate.assignments.length > 0) {
+                for (var i = 0; i < ManualKPIAssign.length; i++) {
+                    $('<div class="ManualAssignToWho col-md-3"> <div class="AssignInfo col-md-10">' +
+                        '<h5>Assign To <strong>TianyiShen</strong></h5>' +
+                        '<h5> 18:00 Every Day</h5>' +
+                        '<h5>Department:Station-1</h5></div>' +
+                        '<button class="DeleteBtn"></button> ' +
+                        '</div>').appendTo('.ShowManualAssign').ready(function () {
+                    });
+                }
+            } else {
+                $('<div style="height: 70px;"><h3>Assign To No People.</h3></div>').appendTo('.ShowManualAssign').ready(function () {
+                });
+            }
+
+            var ManualKPIViewable = KPIDate.kpi.viewable;
+            var ManualKPIViewableCode = ManualKPIViewable.viewable_code;
+
+            var ManualKPIViewType = document.getElementsByName('manualViewType');
+
+            if (ManualKPIViewableCode == 0) {
+                ManualKPIViewType[0].setAttribute('checked', true);
+            } else if (ManualKPIViewableCode == 1) {
+                ManualKPIViewType[1].setAttribute('checked', true);
+            } else if (ManualKPIViewableCode == 2) {
+                ManualKPIViewType[2].setAttribute('checked', true);
+                var ManualKPIViewableGroup = ManualKPIViewable.user_groups;
+            } else if (ManualKPIViewableCode == 3) {
+                ManualKPIViewType[2].setAttribute('checked', true);
+                var ManualKPIViewableGroup = ManualKPIViewable.user_groups;
+            } else {
+                ManualKPIViewType[0].setAttribute('checked', true);
+            }
         }
     )
 }
@@ -707,9 +750,9 @@ function GetListFunc() {
     var frequencyurl = 'kpis/timing_frequencies';
     var Token = $.cookie('token');
 
-    var UOMList = AjaxGetList(uomurl, 'GET', Token);
-    var CalculateList = AjaxGetList(calculateurl, 'GET', Token);
-    var FrequencyList = AjaxGetList(frequencyurl, 'GET', Token);
+    UOMList = AjaxGetList(uomurl, 'GET', Token);
+    CalculateList = AjaxGetList(calculateurl, 'GET', Token);
+    FrequencyList = AjaxGetList(frequencyurl, 'GET', Token);
 
     GetListWithFor(UOMList, 'uom');
     GetListWithFor(CalculateList, 'calculatemethod');
@@ -1055,5 +1098,42 @@ function ValueIsNull(name) {
     } else {
         name.style.border = '1px solid #ccc';
         return true;
+    }
+}
+
+function ManualBasicInformationWirte(KPIDate) {
+    var BasicInformation = document.getElementsByClassName('NameAndInput');
+
+    var ManualKPIName = BasicInformation[0].getElementsByTagName('input')[0];
+    ManualKPIName.value = KPIDate.kpi.kpi_name;
+
+    var ManualKPIDescription = BasicInformation[1].getElementsByTagName('input')[0];
+    ManualKPIDescription.value = KPIDate.kpi.description;
+
+    var ManualKPITargetMin = BasicInformation[2].getElementsByTagName('input')[0];
+    ManualKPITargetMin.value = KPIDate.kpi.target_min;
+
+    var ManualKPITargetMax = BasicInformation[3].getElementsByTagName('input')[0];
+    ManualKPITargetMax.value = KPIDate.kpi.target_max;
+
+    GetListWithFor(FrequencyList, 'manualdefaultfrequency');
+    for (var i = 0; i < FrequencyList.length; i++) {
+        if (KPIDate.kpi.frequency.id == FrequencyList[i].id) {
+            $('#manualdefaultfrequency').find('option[value=' + FrequencyList[i].id + ']').attr('selected', true);
+        }
+    }
+
+    GetListWithFor(UOMList, 'manualuom');
+    for (var i = 0; i < UOMList.length; i++) {
+        if (KPIDate.kpi.uom.id == UOMList[i].id) {
+            $('#manualuom').find('option[value=' + UOMList[i].id + ']').attr('selected', true);
+        }
+    }
+
+    GetListWithFor(CalculateList, 'manualcalculatemethod');
+    for (var i = 0; i < CalculateList.length; i++) {
+        if (KPIDate.kpi.calculate_method.id == CalculateList[i].id) {
+            $('#manualcalculatemethod').find('option[value=' + CalculateList[i].id + ']').attr('selected', true);
+        }
     }
 }

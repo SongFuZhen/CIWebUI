@@ -34,22 +34,20 @@
                     </div>
 
                     <div class="col-md-6 NameAndInput">
+                        <h4>Default Frequency:</h4>
+                        <select class="SelectCls" name="" id="manualdefaultfrequency">
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 NameAndInput">
                         <h4>Unit of measurement:</h4>
-                        <select class="SelectCls" name="" id="uom">
-                            <option value="0">1234</option>
-                            <option value="0">12.34</option>
-                            <option value="0">12%</option>
-                            <option value="0">12.34%</option>
+                        <select class="SelectCls" name="" id="manualuom">
                         </select>
                     </div>
 
                     <div class="col-md-6 NameAndInput">
                         <h4>Calculate Method:</h4>
-                        <select class="SelectCls" name="" id="calculatemethod">
-                            <option value="0">1234</option>
-                            <option value="0">12.34</option>
-                            <option value="0">12%</option>
-                            <option value="0">12.34%</option>
+                        <select class="SelectCls" name="" id="manualcalculatemethod">
                         </select>
                     </div>
                 </div>
@@ -60,6 +58,14 @@
             <h4>Dimensions</h4>
             <hr/>
             <textarea name="" id="manualdimensions" cols="34" style="display: none;"></textarea>
+
+            <!--Animate-->
+            <div class="Addmanualdimensions">
+                <div></div>
+                <div class="AddManualDimensionsBtn">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </div>
+            </div>
         </div>
 
         <div class="panel-body">
@@ -67,66 +73,15 @@
                 <h4>Assign To Who</h4>
                 <hr/>
 
-                <div class="container">
-                    <div class="ManualAssignToWho col-md-3">
-                        <div class="AssignInfo col-md-10">
-                            <h4>Assign To <strong>TianyiShen</strong></h4>
-                            <h4>18:00 Every Day</h4>
-                            <h4>For Department : Station-1For Department : Station-1</h4>
-                        </div>
-
-                        <button class="DeleteBtn">Delete</button>
+                <!--Animate-->
+                <div class="Addmanualassign">
+                    <div></div>
+                    <div class="AddManualAssignBtn">
+                        <i class="glyphicon glyphicon-plus"></i>
                     </div>
+                </div>
 
-                    <div class="ManualAssignToWho col-md-3">
-                        <div class="AssignInfo col-md-10">
-                            <h4>Assign To <strong>TianyiShen</strong></h4>
-                            <h4>18:00 Every Day</h4>
-                            <h4>For Department : Station-1For Department : Station-1</h4>
-                        </div>
-
-                        <button class="DeleteBtn">Delete</button>
-                    </div>
-
-                    <div class="ManualAssignToWho col-md-3">
-                        <div class="AssignInfo col-md-10">
-                            <h4>Assign To <strong>TianyiShen</strong></h4>
-                            <h4>18:00 Every Day</h4>
-                            <h4>For Department : Station-1For Department : Station-1</h4>
-                        </div>
-
-                        <button class="DeleteBtn">Delete</button>
-                    </div>
-
-                    <div class="ManualAssignToWho col-md-3">
-                        <div class="AssignInfo col-md-10">
-                            <h4>Assign To <strong>TianyiShen</strong></h4>
-                            <h4>18:00 Every Day</h4>
-                            <h4>For Department : Station-1For Department : Station-1</h4>
-                        </div>
-
-                        <button class="DeleteBtn">Delete</button>
-                    </div>
-
-                    <div class="ManualAssignToWho col-md-3">
-                        <div class="AssignInfo col-md-10">
-                            <h4>Assign To <strong>TianyiShen</strong></h4>
-                            <h4>18:00 Every Day</h4>
-                            <h4>For Department : Station-1For Department : Station-1</h4>
-                        </div>
-
-                        <button class="DeleteBtn">Delete</button>
-                    </div>
-
-                    <div class="ManualAssignToWho col-md-3">
-                        <div class="AssignInfo col-md-10">
-                            <h4>Assign To <strong>TianyiShen</strong></h4>
-                            <h4>18:00 Every Day</h4>
-                            <h4>For Department : Station-1For Department : Station-1</h4>
-                        </div>
-
-                        <button class="DeleteBtn">Delete</button>
-                    </div>
+                <div class="container ShowManualAssign">
                 </div>
             </div>
         </div>
@@ -139,18 +94,42 @@
                 <div class="col-md-5">
                     <div class="input-group">
                             <span class="input-group-addon">
-                                <input type="radio"/>
+                                <input type="radio" value="0" name="manualViewType"/>
                             </span>
-                        <input type="text" class="form-control"/>
+                        <input type="text" class="form-control" readonly
+                               value="Public              |   Everyone can see it."/>
                     </div>
                 </div>
 
                 <div class="col-md-5">
                     <div class="input-group">
                             <span class="input-group-addon">
-                                <input type="radio"/>
+                                <input type="radio" value="2" name="manualViewType"/>
                             </span>
-                        <input type="text" class="form-control"/>
+                        <input type="text" class="form-control" readonly
+                               value="Partial Public   |   Only selected People can see it."/>
+                        <span class="input-group-addon ShowChoosedGroup"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" value="1" name="manualViewType"/>
+                            </span>
+                        <input type="text" class="form-control" readonly
+                               value="Private         　|   Only you can see it."/>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" value="3" name="manualViewType"/>
+                            </span>
+                        <input type="text" class="form-control" readonly
+                               value="Block Specific  |   Only selected people cannot see it."/>
+                        <span class="input-group-addon ShowChoosedGroup"></span>
                     </div>
                 </div>
 

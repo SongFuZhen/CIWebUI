@@ -6,6 +6,15 @@
     margin-right: 20px;
 }
 
+.panel-primary {
+    border-color: lightblue;
+}
+
+.panel-primary > .panel-heading {
+    background: lightblue;
+    border: none;
+}
+
 .manualcontent {
     border: 2px solid lightblue;
     margin-top: -30px;
@@ -33,7 +42,7 @@
     width: 200px;
     text-align: right;
     margin-right: 20px;
-    margin-top: 0   ;
+    margin-top: 0;
 }
 
 .NameAndInput > input, .SelectCls {
@@ -42,6 +51,7 @@
 
 .manualdimensions {
     padding: 15px;
+    margin: -40px 0 0;
 }
 
 .manualdimensions > hr, .manualassign > hr, .manualviewable > hr {
@@ -55,7 +65,7 @@
     min-width: 300px;
     border-radius: 3px;
     border: 1px solid lightblue;
-    height: 100px;
+    height: 80px;
     display: flex;
     padding-right: 0;
     margin: 20px 30px 0 0;
@@ -65,7 +75,7 @@
     margin: 0;
 }
 
-.AssignInfo > h4 {
+.AssignInfo > h5 {
     margin-right: 20px;
     white-space: nowrap;
     overflow: hidden;
@@ -73,7 +83,7 @@
 }
 
 .DeleteBtn {
-    background: #CD3333;
+    background: darkred;
     border: medium none;
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px;
@@ -82,5 +92,68 @@
 }
 
 .DeleteBtn:hover {
-    background: darkred;
+    background: #CD3333;
+}
+
+.manualviewable > div {
+    margin: 10px 30px 0 0;
+}
+
+.Addmanualdimensions, .Addmanualassign {
+    width: 40px;
+    height: 120px;
+    margin: -115px 0 -30px 80px;
+
+}
+
+.Addmanualassign {
+    margin: -5px 0 -120px 80px;
+}
+
+.Addmanualdimensions > div:first-child, .Addmanualassign > div:first-child {
+    height: 60px;
+    backgound: #000;
+    border-left: 2px solid lightblue;
+    margin: 0 0 0 18px;
+}
+
+.Addmanualdimensions > div:first-child + div, .Addmanualassign > div:first-child + div {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: lightblue;
+
+    /*Add Animate*/
+    animation: AddManualDimensionsAnimate 1s;
+    animation-iteration-count: infinite;
+    /*animation-direction: alternate;*/
+    animation-timing-function: linear;
+}
+
+@keyframes AddManualDimensionsAnimate {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(20deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-20deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.Addmanualdimensions > div:first-child + div:hover, .Addmanualassign > div:first-child + div:hover {
+    animation-play-state: paused;
+    cursor: pointer;
+}
+
+.Addmanualdimensions > div:first-child + div > i, .Addmanualassign > div:first-child + div > i {
+    margin: 12px 0 0 12px;
+    color: lightseagreen
 }
