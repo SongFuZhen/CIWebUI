@@ -34,13 +34,21 @@ function ManageKPI() {
                 forceLowercase: false
             });
 
-            $('.tag-editor').css({
+            $('#manualdimensions + ul').css({
                 height: '100px',
                 marginLeft: '200px',
                 marginRight: '200px',
                 marginTop: '30px',
                 marginBottom: '-25px'
             });
+
+            /*   $('.tag-editor').css({
+             height: '100px',
+             marginLeft: '200px',
+             marginRight: '200px',
+             marginTop: '30px',
+             marginBottom: '-25px'
+             });*/
 
             /*Resize the window Operate*/
             $(window).resize(function () {
