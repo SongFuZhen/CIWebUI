@@ -7,7 +7,7 @@
 <body>
 <div class="manual">
     <div class="panel panel-primary manualpanel">
-        <div class="panel-heading"></div>
+        <div class="panel-heading"><h4>KPIName</h4></div>
         <div class="panel-body">
             <div class="manualbasicinfo">
                 <h4>Basic Information</h4>
@@ -108,7 +108,7 @@
                             </span>
                         <input type="text" class="form-control" readonly
                                value="Partial Public   |   Only selected People can see it."/>
-                        <span class="input-group-addon ShowChoosedGroup"></span>
+                        <span class="input-group-addon SMCGroup"></span>
                     </div>
                 </div>
 
@@ -129,13 +129,106 @@
                             </span>
                         <input type="text" class="form-control" readonly
                                value="Block Specific  |   Only selected people cannot see it."/>
-                        <span class="input-group-addon ShowChoosedGroup"></span>
+                        <span class="input-group-addon SMNCGroup"></span>
                     </div>
                 </div>
 
             </div>
         </div>
 
+        <button class="BtnSubmit">Preview</button>
+    </div>
+</div>
+
+<div class="modal fade" id="AddManualAssign" tabindex="-1" role="dialog" aria-labelledby="AddManualAssignLabel"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="AddManualAssignLabel">New Assign</h4>
+            </div>
+            <div class="modal-body" style="height: 345px;">
+                <div class="alert alert-warning alert-dismissible WarningAlert" role="alert"
+                     style="margin: 20px 0 40px 0;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <strong>Tips!</strong> Here you can only assign to one.
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Assign To Who?</h4>
+                    </div>
+                    <div class="col-md-7" style="display: flex">
+                        <input type="text" class="form-control ManualAssignUser" autocomplete="off" readonly
+                               placeholder="Only One User's Email">
+                    </div>
+                    <div class="col-md-1">
+                        <i class="glyphicon glyphicon-user ManualUsersIcon"></i>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Which Department?</h4>
+                    </div>
+                    <div class="col-md-7">
+                        <select id="ManualAssignDepartment" class="SelectCls">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>What Frequency?</h4>
+                    </div>
+                    <div class="col-md-7">
+                        <select id="ManualFrequency" class="SelectCls">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>What's Time?</h4>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="ManualInputTime form-control" autocomplete="off" placeholder="* time">
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="CheckBox" style="margin: 5px 0 0 -10px;">
+                            <input type="checkbox" class="ManualNotificationCls" value="true" id="ManualNotification"
+                                   style="margin: 4px;"
+                                   name="check" checked="checked"/>
+                            <label for="ManualNotification" style="margin: 0"></label>
+
+                            <p title="Auto Notification" style="margin: 0" data-toggle="tooltip"
+                               data-placement="top">
+                                Notification?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="BtnSubmit" data-dismiss="modal">Close</button>
+                <button type="button" class="ManualAssginBtn BtnSubmit">Assign</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ManualAssignUserList">
+    <div class="ManualCloseAssignUserList">
+        <h4>AssignUserList</h4>
+        <i class="glyphicon glyphicon-remove"></i>
+    </div>
+
+    <div class="ManualList">
+        <ul>
+        </ul>
     </div>
 </div>
 </body>

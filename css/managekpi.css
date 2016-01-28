@@ -6,6 +6,12 @@
     margin-right: 20px;
 }
 
+.manualpanel > button {
+    position: fixed;
+    right: 5px;
+    top: 390px;
+}
+
 .panel-primary {
     border-color: lightblue;
 }

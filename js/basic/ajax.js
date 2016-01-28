@@ -808,3 +808,40 @@ function AjaxGetHtml(url, type) {
     });
     return HtmlDate;
 }
+
+var AssignDate = "";
+function AjaxCreateAssign(url, type, kpi_id, assigndate, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {kpi_id: kpi_id, assigns: assigndate},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            creategroups = data;
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
+                AssignDate = data;
+                $('.RightContent ul').empty();
+                UserGroups();
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+                $('#CreateGroup').modal('hide');
+                $('#UpdateGroup').modal('hide');
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    return AssignDate;
+}

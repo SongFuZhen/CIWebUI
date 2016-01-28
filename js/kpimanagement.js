@@ -58,7 +58,9 @@ function ManageKPI() {
 
             /*Write Date*/
 
-            $('.panel-heading').html("<h4>" + KPIDate.kpi.kpi_name + "</h4>");
+            //$('.panel-heading').html("<h4>" + KPIDate.kpi.kpi_name + "</h4>");
+
+            $('.panel-heading').children('h4').html(KPIDate.kpi.kpi_name);
 
             $('.panel-heading').attr('id', KPIDate.kpi.kpi_id);
 
@@ -77,33 +79,129 @@ function ManageKPI() {
                         '<h5>Assign To <strong>TianyiShen</strong></h5>' +
                         '<h5> 18:00 Every Day</h5>' +
                         '<h5>Department:Station-1</h5></div>' +
-                        '<button class="DeleteBtn"></button> ' +
+                        '<button class="DeleteBtn">Delete</button> ' +
                         '</div>').appendTo('.ShowManualAssign').ready(function () {
                     });
                 }
             } else {
-                $('<div style="height: 70px;"><h3>Assign To No People.</h3></div>').appendTo('.ShowManualAssign').ready(function () {
+                $('<div style="height: 70px;color:#ccc;text-align: center;"><h1 style="padding-top: 20px;">Click Left Button to Assign.</h1></div>').appendTo('.ShowManualAssign').ready(function () {
                 });
             }
 
             var ManualKPIViewable = KPIDate.kpi.viewable;
             var ManualKPIViewableCode = ManualKPIViewable.viewable_code;
-
             var ManualKPIViewType = document.getElementsByName('manualViewType');
-
             if (ManualKPIViewableCode == 0) {
                 ManualKPIViewType[0].setAttribute('checked', true);
-            } else if (ManualKPIViewableCode == 1) {
-                ManualKPIViewType[1].setAttribute('checked', true);
             } else if (ManualKPIViewableCode == 2) {
+                ManualKPIViewType[1].setAttribute('checked', true);
+                var ManualKPIPartialViewableGroup = ManualKPIViewable.user_group;
+                $('.SMCGroup').attr('id', ManualKPIPartialViewableGroup.id);
+                $('.SMCGroup').attr('value', ManualKPIPartialViewableGroup.name);
+                $('.SMCGroup').attr('title', ManualKPIPartialViewableGroup.members);
+                $('.SMCGroup').html(ManualKPIPartialViewableGroup.name);
+                $('.SMCGroup').attr('data-toggle', 'tooltip');
+                $('.SMCGroup').attr('data-placement', 'top');
+                $('.SMCGroup').attr('data-original-title', ManualKPIPartialViewableGroup.members);
+                $('[data-toggle="tooltip"]').tooltip();
+            } else if (ManualKPIViewableCode == 1) {
                 ManualKPIViewType[2].setAttribute('checked', true);
-                var ManualKPIViewableGroup = ManualKPIViewable.user_groups;
             } else if (ManualKPIViewableCode == 3) {
-                ManualKPIViewType[2].setAttribute('checked', true);
-                var ManualKPIViewableGroup = ManualKPIViewable.user_groups;
+                ManualKPIViewType[3].setAttribute('checked', true);
+
+                var ManualKPIBlockViewableGroup = ManualKPIViewable.user_group;
+                $('.SMNCGroup').attr('id', ManualKPIBlockViewableGroup.id);
+                $('.SMNCGroup').attr('value', ManualKPIBlockViewableGroup.name);
+                $('.SMNCGroup').attr('title', ManualKPIBlockViewableGroup.members);
+                $('.SMNCGroup').html(ManualKPIBlockViewableGroup.name);
+                $('.SMNCGroup').attr('data-toggle', 'tooltip');
+                $('.SMNCGroup').attr('data-placement', 'top');
+                $('.SMNCGroup').attr('data-original-title', ManualKPIBlockViewableGroup.members);
+                $('[data-toggle="tooltip"]').tooltip();
             } else {
                 ManualKPIViewType[0].setAttribute('checked', true);
+                console.log("Something Error.")
             }
+
+            GetAllDepartmentList('ManualAssignDepartment');
+            GetListWithFor(FrequencyList, 'ManualFrequency');
+            /*Click AddManualAssignBtn*/
+            $('.AddManualAssignBtn').click(function () {
+                var ManualAssignModal = document.getElementById('AddManualAssign');
+                ManualAssignModal.style.top = (ClientHeight - 600) / 2 + 'px';
+
+                $('#AddManualAssign').modal('show');
+
+                $('.ManualUsersIcon').click(function () {
+                    $('.ManualAssignUserList').fadeIn(400);
+                    $('.ManualAssignUserList').animate({right: ((ClientWidth - 600) / 2 - 180) + 'px'});
+
+                    /*删除列表中的所有li*/
+                    $('.ManualList ul li').remove();
+
+                    GetAllAssignUserList('ManualList', 'ManualUserList');
+
+                    var ManualAssignToWho = document.getElementsByClassName('ManualAssignUser')[0];
+                    /*获取到单选按钮点击事件*/
+                    $("[name=ManualUserList]").click(function () {
+                        ManualAssignToWho.value = $(this).val();
+                        ManualAssignToWho.setAttribute('title', $(this).attr("title"));
+                        ManualAssignToWho.setAttribute('value', $(this).val());
+                        ManualAssignToWho.setAttribute('data-toggle', 'tooltip');
+                        ManualAssignToWho.setAttribute('data-placement', 'bottom');
+                        ManualAssignToWho.setAttribute('data-original-title', $(this).attr('title'));
+                        $('[data-toggle="tooltip"]').tooltip();
+                    });
+
+
+                    $('.ManualCloseAssignUserList').click(function () {
+                        $('.ManualAssignUserList').fadeOut(400);
+                    })
+                });
+
+                $('#AddManualAssign').on('hidden.bs.modal', function () {
+                    $('.ManualAssignUserList').fadeOut(400);
+                });
+
+                /*Assign Btn*/
+                $('.ManualAssginBtn').click(function () {
+                    /*Get Date*/
+                    var MuanualAssignKpi_ID = document.getElementsByClassName('panel-heading')[0].getAttribute('id');
+
+                    var MaunalAssignUser = $('.ManualAssignUser').attr('data-original-title');
+
+                    var ManualAssignDepartmentDate = $('#ManualAssignDepartment').val();
+
+                    var ManualAssignFrequencyDate = $('#ManualFrequency').val();
+
+                    var ManualAssignTime = $('.ManualInputTime').val();
+
+                    //var ManualAutoNotificationFlag = document.getElementsByClassName('row')[3].getElementsByClassName('col-md-3')[0].getElementsByTagName('input')[0];
+                    var ManualAutoNotificationFlag = document.getElementsByClassName('ManualNotificationCls')[0];
+                    var ManualAutoNotification = false;
+                    if (ManualAutoNotificationFlag.checked) {
+                        ManualAutoNotification = true;
+                    }
+
+                    var AssignsDateJSON = [{
+                        "user": MaunalAssignUser,
+                        "department_id": ManualAssignDepartmentDate,
+                        "time": ManualAssignTime,
+                        "frequency": ManualAssignFrequencyDate,
+                        "auto_notification": ManualAutoNotification
+                    }];
+
+                    var url = 'kpis/assigns';
+                    var Token = $.cookie('token');
+                    var ManualAssignDate = AjaxCreateAssign(url, 'POST', MuanualAssignKpi_ID, AssignsDateJSON, Token);
+
+                    /*Here will write on page.*/
+
+                });
+            });
+
+
+            /*Click Preview Button*/
         }
     )
 }
@@ -340,6 +438,7 @@ function LeftNavFun() {
         $('.RightContent').append('<ul></ul>');
         $(this).addClass('IsClick');
         LoadAllKpis();
+        ManageKPI();
     };
 
     LeftNavLi[1].onclick = function () {
@@ -347,6 +446,7 @@ function LeftNavFun() {
         $('.RightContent').append('<ul></ul>');
         $(this).addClass('IsClick');
         LoadCreatedKpis();
+        ManageKPI();
     };
 
     LeftNavLi[2].onclick = function () {
@@ -354,6 +454,7 @@ function LeftNavFun() {
         $('.RightContent').append('<ul></ul>');
         $(this).addClass('IsClick');
         LoadFollowedKpis();
+        ManageKPI();
     };
 
     LeftNavLi[3].onclick = function () {
@@ -482,12 +583,9 @@ function LeftNavFun() {
         var Basic_Info = document.getElementsByClassName('basic-info')[0];
         var Row = Basic_Info.getElementsByClassName('row');
         var Kpi_Name = Row[0].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0];
-        var Default_Frequency = $('#DefaultFrequency').val();
         var Kpi_Description = Row[1].getElementsByClassName('col-md-6')[0].getElementsByTagName('textarea')[0];
-        var uom = $('#uom').val();
         var TargetMin = Row[3].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0];
         var TargetMax = Row[4].getElementsByClassName('col-md-6')[0].getElementsByTagName('input')[0];
-        var CalculateMethod = $('#calculatemethod').val();
 
         /*此处为点击user 图标*/
         var AssignToWhoIcon = document.getElementsByClassName('AssignToWho')[0].getElementsByClassName('col-md-1')[0].getElementsByTagName('i')[0];
@@ -499,7 +597,7 @@ function LeftNavFun() {
             /*删除列表中的所有li*/
             $('.List ul li').remove();
 
-            GetAllAssignUserList();
+            GetAllAssignUserList('List', 'AllUsersList');
             /*获取到单选按钮点击事件*/
             $("[name=AllUsersList]").click(function () {
                 AssignToWho.value = $(this).val();
@@ -543,6 +641,115 @@ function LeftNavFun() {
                     $('.AddDimensions').fadeOut(400);
                     PreStepBtn.removeAttribute('disabled');
                     PreStepBtn.style.border = '2px solid green';
+
+
+                    FinishBtn.onclick = function () {
+                        var Default_Frequency = $('#DefaultFrequency').val();
+                        var uom = $('#uom').val();
+                        var CalculateMethod = $('#calculatemethod').val();
+
+                        var url = 'kpis';
+                        var Token = $.cookie('token');
+
+                        var GetDimensions = document.getElementsByClassName('GetDimensions')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
+                        var Attributes = new Array();
+
+                        if (GetDimensions.length > 1) {
+                            for (var i = 1; i < GetDimensions.length; i++) {
+                                var AttributeName = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].innerHTML;
+                                var AttributeType = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].getAttribute('data-original-title');
+                                var AttributesDate = {
+                                    attribute_name: AttributeName,
+                                    attribute_type: AttributeType
+                                };
+                                Attributes = Attributes.concat(AttributesDate);
+                            }
+                        } else {
+                            Attributes = [];
+                        }
+
+                        //console.log(Attributes);
+                        var AssignDepartment = $('#AssignDepartment').val();
+                        var Frequency = $('#Frequency').val();
+                        var InputTime = document.getElementsByClassName('InputTime')[0].value;
+                        var AutoNotificationFlag = document.getElementsByClassName('assign-to')[0].getElementsByClassName('row')[3].getElementsByClassName('col-md-3')[0].getElementsByTagName('input')[0];
+                        var AutoNotification = false;
+                        if (AutoNotificationFlag.checked) {
+                            AutoNotification = true;
+                        }
+                        Default_Frequency = parseInt(Default_Frequency);
+                        CalculateMethod = parseInt(CalculateMethod);
+
+                        /*get viewable Date*/
+                        var viewable_code = 0;
+                        var ViewType = document.getElementsByName('ViewType');
+                        for (var i = 0; i < ViewType.length; i++) {
+                            if (ViewType[i].checked) {
+                                viewable_code = ViewType[i].value;
+                            }
+                        }
+                        var ShowChoosedGroupDate = $('.ShowChoosedGroup').attr('id');
+                        var ShowNotChoosedGroupDate = $('.ShowNotChoosedGroup').attr('id');
+                        var ViewableDate = "";
+                        if (viewable_code == 0) {
+                            ViewableDate = {
+                                viewable_code: viewable_code
+                            };
+                        } else if (viewable_code == 1) {
+                            ViewableDate = {
+                                viewable_code: viewable_code
+                            };
+                        } else if (viewable_code == 2) {
+                            ViewableDate = {
+                                viewable_code: viewable_code,
+                                user_group_id: ShowChoosedGroupDate
+                            };
+                        } else if (viewable_code == 3) {
+                            ViewableDate = {
+                                viewable_code: viewable_code,
+                                user_group_id: ShowNotChoosedGroupDate
+                            };
+                        } else {
+                            ViewableDate = {
+                                viewable_code: viewable_code
+                            }
+                        }
+
+                        var kpis = {
+                            "kpi_name": Kpi_Name.value,
+                            "description": Kpi_Description.value,
+                            "target_min": TargetMin.value,
+                            "target_max": TargetMax.value,
+                            "uom": uom,
+                            "frequency": Default_Frequency,
+                            "calculate_method": CalculateMethod,
+                            "viewable": ViewableDate,
+                            "attributes": Attributes
+                        };
+
+                        /*Assign to someone*/
+                        var assignments = new Array();
+                        if (!AssignToWho.getAttribute('data-original-title') == "") {
+                            var usersdate = AssignToWho.getAttribute('data-original-title');
+                            Frequency = parseInt(Frequency);
+                            var AssignmentsDate = {
+                                "user": usersdate,
+                                "department_id": AssignDepartment,
+                                "time": InputTime,
+                                "frequency": Frequency,
+                                "auto_notification": AutoNotification
+                            };
+                            assignments.push(AssignmentsDate);
+                        } else {
+                            assignments = [];
+                        }
+
+                        //console.log(assignments);
+                        //console.log(Object.prototype.toString.call(assignments));
+
+                        AjaxCreateKpis(url, 'POST', kpis, assignments, Token);
+                    };
+
                 }
             } else if (Viewable.getAttribute('isopen') == 'yes') {
                 BasicInfo.style.display = 'none';
@@ -620,109 +827,6 @@ function LeftNavFun() {
             $('.AssignUserList').fadeOut(400);
         };
 
-        FinishBtn.onclick = function () {
-            var url = 'kpis';
-            var Token = $.cookie('token');
-
-            var GetDimensions = document.getElementsByClassName('GetDimensions')[0].getElementsByTagName('ul')[0].getElementsByTagName('li');
-            var Attributes = new Array();
-
-            if (GetDimensions.length > 1) {
-                for (var i = 1; i < GetDimensions.length; i++) {
-                    var AttributeName = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].innerHTML;
-                    var AttributeType = GetDimensions[i].getElementsByClassName('tag-editor-tag')[0].getAttribute('data-original-title');
-                    var AttributesDate = {
-                        attribute_name: AttributeName,
-                        attribute_type: AttributeType
-                    };
-                    Attributes = Attributes.concat(AttributesDate);
-                }
-            } else {
-                Attributes = [];
-            }
-
-            console.log(Attributes);
-            var AssignDepartment = $('#AssignDepartment').val();
-            var Frequency = $('#Frequency').val();
-            var InputTime = document.getElementsByClassName('InputTime')[0].value;
-            var AutoNotificationFlag = document.getElementsByClassName('assign-to')[0].getElementsByClassName('row')[3].getElementsByClassName('col-md-3')[0].getElementsByTagName('input')[0];
-            var AutoNotification = false;
-            if (AutoNotificationFlag.checked) {
-                AutoNotification = true;
-            }
-            Default_Frequency = parseInt(Default_Frequency);
-            CalculateMethod = parseInt(CalculateMethod);
-
-            /*get viewable Date*/
-            var viewable_code = 0;
-            var ViewType = document.getElementsByName('ViewType');
-            for (var i = 0; i < ViewType.length; i++) {
-                if (ViewType[i].checked) {
-                    viewable_code = ViewType[i].value;
-                }
-            }
-            var ShowChoosedGroupDate = $('.ShowChoosedGroup').attr('id');
-            var ShowNotChoosedGroupDate = $('.ShowNotChoosedGroup').attr('id');
-            var ViewableDate = "";
-            if (viewable_code == 0) {
-                ViewableDate = {
-                    viewable_code: viewable_code
-                };
-            } else if (viewable_code == 1) {
-                ViewableDate = {
-                    viewable_code: viewable_code
-                };
-            } else if (viewable_code == 2) {
-                ViewableDate = {
-                    viewable_code: viewable_code,
-                    user_group_id: ShowChoosedGroupDate
-                };
-            } else if (viewable_code == 3) {
-                ViewableDate = {
-                    viewable_code: viewable_code,
-                    user_group_id: ShowNotChoosedGroupDate
-                };
-            } else {
-                ViewableDate = {
-                    viewable_code: viewable_code
-                }
-            }
-
-            var kpis = {
-                "kpi_name": Kpi_Name.value,
-                "description": Kpi_Description.value,
-                "target_min": TargetMin.value,
-                "target_max": TargetMax.value,
-                "uom": uom,
-                "frequency": Default_Frequency,
-                "calculate_method": CalculateMethod,
-                "viewable": ViewableDate,
-                "attributes": Attributes
-            };
-
-            /*Assign to someone*/
-            var assignments = new Array();
-            if (!AssignToWho.getAttribute('data-original-title') == "") {
-                var usersdate = AssignToWho.getAttribute('data-original-title');
-                Frequency = parseInt(Frequency);
-                var AssignmentsDate = {
-                    "user": usersdate,
-                    "department_id": AssignDepartment,
-                    "time": InputTime,
-                    "frequency": Frequency,
-                    "auto_notification": AutoNotification
-                };
-                assignments.push(AssignmentsDate);
-            } else {
-                assignments = [];
-            }
-
-            console.log(assignments);
-            console.log(Object.prototype.toString.call(assignments));
-
-            AjaxCreateKpis(url, 'POST', kpis, assignments, Token);
-        };
-
         $('.close').click(function () {
             $('#CreateKpi').modal('hide');
             $('#CreateKpi').on('hidden.bs.modal', function () {
@@ -759,7 +863,7 @@ function GetListFunc() {
     GetListWithFor(FrequencyList, 'DefaultFrequency');
     GetListWithFor(FrequencyList, 'Frequency');
 
-    GetAllDepartmentList();
+    GetAllDepartmentList('AssignDepartment');
 }
 
 function GetListWithFor(data, id) {
@@ -770,7 +874,7 @@ function GetListWithFor(data, id) {
 }
 
 /*Get All Department*/
-function GetAllDepartmentList() {
+function GetAllDepartmentList(ID) {
     /*获取所有的值*/
     var getalldeprtmenturl = 'users/departments';
     var Token = $.cookie('token');
@@ -811,21 +915,21 @@ function GetAllDepartmentList() {
         var NoRepeatDepartmentJSON = eval("(" + NoRepeatDepartment[i] + ")");
         var NoRepeatDepartmentID = NoRepeatDepartmentJSON.ID;
         var NoRepeatDepartmentName = NoRepeatDepartmentJSON.Name;
-        $('<option value="' + NoRepeatDepartmentID + '">' + NoRepeatDepartmentName + '</option>').appendTo('#AssignDepartment').ready(function () {
+        $('<option value="' + NoRepeatDepartmentID + '">' + NoRepeatDepartmentName + '</option>').appendTo('#' + ID).ready(function () {
         });
     }
 }
 
 /*Get All Users List*/
-function GetAllAssignUserList() {
+function GetAllAssignUserList(ListCls, ListName) {
     /*获取所有的用户列表*/
     var url = 'users/brief_infos';
     var Token = $.cookie('token');
     var AllDepartmentJSON = AjaxGetList(url, 'GET', Token);
     for (var i = 0; i < AllDepartmentJSON.length; i++) {
-        $('<li><div class="CheckBox" userlist style="margin-left: -20px"><input type="radio" name="AllUsersList" title="' + AllDepartmentJSON[i].email + '" value="' + AllDepartmentJSON[i].nick_name + '" id="' + AllDepartmentJSON[i].id + '"/>' +
+        $('<li><div class="CheckBox" userlist style="margin-left: -20px"><input type="radio" name="' + ListName + '" title="' + AllDepartmentJSON[i].email + '" value="' + AllDepartmentJSON[i].nick_name + '" id="' + AllDepartmentJSON[i].id + '"/>' +
             '<label for="' + AllDepartmentJSON[i].id + '"></label>' +
-            '<p data-toggle="tooltip" data-placement="bottom" title="' + AllDepartmentJSON[i].email + '">' + AllDepartmentJSON[i].nick_name + '</p></div></li>').appendTo('.List>ul').ready(function () {
+            '<p data-toggle="tooltip" data-placement="bottom" title="' + AllDepartmentJSON[i].email + '">' + AllDepartmentJSON[i].nick_name + '</p></div></li>').appendTo('.' + ListCls + '>ul').ready(function () {
         });
     }
     $('[data-toggle="tooltip"]').tooltip();
@@ -865,7 +969,6 @@ function ClickGroup(selector) {
 
 function RemoveAttr() {
     /*删除部分可见元素属性*/
-    $('.ShowChoosedGroup').html('');
     $('.ShowChoosedGroup').html('');
     $('.ShowChoosedGroup').removeAttr('value');
     $('.ShowChoosedGroup').removeAttr('id');
@@ -1048,7 +1151,7 @@ function ChangeGroup(ID, NameClass, type) {
         GroupName.style.border = '2px solid darkred';
     } else {
         GroupName.style.border = '1px solid #ccc';
-        $('li', ChoosedGroupEditor).each(function (index) {
+        $('li', ChoosedGroupEditor).each(function () {
             var li = $(this);
             var Length = (li.find('.tag-editor-tag')).length;
             if (Length > 0) {
@@ -1117,6 +1220,7 @@ function ManualBasicInformationWirte(KPIDate) {
     ManualKPITargetMax.value = KPIDate.kpi.target_max;
 
     GetListWithFor(FrequencyList, 'manualdefaultfrequency');
+
     for (var i = 0; i < FrequencyList.length; i++) {
         if (KPIDate.kpi.frequency.id == FrequencyList[i].id) {
             $('#manualdefaultfrequency').find('option[value=' + FrequencyList[i].id + ']').attr('selected', true);
