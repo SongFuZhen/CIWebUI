@@ -468,3 +468,36 @@
     font-size: 12px;
     font-weight: bold;
 }
+
+.AddDimensionsDiv {
+    display: none;
+}
+
+.AddDimensionsDiv > div:first-child {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 30px solid lightblue;
+    margin: 0 0 20px 50px;
+}
+
+.AddDimensionsDiv > div:first-child + div {
+    margin: -22px 0 -40px 0;
+    text-align: center;
+    border: 2px solid lightblue;
+    border-radius: 3px;
+    min-width: 300px;
+}
+
+.AddDimensionsTagName {
+    margin: 20px 0 0 0;
+}
+
+.AddDimensionsTagType {
+    margin: 20px 0 0 0;
+}
+
+.AddDimensionsTagBtn {
+    margin-bottom: 20px;
+}
