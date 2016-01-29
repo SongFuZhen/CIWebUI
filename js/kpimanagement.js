@@ -71,17 +71,32 @@ function ManageKPI() {
                 //$('#manualdimensions').tagEditor3parments('addTag', value, title, id);
             }
 
-
             var ManualKPIAssign = KPIDate.assignments;
             if (KPIDate.assignments.length > 0) {
                 for (var i = 0; i < ManualKPIAssign.length; i++) {
-                    $('<div class="ManualAssignToWho col-md-3"> <div class="AssignInfo col-md-10">' +
-                        '<h5>Assign To <strong>TianyiShen</strong></h5>' +
-                        '<h5> 18:00 Every Day</h5>' +
-                        '<h5>Department:Station-1</h5></div>' +
-                        '<button class="DeleteBtn">Delete</button> ' +
-                        '</div>').appendTo('.ShowManualAssign').ready(function () {
-                    });
+                    var AssignmentID = ManualKPIAssign[i].assignment_id;
+                    var AutoNotification = ManualKPIAssign[i].auto_notification;
+
+                    var FrequencyDate = ManualKPIAssign[i].frequency;
+                    console.log(FrequencyDate);
+                    var FrequencyID = FrequencyDate.id;
+                    var FrequencyName = FrequencyDate.name;
+
+                    var Time = ManualKPIAssign[i].time;
+
+                    var User = ManualKPIAssign[i].user;
+                    var Department = User.departments;
+                    var Email = User.email;
+                    var ID = User.id;
+                    var Name = User.nick_name;
+
+                    if (AutoNotification) {
+                        var BellBackground = 'lightseagreen';
+                        ShowAssignToWhoDiv(AssignmentID, ID, Email, Name, Time, FrequencyID, FrequencyName, Department, 'true', BellBackground);
+                    } else {
+                        var BellBackground = 'darkred';
+                        ShowAssignToWhoDiv(AssignmentID, ID, Email, Name, Time, FrequencyID, FrequencyName, Department, 'false', BellBackground);
+                    }
                 }
             } else {
                 $('<div style="height: 70px;color:#ccc;text-align: center;"><h1 style="padding-top: 20px;">Click Left Button to Assign.</h1></div>').appendTo('.ShowManualAssign').ready(function () {
@@ -195,8 +210,51 @@ function ManageKPI() {
                     var Token = $.cookie('token');
                     var ManualAssignDate = AjaxCreateAssign(url, 'POST', MuanualAssignKpi_ID, AssignsDateJSON, Token);
 
-                    /*Here will write on page.*/
+                    console.log(ManualAssignDate);
 
+                    /*Here will write on page.*/
+                    var CustomizedField = ManualAssignDate.customized_field;
+                    var User = CustomizedField.user;
+                    var UserID = User.id;
+                    var UserEmail = User.email;
+                    var UserName = User.nick_name;
+                    var UserDepartment = User.department;
+
+                    var KPI = CustomizedField.kpi;
+                    var KPIID = KPI.kpi_id;
+                    var KPIName = KPI.kpi_name;
+                    var KPIDescription = KPI.description;
+                    /*Name*/
+                    var KPICreator = KPI.creator;
+                    var KPITagetMax = KPI.target_max;
+                    var KPITagetMin = KPI.target_min;
+                    var KPIuom = KPI.uom;
+                    var KPIuomID = KPIuom.id;
+                    var KPIuomName = KPIuom.name;
+                    var KPICalculateMethod = KPIuom.calculate_method;
+                    var KPICalculateMethodID = KPICalculateMethod.id;
+                    var KPICalculateMethodName = KPICalculateMethod.name;
+                    var KPIFrequency = KPI.frequency;
+                    var KPIFrequencyID = KPIFrequency.id;
+                    var KPIFrequencyName = KPIFrequency.name;
+                    var KPIViewable = KPI.viewable;
+                    var KPIViewableCode = KPIViewable.viewable_code;
+                    var KPIViewableGroup = KPIViewable.user_group;
+
+                    var KPIAttributes = KPI.attributes;
+
+                    var Department = CustomizedField.department;
+                    var DepartmentID = Department.id;
+                    var DepartmentName = Department.name;
+                    var DepartmentDescription = Department.description;
+                    var DepartmentCreator = Department.creator_id;
+                    var DepartmentHasChildren = Department.has_children;
+                    var DepartmentMembers = Department.members;
+
+                    var Follow_Flag = CustomizedField.follow_flag;
+                    var Follow_Flag_Value = CustomizedField.follow_flag_value;
+                    var IsCreated = CustomizedField.is_created;
+                    var IsManagable = CustomizedField.is_managable;
                 });
             });
 
@@ -1264,4 +1322,15 @@ function ManualBasicInformationWirte(KPIDate) {
             $('#manualcalculatemethod').find('option[value=' + CalculateList[i].id + ']').attr('selected', true);
         }
     }
+}
+
+function ShowAssignToWhoDiv(AssignmentID, UserID, UserEmail, UserName, Time, FrequencyID, FrequencyName, Department, AutoNotificationMsg, BellBackground) {
+    $('<div class="ManualAssignToWho col-md-3" id="' + AssignmentID + '"> ' +
+        '<div class="AssignInfo col-md-10">' +
+        '<h5>Assign To <strong id="' + UserID + '" data-toggle="tooltip" data-placement="top" title="' + UserEmail + '">' + UserName + '</strong></h5>' +
+        '<h5>' + Time + "&emsp;&emsp;" + FrequencyName + ' <span class="glyphicon glyphicon-bell" data-toggle="tooltip" data-placement="top" title="Auto Notification: ' + AutoNotificationMsg + '" style="margin-left: 20px;transform: rotate(30deg);color: ' + BellBackground + ';"></span></h5>' +
+        '<h5>Department:' + Department + '</h5></div>' +
+        '<button class="DeleteBtn" id="' + AssignmentID + '">Delete</button> ' +
+        '</div>').appendTo('.ShowManualAssign').ready(function () {
+    });
 }
