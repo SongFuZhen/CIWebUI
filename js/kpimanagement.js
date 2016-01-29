@@ -34,7 +34,7 @@ function ManageKPI() {
                 marginLeft: '20px'
             });
 
-            $('#manualdimensions').tagEditor3parments({
+            $('#manualdimensions').tagEditor({
                 forceLowercase: false
             });
 
@@ -200,10 +200,34 @@ function ManageKPI() {
                 });
             });
 
+            /*Click Add DimensionsBtn*/
+            $('.AddManualDimensionsBtn').click(function () {
+                var Display = $('.AddDimensionsDiv').css('display');
+                if (Display == 'none') {
+                    $('.AddDimensionsDiv').slideDown(400);
+                    $('.AddManualDimensionsBtn').children('i').removeClass('glyphicon-plus');
+                    $('.AddManualDimensionsBtn').children('i').attr('class', 'glyphicon glyphicon-minus');
+                    $('.AddDimensionsTagBtn').click(function () {
+                        /*here get value*/
+                        var TagName = $('.AddDimensionsTagName').val().trim();
+                        var TagType = $('.AddDimensionsTagType').val();
+
+                        if (!TagName == "") {
+                            $('#manualdimensions').tagEditor('addTag', TagName, TagType);
+                        }
+                    });
+                } else {
+                    $('.AddDimensionsDiv').slideUp(400);
+                    $('.AddManualDimensionsBtn').children('i').removeClass('glyphicon-minus');
+                    $('.AddManualDimensionsBtn').children('i').attr('class', 'glyphicon glyphicon-plus');
+                    setTimeout(function () {
+                    }, 400);
+                }
+            });
 
             /*Click Preview Button*/
         }
-    )
+    );
 }
 
 function LoadAllKpis() {
