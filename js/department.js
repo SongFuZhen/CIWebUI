@@ -74,6 +74,8 @@ window.onload = function () {
                 RemoveLeadersIcon.style.display = 'block';
                 RemoveLeadersIcon.onclick = function () {
                     ShowConfirmDialog((ClientHeight - 260) / 2, (ClientWidth - 400) / 2, (ClientHeight - 260) / 2, (ClientWidth - 400) / 2, 'block', 'Delete', 'Are you Sure?<br/><br/>Delete the Leader from Department', 'Cancel', 'Delete', '#f2f2f2');
+                    $('.ShowConfirmDialog').fadeIn(800);
+
                     var CancelBtn = document.getElementsByClassName('Cancel')[0];
                     var DeleteBtn = document.getElementsByClassName('Confirm')[0];
                     CancelBtn.onclick = function () {
@@ -124,6 +126,8 @@ window.onload = function () {
                 /*Cancle Add Department*/
                 AddDepartmentOperate[0].onclick = function () {
                     DepartmentDialog(document.getElementsByClassName('AddTwo')[0]);
+                    $('.AddDepartmentDialog').slideDown(500);
+
                     var AddDepartmentDialog = document.getElementsByClassName('AddDepartmentDialog')[0];
                     var CancelBtn = AddDepartmentDialog.getElementsByTagName('button')[0];
                     CancelBtn.onclick = function () {
@@ -170,6 +174,8 @@ window.onload = function () {
                             RemoveUsersIcon.style.display = 'block';
                             RemoveUsersIcon.onclick = function () {
                                 ShowConfirmDialog((ClientHeight - 260) / 2, (ClientWidth - 400) / 2, (ClientHeight - 260) / 2, (ClientWidth - 400) / 2, 'block', 'Delete', 'Are you Sure?<br/><br/>Delete the Users from Department', 'Cancel', 'Delete', '#f2f2f2');
+                                $('.ShowConfirmDialog').fadeIn(800);
+
                                 var CancelBtn = document.getElementsByClassName('Cancel')[0];
                                 var DeleteBtn = document.getElementsByClassName('Confirm')[0];
                                 CancelBtn.onclick = function () {
@@ -301,6 +307,7 @@ window.onload = function () {
 
         var Msg = 'Are you Sure?<br/>Change the Department Name Or Description.';
         ShowConfirmDialog(0, 0, 0, 0, 'block', 'Confirm Changed?', Msg, 'Cancle', 'Changed', 'white');
+        $('.ShowConfirmDialog').fadeIn(800);
 
         var ShowDialogBtn = document.getElementsByClassName('ShowConfirmDialog')[0].getElementsByTagName('button');
         //Cancle Btn
@@ -326,6 +333,7 @@ window.onload = function () {
 
         var Msg = 'Are you Sure?<br/>If you Delete,you will miss this Department.';
         ShowConfirmDialog(0, 0, 0, 0, 'block', 'Confirm Delete?', Msg, 'Cancle', 'Delete', 'white');
+        $('.ShowConfirmDialog').fadeIn(800);
 
         var DialogBtn = document.getElementsByClassName('ShowConfirmDialog')[0].getElementsByTagName('button');
         //Cancle Btn
@@ -453,10 +461,10 @@ function DepartmentDialog(label) {
     Style.left = '10px';
     Style.borderRadius = '3px';
     Style.zIndex = '1000';
-    Style.display = 'block';
+    Style.display = 'none';
     Style.width = '300px';
     Style.height = '220px';
-    Style.background = 'beige';
+    Style.background = '#f2f2f2';
     Style.fontSize = '1.3em';
     Style.textAlign = 'center';
     DepartmentDialog.innerHTML = 'Add Department';

@@ -88,7 +88,7 @@
     text-overflow: ellipsis;
 }
 
-.DeleteBtn {
+.DeleteAssignBtn {
     background: darkred;
     border: medium none;
     border-bottom-right-radius: 3px;
@@ -97,7 +97,7 @@
     margin: -1px;
 }
 
-.DeleteBtn:hover {
+.DeleteAssignBtn:hover {
     background: #CD3333;
 }
 

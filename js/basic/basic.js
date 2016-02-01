@@ -396,7 +396,7 @@ function ShowConfirmDialog(top, right, bottom, left, avaliable, Title, Msg, Canc
     ShowConfirmDialog.style.position = 'absolute';
     ShowConfirmDialog.style.width = '400px';
     ShowConfirmDialog.style.height = '260px';
-    ShowConfirmDialog.style.display = avaliable;
+    ShowConfirmDialog.style.display = 'none';
     ShowConfirmDialog.style.top = (ClientHeight - 260) / 2 + 'px';
     ShowConfirmDialog.style.left = (ClientWidth - 400) / 2 + 'px';
     ShowConfirmDialog.style.borderRadius = '3px';

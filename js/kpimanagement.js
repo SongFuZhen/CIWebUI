@@ -58,46 +58,54 @@ function ManageKPI() {
 
             /*Write Date*/
 
-            //$('.panel-heading').html("<h4>" + KPIDate.kpi.kpi_name + "</h4>");
-
             $('.panel-heading').children('h4').html(KPIDate.kpi.kpi_name);
 
             $('.panel-heading').attr('id', KPIDate.kpi.kpi_id);
 
+            /*Basic information*/
             ManualBasicInformationWirte(KPIDate);
 
+            /*Dimensions*/
             var ManualKPIAttributes = KPIDate.kpi.attributes;
             for (var i = 0; i < ManualKPIAttributes.length; i++) {
                 //$('#manualdimensions').tagEditor3parments('addTag', value, title, id);
             }
 
+            /*Here is the First time to Load Assignments*/
             var ManualKPIAssign = KPIDate.assignments;
-            if (KPIDate.assignments.length > 0) {
+            if (ManualKPIAssign.length > 0) {
                 for (var i = 0; i < ManualKPIAssign.length; i++) {
                     var AssignmentID = ManualKPIAssign[i].assignment_id;
                     var AutoNotification = ManualKPIAssign[i].auto_notification;
 
                     var FrequencyDate = ManualKPIAssign[i].frequency;
-                    console.log(FrequencyDate);
                     var FrequencyID = FrequencyDate.id;
                     var FrequencyName = FrequencyDate.name;
 
                     var Time = ManualKPIAssign[i].time;
 
                     var User = ManualKPIAssign[i].user;
-                    var Department = User.departments;
-                    var Email = User.email;
-                    var ID = User.id;
-                    var Name = User.nick_name;
+                    /*UserDepartment is null.*/
+                    //var UserDepartment = User.departments;
+                    var UserEmail = User.email;
+                    var UserID = User.id;
+                    var UserName = User.nick_name;
+
+                    /*Here is Department*/
+                    var AssignDepartment = ManualKPIAssign[i].departmen;
+                    var AssignDepartmentID = AssignDepartment.id;
+                    var AssignDepartmentName = AssignDepartment.name;
+                    var AssignDepartmentDescription = AssignDepartment.description;
 
                     if (AutoNotification) {
                         var BellBackground = 'lightseagreen';
-                        ShowAssignToWhoDiv(AssignmentID, ID, Email, Name, Time, FrequencyID, FrequencyName, Department, 'true', BellBackground);
+                        ShowAssignToWhoDiv(AssignmentID, UserID, UserEmail, UserName, Time, FrequencyID, FrequencyName, AssignDepartmentID, AssignDepartmentName, AssignDepartmentDescription, "Auto Notification", BellBackground);
                     } else {
                         var BellBackground = 'darkred';
-                        ShowAssignToWhoDiv(AssignmentID, ID, Email, Name, Time, FrequencyID, FrequencyName, Department, 'false', BellBackground);
+                        ShowAssignToWhoDiv(AssignmentID, UserID, UserEmail, UserName, Time, FrequencyID, FrequencyName, AssignDepartmentID, AssignDepartmentName, AssignDepartmentDescription, "Not Auto Notification", BellBackground);
                     }
                 }
+                DeleteAssign();
             } else {
                 $('<div style="height: 70px;color:#ccc;text-align: center;"><h1 style="padding-top: 20px;">Click Left Button to Assign.</h1></div>').appendTo('.ShowManualAssign').ready(function () {
                 });
@@ -140,7 +148,7 @@ function ManageKPI() {
 
             GetAllDepartmentList('ManualAssignDepartment');
             GetListWithFor(FrequencyList, 'ManualFrequency');
-            /*Click AddManualAssignBtn*/
+
             $('.AddManualAssignBtn').click(function () {
                 var ManualAssignModal = document.getElementById('AddManualAssign');
                 ManualAssignModal.style.top = (ClientHeight - 600) / 2 + 'px';
@@ -191,74 +199,30 @@ function ManageKPI() {
 
                     var ManualAssignTime = $('.ManualInputTime').val();
 
-                    //var ManualAutoNotificationFlag = document.getElementsByClassName('row')[3].getElementsByClassName('col-md-3')[0].getElementsByTagName('input')[0];
                     var ManualAutoNotificationFlag = document.getElementsByClassName('ManualNotificationCls')[0];
                     var ManualAutoNotification = false;
                     if (ManualAutoNotificationFlag.checked) {
                         ManualAutoNotification = true;
                     }
 
-                    var AssignsDateJSON = [{
-                        "user": MaunalAssignUser,
-                        "department_id": ManualAssignDepartmentDate,
-                        "time": ManualAssignTime,
-                        "frequency": ManualAssignFrequencyDate,
-                        "auto_notification": ManualAutoNotification
-                    }];
+                    var AssignsDateJSON = [
+                        {
+                            user: MaunalAssignUser,
+                            department_id: ManualAssignDepartmentDate,
+                            time: ManualAssignTime,
+                            frequency: ManualAssignFrequencyDate,
+                            auto_notification: ManualAutoNotification
+                        }
+                    ];
 
                     var url = 'kpis/assigns';
                     var Token = $.cookie('token');
-                    var ManualAssignDate = AjaxCreateAssign(url, 'POST', MuanualAssignKpi_ID, AssignsDateJSON, Token);
-
-                    console.log(ManualAssignDate);
-
-                    /*Here will write on page.*/
-                    var CustomizedField = ManualAssignDate.customized_field;
-                    var User = CustomizedField.user;
-                    var UserID = User.id;
-                    var UserEmail = User.email;
-                    var UserName = User.nick_name;
-                    var UserDepartment = User.department;
-
-                    var KPI = CustomizedField.kpi;
-                    var KPIID = KPI.kpi_id;
-                    var KPIName = KPI.kpi_name;
-                    var KPIDescription = KPI.description;
-                    /*Name*/
-                    var KPICreator = KPI.creator;
-                    var KPITagetMax = KPI.target_max;
-                    var KPITagetMin = KPI.target_min;
-                    var KPIuom = KPI.uom;
-                    var KPIuomID = KPIuom.id;
-                    var KPIuomName = KPIuom.name;
-                    var KPICalculateMethod = KPIuom.calculate_method;
-                    var KPICalculateMethodID = KPICalculateMethod.id;
-                    var KPICalculateMethodName = KPICalculateMethod.name;
-                    var KPIFrequency = KPI.frequency;
-                    var KPIFrequencyID = KPIFrequency.id;
-                    var KPIFrequencyName = KPIFrequency.name;
-                    var KPIViewable = KPI.viewable;
-                    var KPIViewableCode = KPIViewable.viewable_code;
-                    var KPIViewableGroup = KPIViewable.user_group;
-
-                    var KPIAttributes = KPI.attributes;
-
-                    var Department = CustomizedField.department;
-                    var DepartmentID = Department.id;
-                    var DepartmentName = Department.name;
-                    var DepartmentDescription = Department.description;
-                    var DepartmentCreator = Department.creator_id;
-                    var DepartmentHasChildren = Department.has_children;
-                    var DepartmentMembers = Department.members;
-
-                    var Follow_Flag = CustomizedField.follow_flag;
-                    var Follow_Flag_Value = CustomizedField.follow_flag_value;
-                    var IsCreated = CustomizedField.is_created;
-                    var IsManagable = CustomizedField.is_managable;
+                    //AssignsDateJSON = JSON.stringify(AssignsDateJSON);
+                    console.log(AssignsDateJSON);
+                    AjaxCreateAssign(url, 'POST', MuanualAssignKpi_ID, AssignsDateJSON, Token);
                 });
             });
 
-            /*Click Add DimensionsBtn*/
             $('.AddManualDimensionsBtn').click(function () {
                 var Display = $('.AddDimensionsDiv').css('display');
                 if (Display == 'none') {
@@ -283,7 +247,7 @@ function ManageKPI() {
                 }
             });
 
-            /*Click Preview Button*/
+            //TODO:Preview Btn Click Event
         }
     );
 }
@@ -1324,13 +1288,75 @@ function ManualBasicInformationWirte(KPIDate) {
     }
 }
 
-function ShowAssignToWhoDiv(AssignmentID, UserID, UserEmail, UserName, Time, FrequencyID, FrequencyName, Department, AutoNotificationMsg, BellBackground) {
+function ShowAssignToWhoDiv(AssignmentID, UserID, UserEmail, UserName, Time, FrequencyID, FrequencyName, DepartmentID, DepartmentName, DepartmentDescription, AutoNotificationMsg, BellBackground) {
     $('<div class="ManualAssignToWho col-md-3" id="' + AssignmentID + '"> ' +
         '<div class="AssignInfo col-md-10">' +
-        '<h5>Assign To <strong id="' + UserID + '" data-toggle="tooltip" data-placement="top" title="' + UserEmail + '">' + UserName + '</strong></h5>' +
-        '<h5>' + Time + "&emsp;&emsp;" + FrequencyName + ' <span class="glyphicon glyphicon-bell" data-toggle="tooltip" data-placement="top" title="Auto Notification: ' + AutoNotificationMsg + '" style="margin-left: 20px;transform: rotate(30deg);color: ' + BellBackground + ';"></span></h5>' +
-        '<h5>Department:' + Department + '</h5></div>' +
-        '<button class="DeleteBtn" id="' + AssignmentID + '">Delete</button> ' +
+        '<h5 id="' + AssignmentID + '">Assign To <strong id="' + UserID + '" data-toggle="tooltip" data-placement="top" title="' + UserEmail + '">' + UserName + '</strong></h5>' +
+        '<h5 id="' + FrequencyID + '">' + Time + "&emsp;&emsp;" + FrequencyName + ' <span class="glyphicon glyphicon-bell" data-toggle="tooltip" data-placement="top" title="' + AutoNotificationMsg + '" style="margin-left: 20px;transform: rotate(30deg);color: ' + BellBackground + ';"></span></h5>' +
+        '<h5 id="' + DepartmentID + '" title="' + DepartmentDescription + '" data-toggle="tooltip" data-placement="top">Department: &nbsp; <strong>' + DepartmentName + ' </strong></h5></div>' +
+        '<button class="DeleteAssignBtn" id="DeleteBtn' + AssignmentID + '">Delete</button> ' +
         '</div>').appendTo('.ShowManualAssign').ready(function () {
     });
+
+    $('[data-toggle="tooltip"]').tooltip();
+}
+
+function DeleteAssign() {
+    $(".DeleteAssignBtn").each(function () {
+        $(this).click(function () {
+            ShowConfirmDialog((ClientHeight - 260) / 2, (ClientWidth - 400) / 2, (ClientHeight - 260) / 2, (ClientWidth - 400) / 2, 'block', 'Delete', 'Are you Sure?<br/><br/>Delete the Assign from this KPI', 'Cancel', 'Delete', '#f2f2f2');
+            $('.ShowConfirmDialog').fadeIn(800);
+
+            var url = 'kpis/assigns';
+            var Token = $.cookie('token');
+            var AssignmentID = $(this).parent().attr('id');
+
+            $('.Cancel').click(function () {
+                RemoveDialog('Masked');
+                RemoveDialog('ShowConfirmDialog');
+            });
+
+            $('.Confirm').click(function () {
+                AjaxDeleteAssign(url, 'DELETE', AssignmentID, Token);
+            });
+        });
+    })
+}
+
+function GetAllAssignList(KPI_ID) {
+    var url = "kpis/assigns";
+    var Token = $.cookie('token');
+    var AllAssignList = AjaxGetKPIDate(url, 'GET', KPI_ID, Token);
+    if (AllAssignList.length > 0) {
+        var SignalAssign = AllAssignList[i];
+        var SignalAssignID = SignalAssign.assignment_id;
+        var SignalAssignTime = SignalAssign.time;
+        var SignalAssignFrequency = SignalAssign.frequency;
+        var SignalAssignFrequencyID = SignalAssignFrequency.id;
+        var SignalAssignFrequencyName = SignalAssignFrequency.name;
+
+        var SignalAssignNotification = SignalAssign.auto_notification;
+
+        var SignalAssignUser = SignalAssign.user;
+        var SignalAssignUserID = SignalAssignUser.id;
+        var SignalAssignUserName = SignalAssignUser.nick_name;
+        var SignalAssignUserEmail = SignalAssignUser.email;
+        /*department is hide*/
+
+        var SignalAssignDepartment = SignalAssign.department;
+        var SignalAssignDepartmentID = SignalAssignDepartment.id;
+        var SignalAssignDepartmentName = SignalAssignDepartment.name;
+        var SignalAssignDepartmentDescription = SignalAssignDepartment.description;
+        /*parent_id  has_children members is hide*/
+
+        var BellBackgroud = 'lightseagreen';
+        if (SignalAssignNotification) {
+            ShowAssignToWhoDiv(SignalAssignID, SignalAssignUserID, SignalAssignUserEmail, SignalAssignUserName, SignalAssignTime, SignalAssignFrequencyID, SignalAssignFrequencyName, SignalAssignDepartmentID,
+                SignalAssignDepartmentName, SignalAssignDepartmentDescription, SignalAssignNotification, BellBackgroud);
+        } else {
+            BellBackgroud = 'darkred';
+            ShowAssignToWhoDiv(SignalAssignID, SignalAssignUserID, SignalAssignUserEmail, SignalAssignUserName, SignalAssignTime, SignalAssignFrequencyID, SignalAssignFrequencyName, SignalAssignDepartmentID,
+                SignalAssignDepartmentName, SignalAssignDepartmentDescription, SignalAssignNotification, BellBackgroud);
+        }
+    }
 }

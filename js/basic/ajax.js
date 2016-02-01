@@ -809,7 +809,6 @@ function AjaxGetHtml(url, type) {
     return HtmlDate;
 }
 
-var AssignDate = "";
 function AjaxCreateAssign(url, type, kpi_id, assigndate, AuthToken) {
     $.ajax({
         url: urlhead + url,
@@ -820,15 +819,55 @@ function AjaxCreateAssign(url, type, kpi_id, assigndate, AuthToken) {
             xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
         },
         success: function (data) {
-            creategroups = data;
             var background = '#71C671';
             if (data.result_code.toString() == '1') {
-                AssignDate = data;
+                $('.RightContent ul').empty();
+                //UserGroups();
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+                GetAllAssignList(kpi_id);
+                $('#CreateGroup').modal('hide');
+                $('#UpdateGroup').modal('hide');
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+}
+
+function AjaxDeleteAssign(url, type, assignment_id, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {assignment_id: assignment_id},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
                 $('.RightContent ul').empty();
                 UserGroups();
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
                 $('#CreateGroup').modal('hide');
                 $('#UpdateGroup').modal('hide');
+
+                RemoveDialog('Masked');
+                RemoveDialog('ShowConfirmDialog');
+                $('#' + assignment_id).remove();
+
+                if (document.getElementsByClassName('ManualAssignToWho ').length == 0) {
+                    $('<div style="height: 70px;color:#ccc;text-align: center;"><h1 style="padding-top: 20px;">Click Left Button to Assign.</h1></div>').appendTo('.ShowManualAssign').ready(function () {
+                    });
+                }
             } else {
                 var background = '#DC143C';
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
@@ -843,5 +882,4 @@ function AjaxCreateAssign(url, type, kpi_id, assigndate, AuthToken) {
             alert('error');
         }
     });
-    return AssignDate;
 }
