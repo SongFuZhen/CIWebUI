@@ -111,13 +111,15 @@ function ManageKPI() {
                 });
             }
 
+            /*Viewable*/
             var ManualKPIViewable = KPIDate.kpi.viewable;
             var ManualKPIViewableCode = ManualKPIViewable.viewable_code;
             var ManualKPIViewType = document.getElementsByName('manualViewType');
+
             if (ManualKPIViewableCode == 0) {
                 ManualKPIViewType[0].setAttribute('checked', true);
             } else if (ManualKPIViewableCode == 2) {
-                ManualKPIViewType[1].setAttribute('checked', true);
+                ManualKPIViewType[2].setAttribute('checked', true);
                 var ManualKPIPartialViewableGroup = ManualKPIViewable.user_group;
                 $('.SMCGroup').attr('id', ManualKPIPartialViewableGroup.id);
                 $('.SMCGroup').attr('value', ManualKPIPartialViewableGroup.name);
@@ -127,11 +129,12 @@ function ManageKPI() {
                 $('.SMCGroup').attr('data-placement', 'top');
                 $('.SMCGroup').attr('data-original-title', ManualKPIPartialViewableGroup.members);
                 $('[data-toggle="tooltip"]').tooltip();
+
+                /*Here collapse the All Group.*/
             } else if (ManualKPIViewableCode == 1) {
-                ManualKPIViewType[2].setAttribute('checked', true);
+                ManualKPIViewType[1].setAttribute('checked', true);
             } else if (ManualKPIViewableCode == 3) {
                 ManualKPIViewType[3].setAttribute('checked', true);
-
                 var ManualKPIBlockViewableGroup = ManualKPIViewable.user_group;
                 $('.SMNCGroup').attr('id', ManualKPIBlockViewableGroup.id);
                 $('.SMNCGroup').attr('value', ManualKPIBlockViewableGroup.name);
@@ -145,6 +148,9 @@ function ManageKPI() {
                 ManualKPIViewType[0].setAttribute('checked', true);
                 console.log("Something Error.")
             }
+
+            /*Show Group*/
+
 
             GetAllDepartmentList('ManualAssignDepartment');
             GetListWithFor(FrequencyList, 'ManualFrequency');
@@ -215,10 +221,12 @@ function ManageKPI() {
                         }
                     ];
 
+
+                    /*How to Send Params？*/
                     var url = 'kpis/assigns';
                     var Token = $.cookie('token');
-                    //AssignsDateJSON = JSON.stringify(AssignsDateJSON);
                     console.log(AssignsDateJSON);
+                    //AssignsDateJSON = JSON.stringify(AssignsDateJSON);
                     AjaxCreateAssign(url, 'POST', MuanualAssignKpi_ID, AssignsDateJSON, Token);
                 });
             });
@@ -346,7 +354,7 @@ function LoadKpis(LoadKpis, Token) {
                 '<td class="TargetMin"><h3 style="border-right:1px solid #e0e0e0;">' + kpi.target_min_text + '</h3></td>' +
                 '<td class="TargetMax"><h3 style="border-right:1px solid #e0e0e0;">' + kpi.target_max_text + '</h3></td>' +
                 '<td class="KpiCreator" style="border-right:1px solid #e0e0e0;"><h3 title="' + SignedUsersInfo.user.email + '">' + SignedUsersInfo.user.nick_name + '</h3></td>' +
-                '<td><button class="BtnSubmit Follow" style="background: ' + BackColor + ';color:' + FontColor + ' ;"><i class="glyphicon glyphicon-plus"></i> Follow</button></td></tr>' +
+                '<td><button class="BtnSubmit Follow" style="margin: 20px 0 0 0 ;border: none; ;background: ' + BackColor + ';color:' + FontColor + ' ;"><i class="glyphicon glyphicon-plus"></i> Follow</button></td></tr>' +
                 '<tr>' +
                 '<td><h5>KPI Name</h5></td>' +
                 '<td style="border-right:1px solid #e0e0e0; width: ' + (ClientWidth - 600) + 'px' + ';"><h5>Description</h5></td>' +
@@ -361,18 +369,20 @@ function LoadKpis(LoadKpis, Token) {
         /*Is Created? Floow Flag*/
         Is_Followed(follow_flag_value, is_created);
 
+        /*Dynamic Judge Font Size  if add this , the font size will changed*/
         /*Judge Font Size*/
-        if (kpi.kpi_name.length > 10) {
-            var KpiName = document.getElementsByClassName('KpiName')[i];
-            KpiName.style.fontSize = '.9em';
-            KpiName.style.fontWeight = 'bold';
-        }
+        /* if (kpi.kpi_name.length > 10) {
+         var KpiName = document.getElementsByClassName('KpiName')[i];
+         KpiName.style.fontSize = '.9em';
+         KpiName.style.fontWeight = 'bold';
+         }
 
-        if (kpi.description.length > ((ClientWidth - 600) / 18)) {
-            var KpiDescriptionFont = document.getElementsByClassName('KpiDescription')[i];
-            KpiDescriptionFont.style.fontSize = '.9em';
-            KpiDescriptionFont.style.fontWeight = 'bold';
-        }
+         if (kpi.description.length > ((ClientWidth - 600) / 18)) {
+         var KpiDescriptionFont = document.getElementsByClassName('KpiDescription')[i];
+         KpiDescriptionFont.style.fontSize = '.9em';
+         KpiDescriptionFont.style.fontWeight = 'bold';
+         }
+         */
 
         /*Here also can judge TargetMax and TargetMin*/
     }

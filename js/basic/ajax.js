@@ -822,7 +822,6 @@ function AjaxCreateAssign(url, type, kpi_id, assigndate, AuthToken) {
             var background = '#71C671';
             if (data.result_code.toString() == '1') {
                 $('.RightContent ul').empty();
-                //UserGroups();
                 ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
                 GetAllAssignList(kpi_id);
                 $('#CreateGroup').modal('hide');
