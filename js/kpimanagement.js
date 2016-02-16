@@ -68,7 +68,7 @@ function ManageKPI() {
             /*Dimensions*/
             var ManualKPIAttributes = KPIDate.kpi.attributes;
             for (var i = 0; i < ManualKPIAttributes.length; i++) {
-                //$('#manualdimensions').tagEditor3parments('addTag', value, title, id);
+                $('#manualdimensions').tagEditor3parments('addTag', value, title, id);
             }
 
             /*Here is the First time to Load Assignments*/
@@ -118,6 +118,8 @@ function ManageKPI() {
 
             if (ManualKPIViewableCode == 0) {
                 ManualKPIViewType[0].setAttribute('checked', true);
+            } else if (ManualKPIViewableCode == 1) {
+                ManualKPIViewType[1].setAttribute('checked', true);
             } else if (ManualKPIViewableCode == 2) {
                 ManualKPIViewType[2].setAttribute('checked', true);
                 var ManualKPIPartialViewableGroup = ManualKPIViewable.user_group;
@@ -129,10 +131,7 @@ function ManageKPI() {
                 $('.SMCGroup').attr('data-placement', 'top');
                 $('.SMCGroup').attr('data-original-title', ManualKPIPartialViewableGroup.members);
                 $('[data-toggle="tooltip"]').tooltip();
-
                 /*Here collapse the All Group.*/
-            } else if (ManualKPIViewableCode == 1) {
-                ManualKPIViewType[1].setAttribute('checked', true);
             } else if (ManualKPIViewableCode == 3) {
                 ManualKPIViewType[3].setAttribute('checked', true);
                 var ManualKPIBlockViewableGroup = ManualKPIViewable.user_group;
@@ -148,9 +147,6 @@ function ManageKPI() {
                 ManualKPIViewType[0].setAttribute('checked', true);
                 console.log("Something Error.")
             }
-
-            /*Show Group*/
-
 
             GetAllDepartmentList('ManualAssignDepartment');
             GetListWithFor(FrequencyList, 'ManualFrequency');
@@ -255,7 +251,109 @@ function ManageKPI() {
                 }
             });
 
+            //TODO:Viewable , Show Groups.
+            var grouplisturl = 'user_groups/for_kpis';
+            var Token = $.cookie('token');
+            var GetAllGroupListData = AjaxGetList(grouplisturl, 'GET', Token);
+
+            for (var i = 0; i < GetAllGroupListData.length; i++) {
+                /*$('<div class="col-md-1" style="display: flex;"><input type="radio" name="ManualShowGroups" id="' + GetAllGroupListData[i].user_group.id + '"><h5 data-toggle="tooltip" data-placement="bottom" title="' + GetAllGroupListData[i].user_group.members + '" >' + GetAllGroupListData[i].user_group.name + '</h5></div>').appendTo('.ShowViewableGroups').ready(function () {
+                 });*/
+                $('<div class="CheckBox" style="width: 100px;margin-left: 20px;margin-top: 5px;"><input type="radio" grouplist  name="GroupList" title="' + GetAllGroupListData[i].user_group.members + '" value="' + GetAllGroupListData[i].user_group.name + '" id="' + GetAllGroupListData[i].user_group.id + '"/>' +
+                    '<label for="' + GetAllGroupListData[i].user_group.id + '"></label>' +
+                    '<p data-toggle="tooltip" data-placement="bottom" title="' + GetAllGroupListData[i].user_group.members + '">' + GetAllGroupListData[i].user_group.name + '</p>' +
+                    '</div>').appendTo('.ShowViewableGroups').ready(function () {
+                });
+            }
+            $('[data-toggle="tooltip"]').tooltip();
+            /*Get event of click partial public.*/
+            if (ManualKPIViewType[2].getAttribute("checked")) {
+                $('.ShowViewableGroups').slideDown(400);
+                $('.ShowViewableGroups').css({display: "flex"});
+                ClickGroup('SMCGroup');
+            }
+
+            if (ManualKPIViewType[3].getAttribute("checked")) {
+                $('.ShowViewableGroups').slideDown(400);
+                $('.ShowViewableGroups').css({display: "flex"});
+                ClickGroup('SMNCGroup');
+            }
+
+            $(':radio').on('click', function () {
+                switch ($(this).val()) {
+                    case "0":
+                        $('.ShowViewableGroups').slideUp(400);
+                        RemoveAttr('SMCGroup');
+                        RemoveAttr('SMNCGroup');
+                        break;
+                    case "1":
+                        $('.ShowViewableGroups').slideUp(400);
+                        RemoveAttr('SMCGroup');
+                        RemoveAttr('SMNCGroup');
+                        break;
+                    case "2":
+                        $('.ShowViewableGroups').slideDown(400);
+                        $('.ShowViewableGroups').css({display: "flex"});
+                        RemoveAttr('SMCGroup');
+                        RemoveAttr('SMNCGroup');
+                        ClickGroup('SMCGroup');
+                        break;
+                    case "3":
+                        $('.ShowViewableGroups').slideDown(400);
+                        $('.ShowViewableGroups').css({display: "flex"});
+                        RemoveAttr('SMCGroup');
+                        RemoveAttr('SMNCGroup');
+                        ClickGroup('SMNCGroup');
+                        break;
+                }
+            });
+
             //TODO:Preview Btn Click Event
+            $('.Preview').click(function () {
+                var ManualPreviewModal = document.getElementById('ManualPreview');
+                ManualPreviewModal.style.top = (ClientHeight - 900) / 2 + 'px';
+                $('#ManualPreview').modal('show');
+
+                /*Get Value */
+                var ManualPreBasicInformation = document.getElementsByClassName('NameAndInput');
+
+                var ManualPreKPIName = ManualPreBasicInformation[0].getElementsByTagName('input')[0].value;
+                var ManualPreKPIDescription = ManualPreBasicInformation[1].getElementsByTagName('input')[0].value;
+                var ManualPreKPITargetMin = ManualPreBasicInformation[2].getElementsByTagName('input')[0].value;
+                var ManualPreKPITargetMax = ManualPreBasicInformation[3].getElementsByTagName('input')[0].value;
+
+                var ManualPreKPIDefaultFreValue = $('#manualdefaultfrequency').val();
+                var ManualPreKPIDefaultFre = $('#manualdefaultfrequency').find('option[value=' + ManualPreKPIDefaultFreValue + ']').html();
+
+                var ManualPreKPIUOMValue = $('#manualuom').val();
+                var ManualPreKPIUOM = $('#manualuom').find('option[value=' + ManualPreKPIUOMValue + ']').html();
+
+                var ManualPreKPICalculateMethodValue = $('#manualcalculatemethod').val();
+                var ManualPreKPICalculateMethod = $('#manualcalculatemethod').find('option[value=' + ManualPreKPICalculateMethodValue + ']').html();
+
+                $('#ManualPreKPIName').html(ManualPreKPIName);
+                $('#ManualPreKPIDescription').html(ManualPreKPIDescription);
+                $('#ManualPreKPITargetMax').html(ManualPreKPITargetMax);
+                $('#ManualPreKPITargetMin').html(ManualPreKPITargetMin);
+
+                $('#ManualPreKPIDefaultFre').html(ManualPreKPIDefaultFre);
+                $('#ManualPreKPIDefaultFre').attr('title', ManualPreKPIDefaultFreValue);
+
+                $('#ManualPreKPIUOM').html(ManualPreKPIUOM);
+                $('#ManualPreKPIUOM').attr('title', ManualPreKPIUOMValue);
+
+                $('#ManualPreKPICalculateMethod').html(ManualPreKPICalculateMethod);
+                $('#ManualPreKPICalculateMethod').attr('title', ManualPreKPICalculateMethodValue);
+
+                var ManualPreKPIDimensions = $('#manualdimensions').tagEditor('getTags')[0];
+                var ManualPreKPIDimensions22 = $('#manualdimensions').tagEditor('getTags')[0].editor[0].children;
+
+
+                console.log(ManualPreKPIDimensions);
+                console.log(ManualPreKPIDimensions22);
+
+                //$('#ManualPreKPIDimensionsName').html();
+            })
         }
     );
 }
@@ -841,14 +939,16 @@ function LeftNavFun() {
         var BlockSpecific = ViewMsgShow[3].getElementsByTagName('span')[0].getElementsByTagName('input')[0];
 
         Public.onclick = function () {
-            RemoveAttr();
+            RemoveAttr('ShowChoosedGroup');
+            RemoveAttr('ShowNotChoosedGroup');
             $('.GroupUserList').fadeOut(400);
             $('.NewGroup').fadeOut(400);
             $('.ChooseNav').fadeOut(400);
         };
 
         Private.onclick = function () {
-            RemoveAttr();
+            RemoveAttr('ShowChoosedGroup');
+            RemoveAttr('ShowNotChoosedGroup');
             $('.GroupUserList').fadeOut(400);
             $('.NewGroup').fadeOut(400);
             $('.ChooseNav').fadeOut(400);
@@ -856,8 +956,9 @@ function LeftNavFun() {
 
         PartialPublic.onclick = function () {
             $('.ChooseNav').fadeIn(400);
-            RemoveAttr();
-            GetAllGroupList();
+            RemoveAttr('ShowChoosedGroup');
+            RemoveAttr('ShowNotChoosedGroup');
+            GetAllGroupList("ShowGroup");
 
             var CloseCheckBox = document.getElementsByClassName('CloseCheckBox')[0].getElementsByTagName('i')[0];
             CloseCheckBox.onclick = function () {
@@ -869,8 +970,9 @@ function LeftNavFun() {
 
         BlockSpecific.onclick = function () {
             $('.ChooseNav').fadeIn(400);
-            RemoveAttr();
-            GetAllGroupList();
+            RemoveAttr('ShowChoosedGroup');
+            RemoveAttr('ShowNotChoosedGroup');
+            GetAllGroupList("ShowGroup");
             var CloseCheckBox = document.getElementsByClassName('CloseCheckBox')[0].getElementsByTagName('i')[0];
             CloseCheckBox.onclick = function () {
                 $('.ChooseNav').fadeOut(400);
@@ -992,7 +1094,7 @@ function GetAllAssignUserList(ListCls, ListName) {
 }
 
 /*Get All Group List*/
-function GetAllGroupList() {
+function GetAllGroupList(ClassName) {
     /*Clear All*/
     $('.ShowGroup').empty();
     var grouplisturl = 'user_groups/for_kpis';
@@ -1004,7 +1106,7 @@ function GetAllGroupList() {
         $('<div class="CheckBox"><input type="radio" grouplist  name="GroupList" title="' + GetAllGroupListData[i].user_group.members + '" value="' + GetAllGroupListData[i].user_group.name + '" id="' + GetAllGroupListData[i].user_group.id + '"/>' +
             '<label for="' + GetAllGroupListData[i].user_group.id + '"></label>' +
             '<p data-toggle="tooltip" data-placement="bottom" title="' + GetAllGroupListData[i].user_group.members + '">' + GetAllGroupListData[i].user_group.name + '</p>' +
-            '</div><hr>').appendTo('.ShowGroup').ready(function () {
+            '</div><hr>').appendTo('.' + ClassName).ready(function () {
         });
     }
     $('[data-toggle="tooltip"]').tooltip();
@@ -1012,34 +1114,26 @@ function GetAllGroupList() {
 
 function ClickGroup(selector) {
     /*获取到单选按钮点击事件 -然并卵-*/
-    $("[grouplist]").click(function () {
+    $("[grouplist]").unbind().on('click', function () {
         $('.' + selector).html($(this).val());
         $('.' + selector).attr('value', $(this).val());
         $('.' + selector).attr('id', $(this).attr("id"));
-        $('.' + selector).attr('title', $(this).attr("title"));
+        //$('.' + selector).attr('title', $(this).attr("title"));
+        $('.' + selector).attr('title', "");
         $('.' + selector).attr('data-toggle', 'tooltip');
         $('.' + selector).attr('data-original-title', $(this).attr("title"));
         $('[data-toggle="tooltip"]').tooltip();
     });
 }
 
-function RemoveAttr() {
+function RemoveAttr(ClassName) {
     /*删除部分可见元素属性*/
-    $('.ShowChoosedGroup').html('');
-    $('.ShowChoosedGroup').removeAttr('value');
-    $('.ShowChoosedGroup').removeAttr('id');
-    $('.ShowChoosedGroup').removeAttr('title');
-    $('.ShowChoosedGroup').removeAttr('data-toggle');
-    $('.ShowChoosedGroup').removeAttr('data-original-title');
-
-    /*删除部分不可见元素属性*/
-    $('.ShowNotChoosedGroup').html('');
-    $('.ShowNotChoosedGroup').removeAttr('value');
-    $('.ShowNotChoosedGroup').removeAttr('id');
-    $('.ShowNotChoosedGroup').removeAttr('title');
-    $('.ShowNotChoosedGroup').removeAttr('data-toggle');
-    $('.ShowNotChoosedGroup').removeAttr('data-original-title');
-
+    $('.' + ClassName).html('');
+    $('.' + ClassName).removeAttr('value');
+    $('.' + ClassName).removeAttr('id');
+    $('.' + ClassName).removeAttr('title');
+    $('.' + ClassName).removeAttr('data-toggle');
+    $('.' + ClassName).removeAttr('data-original-title');
 }
 
 function GetAllGroupUserList() {

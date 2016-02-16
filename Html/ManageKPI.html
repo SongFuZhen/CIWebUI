@@ -154,15 +154,10 @@
 
         <!--Here is the radio.-->
         <div class="panel-body">
-            <div style="height:100px;border:2px solid lightblue;border-radius:3px;margin:-20px 0 0 15px;overflow-y:auto;"
-                 class="col-md-11">
-                <div class="col-md-1">
-                    <input type="radio" name="ShowGroups" id="1">MM
-                </div>
-            </div>
+            <div class="col-md-10 ShowViewableGroups"></div>
         </div>
 
-        <button class="BtnSubmit">Preview</button>
+        <button class="BtnSubmit Preview">Preview</button>
     </div>
 </div>
 
@@ -258,6 +253,138 @@
     </div>
 </div>
 
+<div class="modal fade" id="ManualPreview" tabindex="-1" role="dialog" aria-labelledby="AddManualAssignLabel"
+     data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ManualPreviewLabel">Confirm Your KPI</h4>
+            </div>
+            <!--  <div class="modal-body">
+              </div>-->
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Basic Information</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td id="ManualPreKPIName"></td>
+                </tr>
+
+                <tr>
+                    <td>Description</td>
+                    <td id="ManualPreKPIDescription"
+                        style="max-width: 450px;text-overflow: ellipsis; overflow: auto;"></td>
+                </tr>
+
+                <tr>
+                    <td>Target Min</td>
+                    <td id="ManualPreKPITargetMin"></td>
+                </tr>
+
+                <tr>
+                    <td>Target Max</td>
+                    <td id="ManualPreKPITargetMax"></td>
+                </tr>
+
+                <tr>
+                    <td>Default Frequency</td>
+                    <td id="ManualPreKPIDefaultFre"></td>
+                </tr>
+
+                <tr>
+                    <td>UOM</td>
+                    <td id="ManualPreKPIUOM"></td>
+                </tr>
+
+                <tr>
+                    <td>Calculate Method</td>
+                    <td id="ManualPreKPICalculateMethod"></td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Dimensions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="ManualPreKPIDimensions">
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>AssignTo</th>
+                </tr>
+                <tr>
+                    <th>Who</th>
+                    <th>Time</th>
+                    <th>Frequency</th>
+                    <th>Department</th>
+                    <th>Notification</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>AdminUI</td>
+                    <td>18:00</td>
+                    <td>Weekly</td>
+                    <td>IT</td>
+                    <td><i class="glyphicon glyphicon-ok" style="color: green;"></i></td>
+                </tr>
+
+                <tr>
+                    <td>AdminUI</td>
+                    <td>18:00</td>
+                    <td>Weekly</td>
+                    <td>IT</td>
+                    <td><i class="glyphicon glyphicon-ok" style="color: green;"></i></td>
+                </tr>
+
+                <tr>
+                    <td>AdminUI</td>
+                    <td>18:00</td>
+                    <td>Weekly</td>
+                    <td>IT</td>
+                    <td><i class="glyphicon glyphicon-ok" style="color: green;"></i></td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Viewable</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Public</td>
+                    <td> Everyone can see it.</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="modal-footer">
+                <button type="button" class="BtnSubmit" data-dismiss="modal">Close</button>
+                <button type="button" class="ManualAssginBtn BtnSubmit">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
