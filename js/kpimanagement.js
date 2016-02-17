@@ -18,7 +18,16 @@ window.onload = function () {
     GetListFunc();
 
     ManageKPI();
+
+    FollowKPI();
 };
+
+function FollowKPI() {
+    $('.Follow').unbind().on('click', function () {
+            console.log("Click Follow");
+        }
+    );
+}
 
 function ManageKPI() {
     $('.Manage').unbind().on('click', function () {
@@ -279,19 +288,32 @@ function ManageKPI() {
                 ClickGroup('SMNCGroup');
             }
 
-            $(':radio').on('click', function () {
+            $('[name=manualViewType]').on('click', function () {
                 switch ($(this).val()) {
                     case "0":
+                        ManualKPIViewType[0].setAttribute('checked', true);
+                        ManualKPIViewType[1].removeAttribute('checked');
+                        ManualKPIViewType[2].removeAttribute('checked');
+                        ManualKPIViewType[3].removeAttribute('checked');
+
                         $('.ShowViewableGroups').slideUp(400);
                         RemoveAttr('SMCGroup');
                         RemoveAttr('SMNCGroup');
                         break;
                     case "1":
+                        ManualKPIViewType[0].removeAttribute('checked');
+                        ManualKPIViewType[1].setAttribute('checked', true);
+                        ManualKPIViewType[2].removeAttribute('checked');
+                        ManualKPIViewType[3].removeAttribute('checked');
                         $('.ShowViewableGroups').slideUp(400);
                         RemoveAttr('SMCGroup');
                         RemoveAttr('SMNCGroup');
                         break;
                     case "2":
+                        ManualKPIViewType[0].removeAttribute('checked');
+                        ManualKPIViewType[1].removeAttribute('checked');
+                        ManualKPIViewType[2].setAttribute('checked', true);
+                        ManualKPIViewType[3].removeAttribute('checked');
                         $('.ShowViewableGroups').slideDown(400);
                         $('.ShowViewableGroups').css({display: "flex"});
                         RemoveAttr('SMCGroup');
@@ -299,6 +321,10 @@ function ManageKPI() {
                         ClickGroup('SMCGroup');
                         break;
                     case "3":
+                        ManualKPIViewType[0].removeAttribute('checked');
+                        ManualKPIViewType[1].removeAttribute('checked');
+                        ManualKPIViewType[2].removeAttribute('checked');
+                        ManualKPIViewType[3].setAttribute('checked', true);
                         $('.ShowViewableGroups').slideDown(400);
                         $('.ShowViewableGroups').css({display: "flex"});
                         RemoveAttr('SMCGroup');
@@ -309,12 +335,14 @@ function ManageKPI() {
             });
 
             //TODO:Preview Btn Click Event
-            $('.Preview').click(function () {
+            $('.Preview').on('click', function () {
                 var ManualPreviewModal = document.getElementById('ManualPreview');
                 ManualPreviewModal.style.top = (ClientHeight - 900) / 2 + 'px';
                 $('#ManualPreview').modal('show');
 
                 /*Get Value */
+                var ManualPreKPIID = $('.manualpanel').children()[0].getAttribute('id');
+
                 var ManualPreBasicInformation = document.getElementsByClassName('NameAndInput');
 
                 var ManualPreKPIName = ManualPreBasicInformation[0].getElementsByTagName('input')[0].value;
@@ -345,15 +373,169 @@ function ManageKPI() {
                 $('#ManualPreKPICalculateMethod').html(ManualPreKPICalculateMethod);
                 $('#ManualPreKPICalculateMethod').attr('title', ManualPreKPICalculateMethodValue);
 
-                var ManualPreKPIDimensions = $('#manualdimensions').tagEditor('getTags')[0];
-                var ManualPreKPIDimensions22 = $('#manualdimensions').tagEditor('getTags')[0].editor[0].children;
+                /*Dimensions*/
+                var Attributes = [];
+                $('#ManualPreKPIDimensions').empty();
+                var ManualPreKPIDimensions = $('#manualdimensions').tagEditor('getTags')[0].editor[0].children;
+                if (ManualPreKPIDimensions.length > 1) {
+                    for (var i = 1; i < ManualPreKPIDimensions.length; i++) {
+                        var ManualKPIDimensionsName = ManualPreKPIDimensions[i].children[1].innerHTML;
+                        var ManualKPIDimensionsType = ManualPreKPIDimensions[i].children[1].getAttribute('data-original-title');
+                        $('<tr><td>' + ManualKPIDimensionsName + '</td><td>' + ManualKPIDimensionsType + '</td></tr>').appendTo('#ManualPreKPIDimensions').ready(function () {
+                        });
+
+                        Attributes.push({
+                            attribute_name: ManualKPIDimensionsName,
+                            attribute_type: ManualKPIDimensionsType
+                        })
+                    }
+                } else {
+                    $('#ManualPreKPIDimensions').html("<strong style='margin:-10px 0 0 200px'>Here is No Dimensions.</strong>");
+                }
 
 
-                console.log(ManualPreKPIDimensions);
-                console.log(ManualPreKPIDimensions22);
+                /*AssignTo*/
+                var Assignments = [];
+                $('#ManualPreKPIAssignTo').empty();
+                var ManualPreKPIAssignTo = $('.ShowManualAssign')[0].children;
+                try {
+                    for (var i = 0; i < ManualPreKPIAssignTo.length; i++) {
+                        var ManualPreKPIAssignToWho = ManualPreKPIAssignTo[i].children[0].children[0].children[0].innerHTML;
+                        var ManualPreKPIAssignToWhoValue = ManualPreKPIAssignTo[i].children[0].children[0].children[0].getAttribute('data-original-title');
+                        var ManualPreKPIAssignToID = ManualPreKPIAssignTo[i].children[0].children[0].getAttribute('id');
 
-                //$('#ManualPreKPIDimensionsName').html();
-            })
+                        var ManualPreKPIAssignToTime = ManualPreKPIAssignTo[i].children[0].children[1].innerHTML.split('<span')[0].split('  ')[0];
+                        var ManualPreKPIAssignToFrequency = ManualPreKPIAssignTo[i].children[0].children[1].innerHTML.split('<span')[0].split('  ')[1];
+                        var ManualPreKPIAssignToFrequencyValue = ManualPreKPIAssignTo[i].children[0].children[1].getAttribute('id');
+                        var ManualPreKPIAssignToNotification = ManualPreKPIAssignTo[i].children[0].children[1].children[0].getAttribute('data-original-title');
+
+                        var ManualPreKPIAssignToDepartment = ManualPreKPIAssignTo[i].children[0].children[2].children[0].innerHTML;
+                        var ManualPreKPIAssignToDepartmentValue = ManualPreKPIAssignTo[i].children[0].children[2].getAttribute('id');
+                        if (ManualPreKPIAssignToNotification == "Auto Notification") {
+                            $('<tr id="' + ManualPreKPIAssignToID + '"><td title="' + ManualPreKPIAssignToWhoValue + '">' + ManualPreKPIAssignToWho + '</td>' +
+                                '<td>' + ManualPreKPIAssignToTime + '</td>' +
+                                '<td title="' + ManualPreKPIAssignToFrequencyValue + '">' + ManualPreKPIAssignToFrequency + '</td>' +
+                                '<td title="' + ManualPreKPIAssignToDepartmentValue + '">' + ManualPreKPIAssignToDepartment + '</td>' +
+                                '<td><i class="glyphicon glyphicon-ok" style="color: green;" title="Auto Notification"></i></td></tr>').appendTo('#ManualPreKPIAssignTo').ready(function () {
+                            });
+
+                            Assignments.push({
+                                assignment_id: ManualPreKPIAssignToID,
+                                user: ManualPreKPIAssignToWho,
+                                department_id: ManualPreKPIAssignToDepartmentValue,
+                                time: ManualPreKPIAssignToTime,
+                                frequency: ManualPreKPIAssignToFrequencyValue,
+                                auto_notification: true
+                            })
+                        } else {
+                            $('<tr id="' + ManualPreKPIAssignToID + '"><td title="' + ManualPreKPIAssignToWhoValue + '">' + ManualPreKPIAssignToWho + '</td>' +
+                                '<td>' + ManualPreKPIAssignToTime + '</td>' +
+                                '<td title="' + ManualPreKPIAssignToFrequencyValue + '">' + ManualPreKPIAssignToFrequency + '</td>' +
+                                '<td title="' + ManualPreKPIAssignToDepartmentValue + '">' + ManualPreKPIAssignToDepartment + '</td>' +
+                                '<td><i class="glyphicon glyphicon-remove" style="color: red;" title="No Notification"></i></td></tr>').appendTo('#ManualPreKPIAssignTo').ready(function () {
+                            });
+
+                            Assignments.push({
+                                assignment_id: ManualPreKPIAssignToID,
+                                user: ManualPreKPIAssignToWho,
+                                department_id: ManualPreKPIAssignToDepartmentValue,
+                                time: ManualPreKPIAssignToTime,
+                                frequency: ManualPreKPIAssignToFrequencyValue,
+                                auto_notification: false
+                            })
+                        }
+                    }
+                } catch (e) {
+                    //$('#ManualPreKPIAssignTo').prev().children()[1].remove();
+                    //$('#ManualPreKPIAssignTo').html("<strong style='margin: -10px 0 0 200px;'>No People To Assign.</strong>");
+                    console.log(e);
+                }
+
+                /*Viewable*/
+                $('#ManualPreKPIViewable').empty();
+                var Viewable = [];
+                $('[name=manualViewType]').each(function () {
+                    if ($(this).attr('checked')) {
+                        var WhichValue = $(this)[0].value;
+                        switch (WhichValue) {
+                            case "0":
+                                $('<td id="0">Public</td> <td>Everyone can see it.</td>').appendTo('#ManualPreKPIViewable').ready(function () {
+                                });
+                                Viewable.push({
+                                    viewable_code: 0,
+                                    user_group_id: ""
+                                });
+                                break;
+                            case "1":
+                                $('<td id="1">Private</td> <td>Only you can see it.</td>').appendTo('#ManualPreKPIViewable').ready(function () {
+                                });
+                                Viewable.push({
+                                    viewable_code: 1,
+                                    user_group_id: ""
+                                });
+                                break;
+                            case "2":
+                                var Group = $(this).parent().parent().children('span')[1].innerHTML;
+                                var GroupID = $(this).parent().parent().children('span')[1].getAttribute('id');
+                                var GroupMembers = $(this).parent().parent().children('span')[1].getAttribute('data-original-title');
+                                if (Group == "") {
+                                    $('<td id="2">Partial Public</td> <td style="background: darkred;color: white;">Group is Null.</td>').appendTo('#ManualPreKPIViewable').ready(function () {
+                                    });
+                                } else {
+                                    $('<td id="2">Partial Public</td> <td id="' + GroupID + '" title="' + GroupMembers + '">' + Group + '</td>').appendTo('#ManualPreKPIViewable').ready(function () {
+                                    });
+                                }
+                                Viewable.push({
+                                    viewable_code: 2,
+                                    user_group_id: GroupID
+                                });
+                                break;
+                            case "3":
+                                var Group = $(this).parent().parent().children('span')[1].innerHTML;
+                                var GroupID = $(this).parent().parent().children('span')[1].getAttribute('id');
+                                var GroupMembers = $(this).parent().parent().children('span')[1].getAttribute('data-original-title');
+                                if (Group == "") {
+                                    $('<td id="3">Block Specific</td> <td style="background: darkred;color: white;">Group is Null.</td>').appendTo('#ManualPreKPIViewable').ready(function () {
+                                    });
+                                } else {
+                                    $('<td id="3">Block Specific</td> <td id="' + GroupID + '" title="' + GroupMembers + '">' + Group + '</td>').appendTo('#ManualPreKPIViewable').ready(function () {
+                                    });
+                                }
+                                Viewable.push({
+                                    viewable_code: 3,
+                                    user_group_id: GroupID
+                                });
+                                break;
+                        }
+                    } else {
+                        /*Not Choosed*/
+                    }
+                });
+
+                /*Confirm Btn*/
+                $('.ManualPreKPIConfirm').unbind().on('click', function () {
+                    var kpi = {
+                        kpi_id: ManualPreKPIID,
+                        kpi_name: ManualPreKPIName,
+                        description: ManualPreKPIDescription,
+                        target_max: ManualPreKPITargetMax,
+                        target_min: ManualPreKPITargetMin,
+                        uom: ManualPreKPIUOMValue,
+                        calculate_method: ManualPreKPICalculateMethodValue,
+                        frequency: ManualPreKPIDefaultFreValue,
+                        viewable: Viewable,
+                        attributes: Attributes
+                    };
+
+                    console.log(kpi);
+                    console.log(Assignments);
+
+                    var url = 'kpis';
+                    var Token = $.cookie('token');
+                    AjaxChangeKPI(url, 'PUT', kpi, Assignments, Token);
+                });
+
+            });
         }
     );
 }

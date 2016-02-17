@@ -882,3 +882,32 @@ function AjaxDeleteAssign(url, type, assignment_id, AuthToken) {
         }
     });
 }
+
+function AjaxChangeKPI(url, type, kpi, assignments, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {kpi: kpi, assignments: assignments},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            var background = '#71C671';
+            if (data.result_code.toString() == '1') {
+                $('.RightContent ul').empty();
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            } else {
+                var background = '#DC143C';
+                ShowMsgDialog(0, (ClientWidth - 500) / 2, ClientHeight - 80, (ClientWidth - 500) / 2, 'none', data.messages.toString(), background);
+            }
+            SlideToggle('.ShowMsgDialog', 1000, 2000, 1000);
+            setTimeout(function () {
+                RemoveDialog('ShowMsgDialog');
+            }, 3000);
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+}
