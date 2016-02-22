@@ -24,7 +24,108 @@ window.onload = function () {
 
 function FollowKPI() {
     $('.Follow').unbind().on('click', function () {
-            console.log("Click Follow");
+            var FollowNodes = $(this).parent().parent().children('td');
+
+            /*KPI Name*/
+            var FollowKPIID = FollowNodes[0].children[0].getAttribute('id');
+            var FollowKPIName = FollowNodes[0].children[0].getAttribute('title');
+
+            /*KPI Description*/
+            var FollowKPIDescription = FollowNodes[1].children[0].innerHTML;
+
+            /*KPI TargetMin*/
+            var FollowKPITargetMin = FollowNodes[2].children[0].innerHTML;
+
+            /*KPI TargetMax*/
+            var FollowKPITargetMax = FollowNodes[3].children[0].innerHTML;
+
+            /*KPI Creator*/
+            var FollowKPICreatorEmail = FollowNodes[4].children[0].getAttribute('title');
+            var FollowKPICreatorName = FollowNodes[4].children[0].innerHTML;
+
+            /*   console.log(FollowKPIID);
+             console.log(FollowKPIName);
+             console.log(FollowKPIDescription);
+             console.log(FollowKPITargetMin);
+             console.log(FollowKPITargetMax);
+             console.log(FollowKPICreatorEmail);
+             console.log(FollowKPICreatorName);
+             */
+
+            RemoveLi();
+            var RightContent = document.getElementsByClassName('RightContent')[0];
+            var HtmlDate = AjaxGetHtml('FollowKPI.html', 'GET');
+            RightContent.innerHTML = HtmlDate;
+            $('.follow').css({
+                width: (ClientWidth - 220) + 'px',
+                marginTop: '10px',
+                marginLeft: '20px'
+            });
+
+            $('.panel-heading').children('h4').html(FollowKPIName);
+            $('.panel-heading').attr('id', FollowKPIID);
+            $('.FollowKPIDescription').html(FollowKPIDescription);
+
+            var url = 'kpis/departments';
+            var Token = $.cookie('token');
+            var FollowKPIDepartmentsData = AjaxFollowKPIDepartments(url, 'GET', FollowKPIID, "", Token);
+
+            var DepartmentFollowStates = FollowKPIDepartmentsData.department_follow_states;
+
+            for (var i = 0; i < DepartmentFollowStates.length; i++) {
+                /*var DepartmentFollowStatesFlag = DepartmentFollowStates[i].follow_flag;
+                 var DepartmentFollowStatesFlagValue = DepartmentFollowStates[i].follow_flag_value;*/
+                var DepartmentFollowStatesFollowed = DepartmentFollowStates[i].followed;
+
+                if (DepartmentFollowStatesFollowed) {
+                    $('<tbody><tr style="border-bottom: 1px dashed #ccc;">' +
+                        '<td style="margin: 10px 0 0 0;display: block;font-size: 1.2em;">' +
+                        '<i class="glyphicon glyphicon-plus-sign PlusIcon" style="color: green;"></i>' +
+                        '<strong id="' + DepartmentFollowStates[i].department.id + '" ' +
+                        'title="' + DepartmentFollowStates[i].department.members + '">' + DepartmentFollowStates[i].department.name + '</strong></td>' +
+                        '<td><button class="BtnSubmit" style="margin: 2px 0 0 0;background: darkred;color: white;border: none;">UnFollow</button></td>' +
+                        '</tr></tbody>').appendTo('.DepartmentTable').ready(function () {
+                    });
+                } else {
+                    $('<tbody><tr style="border-bottom: 1px dashed #ccc;">' +
+                        '<td style="margin: 10px 0 0 0;display: block;font-size: 1.2em;">' +
+                        '<i class="glyphicon glyphicon-plus-sign PlusIcon" style="color: green;"></i>' +
+                        '<strong id="' + DepartmentFollowStates[i].department.id + '" ' +
+                        'title="' + DepartmentFollowStates[i].department.members + '">' + DepartmentFollowStates[i].department.name + '</strong></td>' +
+                        '<td><button class="BtnSubmit" style="margin: 2px 0 0 0">+Follow</button></td>' +
+                        '</tr></tbody>').appendTo('.DepartmentTable').ready(function () {
+                    });
+                }
+            }
+
+            $('.PlusIcon').on('click', function () {
+                /*请求数据*/
+                $(this).removeAttr('class');
+                $(this).attr('class', 'glyphicon glyphicon-minus-sign MinuIcon');
+
+                var DepartmentID = $(this).parent().children('strong').attr('id');
+                var DepartmentFollowStatesData = AjaxFollowKPIDepartments(url, 'GET', FollowKPIID, DepartmentID, Token);
+
+                var DepartmentFollowStates = DepartmentFollowStatesData.department_follow_states;
+                for (var i = 0; i < DepartmentFollowStates.length; i++) {
+                    var DepartmentFollowStatesFollowed = DepartmentFollowStates[i].followed;
+                    if (DepartmentFollowStatesFollowed) {
+                        $('<tr style="border-bottom: 1px dashed #ccc;"><td><i class="glyphicon glyphicon-plus-sign PlusIcon" style="color: green;margin: 10px 0 0 50px;"></i>' +
+                            '<strong id="' + DepartmentFollowStates[i].department.id + '">' + DepartmentFollowStates[i].department.name + '</strong></td>' +
+                            '<td><button class="BtnSubmit" style="margin: 2px 0 0 0;background: darkred;color: white;border: none;">UnFollow</button></td></tr>').appendTo($(this).parent().parent().parent()).ready(function () {
+                        });
+                    } else {
+                        $('<tr style="border-bottom: 1px dashed #ccc;"><td><i class="glyphicon glyphicon-plus-sign PlusIcon" style="color: green;margin: 10px 0 0 50px;"></i>' +
+                            '<strong id="' + DepartmentFollowStates[i].department.id + '">' + DepartmentFollowStates[i].department.name + '</strong></td>' +
+                            '<td><button class="BtnSubmit" style="margin: 2px 0 0 0;">+Follow</button></td></tr>').appendTo($(this).parent().parent().parent()).ready(function () {
+                        });
+                    }
+                }
+            });
+
+            $('.MinuIcon').unbind().on('click', function () {
+                console.log($(this));
+            })
         }
     );
 }

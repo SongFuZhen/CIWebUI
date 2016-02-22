@@ -1,0 +1,15 @@
+.follow {
+    min-width: 980px;
+}
+
+.followpanel {
+    margin-right: 20px;
+}
+
+.FollowKPIDescription {
+    margin: 10px 0 0 10px;
+}
+
+.PlusIcon, .MinuIcon {
+    cursor: pointer;
+}

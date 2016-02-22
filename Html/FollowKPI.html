@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FollowKPI</title>
+</head>
+<body>
+
+<div class="follow">
+    <div class="panel panel-primary followpanel">
+        <div class="panel-heading"><h4>KPIName</h4></div>
+        <div class="panel-body">
+            <div style="display: flex;">
+                <h4>Description:</h4>
+                <strong class="FollowKPIDescription"></strong>
+            </div>
+            <hr style="border-color: #ccc;"/>
+        </div>
+        <table class="table DepartmentTable" style="width: 90%;margin: -36px 0 0 80px;">
+            <thead>
+            <tr style="font-size: 1.5em;">
+                <th>Avilable Level</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <!--
+                        <tbody>
+                        <tr style="border-bottom: 1px dashed #ccc;">
+                            <td style="margin: 10px  0 0 0;display: block; font-size: 1.2em">
+                                <i class="glyphicon glyphicon-minus-sign" style="color: green;"></i>
+                                <strong>Asia pacific area</strong>
+                            </td>
+                            <td>
+                                <button class="BtnSubmit" style="margin: 2px 0 0 0">+Follow</button>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom: 1px dashed #ccc;">
+                            <td style="margin: 10px  0 0 50px;display: block; font-size: 1.2em">
+                                <i class="glyphicon glyphicon-minus-sign" style="color: green;"></i>
+                                <strong>China</strong>
+                            </td>
+                            <td>
+                                <button class="BtnSubmit" style="margin: 2px 0 0 0">+Follow</button>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom: 1px dashed #ccc;">
+                            <td style="margin: 10px  0 0 100px;display: block; font-size: 1.2em">
+                                <i class="glyphicon glyphicon-plus-sign" style="color: green;"></i>
+                                <strong>Shanghai</strong>
+                            </td>
+                            <td>
+                                <button class="BtnSubmit" style="margin: 2px 0 0 0;background: darkred;color: white;border: none;">
+                                    UnFollow
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom: 1px dashed #ccc;">
+                            <td style="margin: 10px  0 0 0;display: block; font-size: 1.2em">
+                                <i class="glyphicon glyphicon-plus-sign" style="color: green;"></i>
+                                <strong>Shanghai</strong>
+                            </td>
+                            <td>
+                                <button class="BtnSubmit" style="margin: 2px 0 0 0;background: darkred;color: white;border: none;">
+                                    UnFollow
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom: 1px dashed #ccc;">
+                            <td style="margin: 10px  0 0 50px;display: block; font-size: 1.2em">
+                                <i class="glyphicon glyphicon-plus-sign" style="color: green;"></i>
+                                <strong>Shanghai</strong>
+                            </td>
+                            <td>
+                                <button class="BtnSubmit" style="margin: 2px 0 0 0;background: darkred;color: white;border: none;">
+                                    UnFollow
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                        <tbody>
+                        <tr style="border-bottom: 1px dashed #ccc;">
+                            <td style="margin: 10px  0 0 0;display: block; font-size: 1.2em">
+                                <i class="glyphicon glyphicon-minus-sign" style="color: green;"></i>
+                                <strong>Europa</strong>
+                            </td>
+                            <td>
+                                <button class="BtnSubmit" style="margin: 2px 0 0 0">+Follow</button>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom: 1px dashed #ccc;">
+                            <td style="margin: 10px  0 0 50px;display: block; font-size: 1.2em">
+                                <i class="glyphicon glyphicon-minus-sign" style="color: green;"></i>
+                                <strong>China</strong>
+                            </td>
+                            <td>
+                                <button class="BtnSubmit" style="margin: 2px 0 0 0">+Follow</button>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom: 1px dashed #ccc;">
+                            <td style="margin: 10px  0 0 100px;display: block; font-size: 1.2em">
+                                <i class="glyphicon glyphicon-plus-sign" style="color: green;"></i>
+                                <strong>Shanghai</strong>
+                            </td>
+                            <td>
+                                <button class="BtnSubmit" style="margin: 2px 0 0 0">+Follow</button>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                        <tbody>
+                        <tr style="border-bottom: 1px dashed #ccc;">
+                            <td style="margin: 10px 0 0 0;display: block; font-size: 1.2em">
+                                <i class="glyphicon glyphicon-minus-sign" style="color: green;"></i>
+                                <strong>North America</strong>
+                            </td>
+                            <td>
+                                <button class="BtnSubmit" style="margin: 2px 0 0 0">+Follow</button>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom: 1px dashed #ccc;">
+                            <td style="margin: 10px  0 0 50px;display: block; font-size: 1.2em">
+                                <i class="glyphicon glyphicon-minus-sign" style="color: green;"></i>
+                                <strong>China</strong>
+                            </td>
+                            <td>
+                                <button class="BtnSubmit" style="margin: 2px 0 0 0">+Follow</button>
+                            </td>
+                        </tr>
+
+                        <tr style="border-bottom: 1px dashed #ccc;">
+                            <td style="margin: 10px  0 0 100px;display: block; font-size: 1.2em">
+                                <i class="glyphicon glyphicon-plus-sign" style="color: green;"></i>
+                                <strong>Shanghai</strong>
+                            </td>
+                            <td>
+                                <button class="BtnSubmit" style="margin: 2px 0 0 0">+Follow</button>
+                            </td>
+                        </tr>
+                        </tbody>-->
+        </table>
+        <hr style="border-color: white;"/>
+    </div>
+</div>
+</div>
+</body>
+</html>

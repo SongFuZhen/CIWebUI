@@ -911,3 +911,24 @@ function AjaxChangeKPI(url, type, kpi, assignments, AuthToken) {
         }
     });
 }
+
+var FollowKPIDepartmentsData = "";
+function AjaxFollowKPIDepartments(url, type, kpi_id, department_id, AuthToken) {
+    $.ajax({
+        url: urlhead + url,
+        type: type,
+        async: false,
+        data: {kpi_id: kpi_id, department_id: department_id},
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + AuthToken);
+        },
+        success: function (data) {
+            $('.RightContent ul').empty();
+            FollowKPIDepartmentsData = data;
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+    return FollowKPIDepartmentsData;
+}

@@ -498,3 +498,20 @@
 .AddDimensionsTagBtn {
     margin-bottom: 20px;
 }
+
+/*Follow KPI*/
+.FollowKPIName {
+    width: 200px;
+    height: 40px;
+    border: 1px solid #000;
+    border-bottom: 1px solid white;
+    border-radius: 4px;
+}
+
+.FollowKPIContent {
+    width: 800px;
+    height: 500px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    margin-top: -2px;
+}
